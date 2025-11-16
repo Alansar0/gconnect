@@ -137,6 +137,7 @@
         <button type="submit" class="bg-[#00FFD1] text-black px-6 py-3 rounded-xl font-bold hover:bg-[#00CCA9] transition">
             Purchase Voucher
         </button>
+        <input type="hidden" name="pin" id="transaction-pin-final">
     </form>
 </div>
 </x-layouts.app>

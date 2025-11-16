@@ -18,21 +18,7 @@ use App\Services\RouterApi\LiveMikroTikService;
 class GetVoucherController extends Controller
 {
 
-
-    // public function index()
-    // {
-    //     return view('getVocher.index');
-    // }
-    // public function receipt()
-    // {
-    //     return view('getVoucher.receipt');
-    // }
-
-    // public function paycheckout()
-    // {
-    //     return view('getVoucher.paycheckout');
-    // // }
-            protected $routerService;
+    protected $routerService;
 
     public function __construct()
     {
@@ -43,39 +29,47 @@ class GetVoucherController extends Controller
     /**
      * Show purchase form.
      */
-    public function index()
+    public function create()
     {
         $resellers = Reseller::where('status', 'active')->get();
-        // $profiles = $this->routerService->getProfiles(); // e.g. 1d, 3d, 1w
         $profiles = VoucherProfile::all(); // Use real DB model
 
-
-        return view('getVoucher.index', compact('resellers', 'profiles'));
+        return view('getVoucher.buy', compact('resellers', 'profiles'));
     }
 
     /**
      * Handle a single voucher purchase.
      */
+
+
     public function store(Request $request)
     {
         $request->validate([
             'reseller_id' => 'required|exists:resellers,id',
             'profile_id'  => 'required|exists:voucher_profiles,id',
+            'pin'         => 'required|digits:4', // <-- required for verification
         ]);
-
+        $user = Auth::user();
         $reseller = Reseller::with(['user', 'router'])->findOrFail($request->reseller_id);
         $profile  = VoucherProfile::findOrFail($request->profile_id);
-        $amount   = $profile->price; // no quantity
+        $amount   = $profile->price;
 
         if (!$reseller->router) {
             return back()->with('error', 'Router not found for this reseller.');
         }
+       // ===== PIN VALIDATION =====
+        if (!Hash::check($request->pin, $user->transaction_pin)) {
+            return back()->with('error', 'Incorrect PIN.');
+        }
+
 
         $connection = [
             'host'     => $reseller->router->host,
             'port'     => $reseller->router->port ?? 8728,
             'username' => $reseller->router->username,
             'password' => encrypt($reseller->router->password),
+                // 'password' => decrypt($reseller->router->password),
+
         ];
 
         try {
@@ -128,6 +122,8 @@ class GetVoucherController extends Controller
             return back()->with('error', 'Purchase failed: ' . $e->getMessage());
         }
 
-        return back()->with('success', 'Voucher purchased and reseller credited successfully!');
+        return redirect()->route('pin.show')->with('success', 'Voucher purchased successfully!');
     }
+
+
 }

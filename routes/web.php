@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EarnController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\PaymentWebhookController;
+use App\Http\Controllers\PinController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -72,15 +73,34 @@ Route::match(['get', 'post'], '/simulate-webhook', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
+
+     // PIN creation / confirmation (after registration)
+    Route::get('/create-pin', [PinController::class, 'create'])->name('pin.create');
+    Route::post('/create-pin', [PinController::class, 'store'])->name('pin.store');
+
+     // App-lock authorization (when session expired/locked)
+    Route::get('/authorize', [PinController::class, 'showLockScreen'])->name('pin.authorize');
+    Route::post('/authorize', [PinController::class, 'showLockScreenCheck'])->name('pin.authorize.check');
+
+          // WebAuthn / Biometric placeholders (optional)
+    Route::post('/webauthn/register', [PinController::class, 'webauthnRegister'])->name('webauthn.register');
+    Route::post('/webauthn/authenticate', [PinController::class, 'webauthnAuthenticate'])->name('webauthn.authenticate');
+
     Route::view('/profile/index', 'profile.index')->name('profile');
     Route::view('/getVoucher/paycheckout', 'getVoucher.paycheckout')->name('getVoucher.paycheckout');
     Route::view('/getVoucher/receipt', 'getVoucher.receipt')->name('getVoucher.receipt');
 
 
+
     //getVocher route
     Route::get('/wallet/accno', [DashboardController::class, 'acc'])->name('user.accno');
-    Route::get('/getVoucher/index', [GetVoucherController::class, 'index'])->name('getVoucher.index');
-    Route::post('/getVoucher/index', [GetVoucherController::class, 'store'])->name('getVoucher.store');
+    Route::get('/getVoucher/buy', [GetVoucherController::class, 'create'])->name('getVoucher.buy');
+    Route::post('/getVoucher/store', [GetVoucherController::class, 'store'])->name('getVoucher.store');
+
+    // Transaction PIN verification (AJAX)
+    Route::get('/transaction/enter-pin', [PinController::class, 'showPinPage'])->name('pin.show');
+    Route::post('/transaction/verify-pin', [PinController::class, 'verifyTransactionPin'])->name('transaction.pin.verify');
+
     // Route::get('/getVoucher/paycheckout', [GetVoucherController::class, 'paycheckout'])->name('getVoucher.paycheckout');
     // Route::get('/getVoucher/receipt', [GetVoucherController::class, 'receipt'])->name('getVoucher.receipt');
 
@@ -111,6 +131,7 @@ Route::middleware('auth')->group(function () {
     // Route::view('/transactions/index', 'index')->name('transactions.index');
     Route::get('/transactions/index', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/help/index', [SupportController::class, 'index'])->name('help.index');
+
 
     //PaymentPoint Routes
     // Route::post('/api/payment/webhook', [PaymentWebhookController::class, 'handleWebhook']);

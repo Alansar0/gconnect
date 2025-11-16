@@ -56,6 +56,13 @@
             </div>
         </div>
     </div>
+    <!-- Add this form inside your view -->
+<form id="purchase-form" method="POST" action="{{ route('getVoucher.store') }}">
+    @csrf
+    <input type="hidden" name="reseller_id" id="purchase-reseller-id">
+    <input type="hidden" name="profile_id" id="purchase-profile-id">
+    <input type="hidden" name="pin" id="purchase-pin">
+</form>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -74,39 +81,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function sendVerify() {
-        if (pin.length !== MAX) return;
-        // AJAX to verify pin
-        fetch("{{ route('transaction.pin.verify') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({ pin })
-        })
-        .then(r => r.json().then(body => ({status: r.status, body})))
-        .then(({status, body}) => {
-            if (status === 200 && body.verified) {
-                // PIN ok — proceed to submit voucher purchase
-                // Put your final purchase POST here (or redirect back to purchase flow)
-                alert('PIN verified — proceeding with purchase.');
-                // Example: submit purchase form or call the endpoint
-                // document.getElementById('purchase-form').submit();
-            } else {
-                // incorrect
-                shake();
-                pin = '';
-                renderFields();
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            shake();
-            pin = '';
-            renderFields();
-        });
-    }
+    if (pin.length !== MAX) return;
+
+    fetch("{{ route('transaction.pin.verify') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({ pin })
+    })
+    .then(r => r.json().then(body => ({status: r.status, body})))
+    .then(({status, body}) => {
+
+        if (status === 200 && body.verified) {
+            // SUCCESS → auto-submit final purchase form
+            document.getElementById('pin-input').value = pin;
+            document.getElementById('purchase-form').submit();
+            return;
+        }
+
+        // FAILED
+        shake();
+        pin = '';
+        renderFields();
+    })
+    .catch(err => {
+        console.error(err);
+        shake();
+        pin = '';
+        renderFields();
+    });
+}
+
 
     function shake() {
         const container = document.querySelector('.bg-[#121A2F]');

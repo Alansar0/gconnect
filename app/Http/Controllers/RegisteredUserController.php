@@ -33,7 +33,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/dashboard')->with('success', 'Registration successful!');
+        return redirect()->route('pin.create');
+        // return redirect('/dashboard')->with('success', 'Registration successful!');
     }
 
 }

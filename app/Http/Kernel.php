@@ -12,7 +12,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        // existing...
+         'applock'  =>    \App\Http\Middleware\AppLockedMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 }

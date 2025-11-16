@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('role')->default('user');
             $table->string('password');
             $table->string('virtual_account')->nullable()->unique();
+            $table->string('pin_code')->nullable();
+            $table->boolean('has_biometric')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -56,7 +56,7 @@
             </div>
             <span class="block mt-2 text-sm text-[#f0f6fc]">Fund Wallet</span>
         </a>
-        <a href="{{ route('getVoucher.index') }}"
+        <a href="{{ route('getVoucher.buy') }}"
             class="bg-[#161b22] border border-[#58a6ff]/40 p-4 rounded-2xl text-center transition hover:bg-[#182430] cursor-pointer shadow-md">
             <div class="bg-[#182430] border border-[#58a6ff]/30 rounded-xl inline-block py-3 px-4 text-[#58a6ff]">
                 <img src="{{ Vite::asset('resources/images/voucher-icon.png') }}" alt="Voucher Icon" class="w-8 h-8" />
