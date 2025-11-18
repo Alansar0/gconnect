@@ -114,7 +114,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('getVoucher.store') }}" class="space-y-5">
+    <form method="POST" action="{{ route('voucher.select') }}" class="space-y-5">
         @csrf
         <div>
             <label class="block mb-2 text-sm font-semibold">Select Reseller</label>

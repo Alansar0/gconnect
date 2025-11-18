@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Voucher;
 use App\Models\Transaction;
 
 class PinController extends Controller
@@ -84,7 +85,9 @@ class PinController extends Controller
     }
        public function showPinPage()
     {
-        return view('getVoucher.transaction-pin');
+        $voucher = Voucher::all();
+
+        return view('getVoucher.transaction-pin', compact('voucher'));
     }
 
     // verify pin for a sensitive transaction (AJAX)
@@ -103,6 +106,7 @@ class PinController extends Controller
             return response()->json(['verified' => false, 'message' => 'Incorrect PIN.'], 401);
         }
 
+        session(['pin_verified' => true]);
 
         return response()->json(['verified' => true], 200);
     }

@@ -38,6 +38,7 @@ class Wallet extends Model
             'amount' => $amount,
             'type' => 'credit',
             'description' => $description,
+             'reference' => strtoupper(uniqid('TXN')),
             'status' => 'success',
         ]);
     }
@@ -56,6 +57,7 @@ class Wallet extends Model
             'amount' => $amount,
             'type' => 'debit',
             'description' => $description,
+            'reference' => strtoupper(uniqid('TXN')),
             'status' => 'success',
         ]);
     }

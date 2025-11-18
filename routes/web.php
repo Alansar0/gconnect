@@ -87,23 +87,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/webauthn/authenticate', [PinController::class, 'webauthnAuthenticate'])->name('webauthn.authenticate');
 
     Route::view('/profile/index', 'profile.index')->name('profile');
-    Route::view('/getVoucher/paycheckout', 'getVoucher.paycheckout')->name('getVoucher.paycheckout');
-    Route::view('/getVoucher/receipt', 'getVoucher.receipt')->name('getVoucher.receipt');
-
-
-
     //getVocher route
     Route::get('/wallet/accno', [DashboardController::class, 'acc'])->name('user.accno');
     Route::get('/getVoucher/buy', [GetVoucherController::class, 'create'])->name('getVoucher.buy');
-    Route::post('/getVoucher/store', [GetVoucherController::class, 'store'])->name('getVoucher.store');
+    Route::get('/getVoucher/receipt/{id}', [GetVoucherController::class, 'receipt'])->name('getVoucher.receipt');
+
+
+    Route::post('/voucher/select', [GetVoucherController::class, 'redirectToPinConfirmation'])->name('voucher.select');
+    Route::post('/voucher/final-store', [GetVoucherController::class, 'finalStore'])->name('voucher.store');
 
     // Transaction PIN verification (AJAX)
     Route::get('/transaction/enter-pin', [PinController::class, 'showPinPage'])->name('pin.show');
     Route::post('/transaction/verify-pin', [PinController::class, 'verifyTransactionPin'])->name('transaction.pin.verify');
 
-    // Route::get('/getVoucher/paycheckout', [GetVoucherController::class, 'paycheckout'])->name('getVoucher.paycheckout');
-    // Route::get('/getVoucher/receipt', [GetVoucherController::class, 'receipt'])->name('getVoucher.receipt');
-
+    //Reseller Routes
     Route::resource('voucher-profiles', ResellerController::class)
         ->names('reseller.upgrade');
 

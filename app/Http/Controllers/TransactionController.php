@@ -12,4 +12,5 @@ class TransactionController extends Controller
         $transactions = Transaction::where('user_id', auth()->id())->latest()->get();
         return view('transactions.index', compact('transactions'));
     }
+    
 }

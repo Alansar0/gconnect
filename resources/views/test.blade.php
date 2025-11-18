@@ -1,174 +1,81 @@
 <x-layouts.app>
-    <div class="bg-[#0B1120] min-h-screen flex flex-col items-center justify-center p-6">
+    <div class="bg-[#0d0f0e] text-white min-h-screen font-sans p-5 flex flex-col">
         <div class=" w-full flex justify-start mt-6 mb-4">
             <a href="{{ url()->previous() }}" class="text-[#58a6ff] hover:underline flex items-center">
                 <i class="material-icons mr-1">arrow_back</i> Back
             </a>
         </div>
-        <!-- Payment Card -->
-        <div class="bg-[#121A2F] rounded-2xl p-4 w-88 shadow-xl border border-[#1C2750] text-white">
-            <h2 class="text-xl text-center font-bold mb-2 text-[#58a6ff]">Confirm Payment</h2>
-            <p class="text-sm text-gray-400 mb-6">Please confirm your details before proceeding.</p>
+        <!-- Header -->
+        <div class="flex items-center justify-center mb-6">
+            <h1 class="text-lg font-semibold">Transaction Details</h1>
+        </div>
 
-            <!-- Details Box -->
-            <div class="bg-[#3a75c4] rounded-xl p-4 mb-6">
-                <div class="flex justify-between mb-1 text-sm text-[#121A2F]">
-                    <span>Product</span>
-                    <span class="font-medium text-[#121A2F]">MTN Data</span>
-                </div>
-                <div class="flex justify-between mb-1 text-sm text-[#121A2F]">
-                    <span>Discount</span>
-                    <span class="font-medium text-[#121A2F]">—</span>
-                </div>
-                <div class="flex justify-between mb-1 text-sm text-[#121A2F]">
-                    <span>Number</span>
-                    <span class="font-medium text-[#121A2F]">07044834946</span>
-                </div>
-                <div class="flex justify-between mt-3 text-[#121A2F] font-semibold">
-                    <span>Total</span>
-                    <span class="text-[#121A2F]">₦450</span>
-                </div>
-            </div>
 
-            <!-- PIN Inputs -->
-            <div class="flex justify-around mb-6" id="pin-boxes">
-                <input type="password" maxlength="1" class="pin-field w-10 h-10 rounded-lg bg-[#0B1120] border border-[#1E2A55] text-center text-white focus:border-[#58a6ff] outline-none transition" />
-                <input type="password" maxlength="1" class="pin-field w-10 h-10 rounded-lg bg-[#0B1120] border border-[#1E2A55] text-center text-white focus:border-[#58a6ff] outline-none transition" />
-                <input type="password" maxlength="1" class="pin-field w-10 h-10 rounded-lg bg-[#0B1120] border border-[#1E2A55] text-center text-white focus:border-[#58a6ff] outline-none transition" />
-                <input type="password" maxlength="1" class="pin-field w-10 h-10 rounded-lg bg-[#0B1120] border border-[#1E2A55] text-center text-white focus:border-[#58a6ff] outline-none transition" />
-            </div>
+        <!-- Transaction Summary Card -->
+        <div class="bg-[#1b1b1f] rounded-2xl shadow-lg p-5 mb-5 border border-[#2b5da4]">
+            <div class="flex flex-col items-center text-center">
+                <h2 class="text-lg font-semibold mb-1">Vocher</h2>
+                <h3 class="text-3xl font-bold mb-2 text-white">₦100.00</h3>
 
-            <!-- Keypad -->
-            <div class="grid grid-cols-3 gap-3">
-                @foreach(range(1,9) as $n)
-                    <button data-value="{{ $n }}" class="bg-[#0B1120] rounded-xl py-3 text-xl font-semibold hover:bg-[#121A2F] hover:text-white transition">{{ $n }}</button>
-                @endforeach
-
-                <button id="clear-btn" class="bg-[#0B1120] rounded-xl py-3 text-lg text-[#58a6ff] font-semibold hover:bg-[#1E2A55] transition">Clear</button>
-                <button data-value="0" class="bg-[#0B1120] rounded-xl py-3 text-xl font-semibold hover:bg-[#121A2F] hover:text-white transition">0</button>
-                <button id="backspace-btn" class="bg-[#0B1120] rounded-xl py-3 text-xl text-[#58a6ff] font-semibold hover:bg-[#1E2A55] transition">⌫</button>
-            </div>
-
-            <div class="flex justify-center mt-6">
-                <div class="w-12 h-12 rounded-full border border-[#58a6ff] flex items-center justify-center hover:bg-[#0F1B33] transition" id="webauthn-btn">
-                    <i class="material-icons text-[#58a6ff]">fingerprint</i>
+                <div class="flex items-center justify-center text-[#58a6ff] font-medium mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Successful
                 </div>
             </div>
         </div>
+
+        <!-- Transaction Details Card -->
+        <div class="bg-[#1b1b1f] rounded-2xl shadow-md border border-[#2b5da4] p-5 mb-8">
+            <h3 class="text-[#58a6ff] font-semibold mb-4">Transaction Details</h3>
+
+            <div class="space-y-3 text-sm">
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Voucher Username</span>
+                    <span class="font-medium text-white">Vegt575</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Voucher Pin</span>
+                    <span class="font-medium text-white">30990639</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Transaction Type</span>
+                    <span class="font-medium text-white">Airtime</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Payment Method</span>
+                    <span class="font-medium flex items-center text-white">
+                        Wallet
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 text-[#58a6ff]" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Transaction No.</span>
+                    <span class="text-gray-300 text-xs">251007100100645513607879</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Transaction Date</span>
+                    <span class="font-medium text-gray-200">Oct 7, 2025 23:54:16</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex space-x-4 mt-auto">
+            <button
+                class="flex-1 border border-[#58a6ff] text-[#58a6ff] font-semibold py-3 rounded-full hover:bg-[#1b1b1f] hover:border-[#3a75c4] transition-all">
+                Report Issue
+            </button>
+            <button
+                class="flex-1 bg-[#58a6ff] hover:bg-[#3a75c4] text-black font-semibold py-3 rounded-full transition-all">
+                Share Receipt
+            </button>
+        </div>
+
     </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const MAX = 4;
-    let pin = '';
-    const pinFields = document.querySelectorAll('.pin-field');
-    const keypad = document.querySelectorAll('[data-value]');
-    const clearBtn = document.getElementById('clear-btn');
-    const backspaceBtn = document.getElementById('backspace-btn');
-    const webauthnBtn = document.getElementById('webauthn-btn');
-
-    function renderFields() {
-        pinFields.forEach((f, i) => {
-            f.value = pin[i] ? '*' : '';
-        });
-    }
-
-    function sendVerify() {
-        if (pin.length !== MAX) return;
-        // AJAX to verify pin
-        fetch("{{ route('transaction.pin.verify') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({ pin })
-        })
-        .then(r => r.json().then(body => ({status: r.status, body})))
-        .then(({status, body}) => {
-            if (status === 200 && body.verified) {
-                // PIN ok — proceed to submit voucher purchase
-                // Put your final purchase POST here (or redirect back to purchase flow)
-                alert('PIN verified — proceeding with purchase.');
-                // Example: submit purchase form or call the endpoint
-                // document.getElementById('purchase-form').submit();
-            } else {
-                // incorrect
-                shake();
-                pin = '';
-                renderFields();
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            shake();
-            pin = '';
-            renderFields();
-        });
-    }
-
-    function shake() {
-        const container = document.querySelector('.bg-[#121A2F]');
-        container.classList.add('animate-shake');
-        setTimeout(() => container.classList.remove('animate-shake'), 500);
-    }
-
-    keypad.forEach(k => {
-        k.addEventListener('click', () => {
-            const v = k.getAttribute('data-value');
-            if (!v) return;
-            if (pin.length < MAX) {
-                pin += v;
-                renderFields();
-                if (pin.length === MAX) sendVerify();
-            }
-        });
-    });
-
-    clearBtn.addEventListener('click', () => {
-        pin = '';
-        renderFields();
-    });
-
-    backspaceBtn.addEventListener('click', () => {
-        pin = pin.slice(0, -1);
-        renderFields();
-    });
-
-    // keyboard support
-    document.addEventListener('keydown', (e) => {
-        if (e.key >= '0' && e.key <= '9') {
-            if (pin.length < MAX) {
-                pin += e.key;
-                renderFields();
-                if (pin.length === MAX) sendVerify();
-            }
-        } else if (e.key === 'Backspace') {
-            pin = pin.slice(0, -1);
-            renderFields();
-        }
-    });
-
-    // WebAuthn placeholder (requires server-side integration)
-    webauthnBtn.addEventListener('click', async () => {
-        alert('Fingerprint auth placeholder — implement WebAuthn to enable.');
-        // When ready implement navigator.credentials.get() flow and call /webauthn/authenticate
-    });
-
-});
-</script>
-
-<style>
-@keyframes shakeAnim {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(6px); }
-  75% { transform: translateX(-4px); }
-  100% { transform: translateX(0); }
-}
-.animate-shake {
-  animation: shakeAnim 0.45s ease;
-}
-</style>
 </x-layouts.app>
