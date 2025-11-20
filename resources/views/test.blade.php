@@ -1,81 +1,123 @@
 <x-layouts.app>
-    <div class="bg-[#0d0f0e] text-white min-h-screen font-sans p-5 flex flex-col">
+    <div class="bg-[#0d0d0f] text-white min-h-screen font-sans py-2 px-4">
         <div class=" w-full flex justify-start mt-6 mb-4">
             <a href="{{ url()->previous() }}" class="text-[#58a6ff] hover:underline flex items-center">
                 <i class="material-icons mr-1">arrow_back</i> Back
             </a>
         </div>
         <!-- Header -->
-        <div class="flex items-center justify-center mb-6">
-            <h1 class="text-lg font-semibold">Transaction Details</h1>
+        <div class="text-center mt-6 mb-6">
+            <div class="flex justify-center mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/2331/2331942.png" alt="Help Icon" class="w-20 h-20">
+            </div>
+            <h1 class="text-2xl font-bold text-[#58a6ff] mb-2">Get Your Voucher</h1>
+            <p class="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto">
+                Purchase a data or Wi-Fi voucher easily and get your access code instantly.
+                Stay connected — anytime, anywhere.
+            </p>
         </div>
 
+        <!-- Flash Sales Section -->
+        <h2 class="text-white font-semibold text-lg mb-2">
+            Flash Sales <span class="text-gray-400 text-sm">ℹ️</span>
+        </h2>
 
-        <!-- Transaction Summary Card -->
-        <div class="bg-[#1b1b1f] rounded-2xl shadow-lg p-5 mb-5 border border-[#2b5da4]">
-            <div class="flex flex-col items-center text-center">
-                <h2 class="text-lg font-semibold mb-1">Vocher</h2>
-                <h3 class="text-3xl font-bold mb-2 text-white">₦100.00</h3>
+        <!-- Flash Sales Carousel -->
+        <div class="relative max-w-md mx-auto overflow-hidden rounded-2xl mb-8">
+            <div id="flash-track" class="flex transition-transform duration-700 ease-in-out">
+                <!-- Flash Card 1 -->
+                <div class="min-w-full p-3">
+                    <div class="bg-[#1b1b1f] rounded-2xl border border-gray-700 p-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <p class="font-semibold text-white">1GB / 1 DAY</p>
+                            <span class="bg-gray-600 text-xs px-2 py-1 rounded-md">Sold Out</span>
+                        </div>
+                        <div class="text-gray-400 text-sm line-through">₦500</div>
+                        <div class="text-[#58a6ff] text-sm">₦10 | 98% OFF</div>
+                        <div class="h-1 bg-[#58a6ff] mt-3 rounded-full"></div>
+                    </div>
+                </div>
 
-                <div class="flex items-center justify-center text-[#58a6ff] font-medium mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Successful
+                <!-- Flash Card 2 -->
+                <div class="min-w-full p-3">
+                    <div class="bg-[#1b1b1f] rounded-2xl border border-gray-700 p-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <p class="font-semibold text-white">2GB / 3 DAYS</p>
+                            <span class="bg-green-600 text-xs px-2 py-1 rounded-md">Active</span>
+                        </div>
+                        <div class="text-gray-400 text-sm line-through">₦1000</div>
+                        <div class="text-[#58a6ff] text-sm">₦20 | 97% OFF</div>
+                        <div class="h-1 bg-[#58a6ff] mt-3 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Flash Card 3 -->
+                <div class="min-w-full p-3">
+                    <div class="bg-[#1b1b1f] rounded-2xl border border-gray-700 p-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <p class="font-semibold text-white">500MB / 6 HRS</p>
+                            <span class="bg-[#58a6ff]/40 text-xs px-2 py-1 rounded-md">Hot 🔥</span>
+                        </div>
+                        <div class="text-gray-400 text-sm line-through">₦300</div>
+                        <div class="text-[#58a6ff] text-sm">₦5 | 99% OFF</div>
+                        <div class="h-1 bg-[#58a6ff] mt-3 rounded-full"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Transaction Details Card -->
-        <div class="bg-[#1b1b1f] rounded-2xl shadow-md border border-[#2b5da4] p-5 mb-8">
-            <h3 class="text-[#58a6ff] font-semibold mb-4">Transaction Details</h3>
+        <script>
+            const flashTrack = document.getElementById('flash-track');
+            let flashIndex = 0;
+            const flashTotal = 3;
 
-            <div class="space-y-3 text-sm">
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Voucher Username</span>
-                    <span class="font-medium text-white">Vegt575</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Voucher Pin</span>
-                    <span class="font-medium text-white">30990639</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Transaction Type</span>
-                    <span class="font-medium text-white">Airtime</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Payment Method</span>
-                    <span class="font-medium flex items-center text-white">
-                        Wallet
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 text-[#58a6ff]" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Transaction No.</span>
-                    <span class="text-gray-300 text-xs">251007100100645513607879</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Transaction Date</span>
-                    <span class="font-medium text-gray-200">Oct 7, 2025 23:54:16</span>
-                </div>
+            function updateFlashCarousel() {
+                flashTrack.style.transform = `translateX(-${flashIndex * 100}%)`;
+            }
+
+            setInterval(() => {
+                flashIndex = (flashIndex + 1) % flashTotal;
+                updateFlashCarousel();
+            }, 3000);
+        </script>
+        @if (session('success'))
+            <div class="bg-green-600/30 text-green-200 p-4 rounded-xl mb-4">
+                {{ session('success') }}
             </div>
-        </div>
+        @endif
+        @if (session('error'))
+            <div class="bg-red-600/30 text-red-200 p-4 rounded-xl mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
 
-        <!-- Action Buttons -->
-        <div class="flex space-x-4 mt-auto">
-            <button
-                class="flex-1 border border-[#58a6ff] text-[#58a6ff] font-semibold py-3 rounded-full hover:bg-[#1b1b1f] hover:border-[#3a75c4] transition-all">
-                Report Issue
-            </button>
-            <button
-                class="flex-1 bg-[#58a6ff] hover:bg-[#3a75c4] text-black font-semibold py-3 rounded-full transition-all">
-                Share Receipt
-            </button>
-        </div>
+        <form method="POST" action="{{ route('voucher.select') }}" class="space-y-5">
+            @csrf
+            <div>
+                <label class="block mb-2 text-sm font-semibold">Select Reseller</label>
+                <select name="reseller_id" class="w-full bg-[#141E26] p-3 rounded-xl border border-[#1F2A33]">
+                    @foreach ($resellers as $reseller)
+                        <option value="{{ $reseller->id }}">{{ $reseller->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Data Plans Grid -->
+            <div class="grid grid-cols-3 gap-3">
+                @foreach ($profiles as $profile)
+                    <div class="bg-[#1b1b1f] rounded-xl px-4 py-6 flex flex-col text-center border border-gray-700 h-full">
+                        <p value="{{ $profile->id }}" class="text-white font-bold text-lg">{{ $profile->name }}</p>
+                        <p class="text-gray-300 text-sm mb-4"> ₦{{ number_format($profile->price, 2) }}</p>
+                        <button type="submit"
+                            class="mt-auto flex justify-between items-center border border-[#58a6ff] rounded-lg px-4 py-2 text-lg text-[#58a6ff] font-medium hover:bg-[#58a6ff]/10 transition-all">
+                            <span>Get</span>
+                            <i class="material-icons">chevron_right</i>
+                        </button>
+                    </div>
+                @endforeach
+                <input type="hidden" name="pin" id="transaction-pin-final">
+            </div>
+        </form>
 
     </div>
 </x-layouts.app>
