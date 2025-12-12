@@ -1,67 +1,113 @@
+<x-layouts.app>
 
-    <x-layouts.app>
-            <div class=" bg-[#0d1117] text-[#e6edf3] font-sans flex flex-col w-full h-[100vh]">
-                <div class="bg-[#161b22] rounded-xl shadow-lg w-[95%] h-[82vh] p-4 sm:p-6 md:p-8 mt-10 mx-auto">
+    <div class="bg-bg1 text-t1 font-sans flex flex-col w-full h-[100vh]">
 
-                    <!-- Header -->
-                    <h2 class="text-lg font-semibold mb-6 text-left text-[#58a6ff]">User Details</h2>
+        <div class="bg-bg2 rounded-xl shadow-accent w-[95%] h-[82vh] p-4 sm:p-6 md:p-8 mt-10 mx-auto">
 
-                    <!-- Profile Details -->
-                    <div class="flex flex-col h-[60vh]">
+            <!-- Header -->
+            <h2 class="text-lg font-semibold mb-6 text-left text-accent">User Details</h2>
 
-                        <!-- Profile Picture -->
-                        <div class="mx-auto mb-4 text-center">
-                            <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Profile Picture"
-                                class="w-17 h-17 rounded-full object-cover border-2 border-[#58a6ff]">
-                        </div>
+            <!-- Profile Details -->
+            <div class="flex flex-col h-[60vh]">
 
-                        <!-- Details List -->
-                        <div class="w-full ">
-                            <div class="flex justify-between py-4 px-2 border-b border-[#30363d] text-sm">
-                                <span class="text-[#8b949e] font-medium">Full Name</span>
-                                <span>{{Auth::user()->full_name}}</span>
-                            </div>
-                            <div class="flex justify-between py-4 px-2 border-b border-[#30363d] text-sm">
-                                <span class="text-[#8b949e] font-medium">Email</span>
-                                <span>{{Auth::user()->email}}</span>
-                            </div>
-                            <div class="flex justify-between py-4 px-2 border-b border-[#30363d] text-sm">
-                                <span class="text-[#8b949e] font-medium">Phone Number</span>
-                                <span>{{Auth::user()->phone_number}}</span>
-                            </div>
-                             <div class="flex justify-between py-4 px-2 border-b border-[#30363d] text-sm">
-                                <span class="text-[#8b949e] font-medium">User Type</span>
-                                <span>{{Auth::user()->role}}</span>
-                            </div>
-                            <div class="flex justify-between py-4 px-2 border-b border-[#30363d] text-sm">
-                                <span class="text-[#8b949e] font-medium">Location</span>
-                                <span>{{Auth::user()->location}}</span>
-                            </div>
-                            <div class="flex justify-between py-4 px-2 border-b border-[#30363d] text-sm">
-                                <span class="text-[#8b949e] font-medium">Date Joined</span>
-                                <span>{{ Auth::user()->created_at->format('D M d Y H:i:s') }}</span>
-                            </div>
-                        </div>
+                <!-- Profile Picture -->
+                <div class="mx-auto mb-4 text-center">
+                    <img src="{{ Vite::asset('resources/images/logo.png') }}"
+                         alt="Profile Picture"
+                         class="w-17 h-17 rounded-full object-cover border-2 border-accent">
+                </div>
+
+                <!-- Details List -->
+                <div class="w-full">
+                    
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">Full Name</span>
+                        <span>{{ Auth::user()->full_name }}</span>
                     </div>
 
-                    <!-- Actions -->
-                    <div class="flex justify-start mt-4">
-                        {{-- <button
-                            class="flex-1 text-center bg-[#238636] text-white rounded-lg py-2 text-sm mx-1 hover:bg-[#2ea043] transition">
-                            <i class="fas fa-edit"></i> Edit
-                        </button> --}}
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                            @csrf
-                        </form>
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">Email</span>
+                        <span>{{ Auth::user()->email }}</span>
+                    </div>
 
-                        <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="flex-1 text-center bg-[#da3633] text-white rounded-lg py-2 text-sm mx-1 hover:bg-[#f85149] transition">
-                            <i class="fas fa-power-off"></i> Log Out
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">Phone Number</span>
+                        <span>{{ Auth::user()->phone_number }}</span>
+                    </div>
+
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">User Type</span>
+                        <span>{{ Auth::user()->role }}</span>
+                    </div>
+
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">Location</span>
+                        <span>{{ Auth::user()->location }}</span>
+                    </div>
+
+                    <!-- Theme Switch -->
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">Switch Theme</span>
+                        <button onclick="toggleTheme()"
+                                class="text-accent px-4 py-2 border border-accent rounded">
+                            Toggle Theme
                         </button>
                     </div>
+
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">Date Joined</span>
+                        <span>{{ Auth::user()->created_at->format('D M d Y H:i:s') }}</span>
+                    </div>
+                
                 </div>
             </div>
 
+            <!-- Actions -->
+            <div class="flex justify-start mt-4">
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                    @csrf
+                </form>
+
+                    <button 
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="flex-1 text-center bg-[#da3633] text-white rounded-lg py-2 text-sm mx-1 transition hover:bg-[#f85149]">
+                            <i class="fas fa-power-off"></i> Log Out
+                    </button>
 
 
-    </x-layouts.app>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORRECT THEME TOGGLE SCRIPT -->
+    <script>
+        (function () {
+            const html = document.documentElement;
+            const KEY = 'theme';
+            const DEFAULT = 'light';
+
+            function applyTheme(theme) {
+                html.setAttribute('data-theme', theme);
+
+                if (theme === 'dark') html.classList.add('dark');
+                else html.classList.remove('dark');
+
+                localStorage.setItem(KEY, theme);
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const saved = localStorage.getItem(KEY);
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                applyTheme(saved || (prefersDark ? 'dark' : DEFAULT));
+            });
+
+            window.toggleTheme = function () {
+                const current = html.getAttribute('data-theme');
+                applyTheme(current === 'dark' ? 'light' : 'dark');
+            };
+        })();
+    </script>
+
+</x-layouts.app>

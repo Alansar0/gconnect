@@ -2,7 +2,7 @@
 
 return [
     [
-        "file" => "1 - MU'AMALAR AURATAYYA - USMANNOOR_ASSALAFY.mp3",
+        "file" => "karatu 1.opus",
         "questions" => [
             [
                 "question" => "Who is Dajjal?",
@@ -17,7 +17,7 @@ return [
         ]
     ],
     [
-        "file" => "002.mp3",
+        "file" => "karatu 2.opus",
         "questions" => [
             [
                 "question" => "What is Dajjal’s main claim?",

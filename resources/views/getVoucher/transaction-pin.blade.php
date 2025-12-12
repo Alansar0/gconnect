@@ -25,8 +25,7 @@
                 </div>
             </div>
             <!-- Error Message (hidden by default) -->
-            <div id="error-message"
-                class="text-red-400 bg-red-900/30 rounded-lg px-3 py-2 mb-4 text-center text-sm hidden"></div>
+            <div id="error-message" class="text-red-400 bg-red-900/30 rounded-lg px-3 py-2 mb-4 text-center text-sm hidden"></div>
             <!-- PIN Inputs -->
             <div class="flex justify-around mb-6" id="pin-boxes">
                 <input type="password" maxlength="1"
@@ -134,15 +133,7 @@
                 pin = '';
                 renderFields();
             }
-            // function shakeError(msg = 'Incorrect PIN') {
-            //     const box = document.getElementById('payment-card');
-            //     box.classList.add('animate-shake');
-            //     setTimeout(() => box.classList.remove('animate-shake'), 500);
-
-            //     // reset
-            //     pin = '';
-            //     renderFields();
-            // }
+            
 
             // --- Auto Verify PIN ---
             function verifyPin() {

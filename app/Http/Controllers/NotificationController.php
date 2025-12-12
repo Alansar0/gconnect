@@ -12,18 +12,37 @@ class NotificationController extends Controller
         return view('notifications.index', compact('notifications'));
     }
 
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $notification = auth()->user()->notifications()->where('id', $id)->first();
+    //     if ($notification) {
+    //         return view('notifications.show', compact('notifications'));
+    //     }
+    //     return back()->with('error','Notification not found.');
+    // }
+      public function show($id)
     {
-        $notification = auth()->user()->notifications()->where('id', $id)->first();
-        if ($notification) {
-            return view('notifications.show', compact('notifications'));
+        $notification = auth()->user()->notifications()->where('id', $id)->firstOrFail();
+
+        // Optionally mark it as read immediately when viewing
+        if (!$notification->read_at) {
+            $notification->markAsRead();
         }
-        return back()->with('error','Notification not found.');
+
+        return view('notifications.show', compact('notification'));
+    }
+
+        // / NotificationController.php
+    public function count()
+    {
+        return response()->json([
+            'count' => auth()->user()->unreadNotifications()->count()
+        ]);
     }
 
     public function markRead($id)
     {
-        $notification = auth()->user()->notifications()->where('id', $id)->first();
+        $notification = auth()->user()->notifications()->where('id', $id)->firstOrFail();
         if ($notification) {
             $notification->markAsRead();
             return back()->with('success','Marked read.');

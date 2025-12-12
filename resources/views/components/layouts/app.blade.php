@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
 
 <head>
     <meta charset="utf-8">
@@ -12,84 +12,141 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Styles / Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    @vite(['resources/css/theme.css', 'resources/js/app.js'])
 </head>
 
-<body class="m-0 p-0 bg-[#0d1117] text-[#f0f6fc] font-['Roboto']">
+<body class="m-0 p-0 bg-bg1 text-t1 font-['Roboto']">
+    
+    
     <main class="min-h-screen">
         {{ $slot }}
     </main>
+
     @if (in_array(Route::currentRouteName(), ['dashboard', 'transactions.index', 'help.index', 'profile', 'earn.index']))
+        <!-- BOTTOM NAV -->
+<div class="unique-bottom-nav">
 
-        <div
-    class="fixed bottom-5 left-2 right-2 bg-[#161b22] border border-[#58a6ff]/20 rounded-2xl flex justify-around items-center py-2 shadow-[0_0_20px_rgba(88,166,255,0.3)] backdrop-blur-md z-50">
-    <div class="flex w-full justify-around">
+    <a href="{{ route('dashboard') }}">
+        <i class="material-icons !text-[34px]">home</i>
+    </a>
 
-        <!-- Home -->
-        <a href="{{ route('dashboard') }}"
-            class="hover:bg-[#58a6ff]/20 hover:text-[#58a6ff] text-[#f0f6fc] rounded-[40px] p-1.5 transition-all duration-300 shadow-[0_0_8px_rgba(88,166,255,0.1)]">
-            <i class="material-icons !text-[34px]">home</i>
-        </a>
+    <a href="{{ route('transactions.index') }}">
+        <i class="material-icons !text-[34px]">history</i>
+    </a>
 
-        <!-- History -->
-        <a href="{{ route('transactions.index') }}"
-            class="hover:bg-[#58a6ff]/20 hover:text-[#58a6ff] text-[#f0f6fc] rounded-[40px] p-1.5 transition-all duration-300 shadow-[0_0_8px_rgba(88,166,255,0.1)]">
-            <i class="material-icons !text-[34px]">history</i>
-        </a>
+    
+    <a href="{{ route('earn.index') }}"
+   class="unique-bottom-nav-profit">
+    <img src="{{ Vite::asset('resources/images/profit-white.png') }}" 
+         id="profit-icon"
+         class="w-[34px] h-[34px] transition-all duration-300" />
+</a>
 
-        <!-- Profit (custom icon) -->
-        <a href="{{ route('earn.index') }}"
-            class="hover:bg-[#58a6ff]/20 hover:text-[#58a6ff] rounded-[40px] p-1.5 transition-all duration-300 flex items-center justify-center shadow-[0_0_8px_rgba(88,166,255,0.1)]">
-            <img src="{{ Vite::asset('resources/images/profit-white.png') }}" alt="Profit"
-                class="w-[34px] h-[34px] brightness-0 invert hover:invert-0 transition-all duration-300" />
-        </a>
 
-        <!-- Support -->
-        <a href="{{ route('help.index') }}"
-            class="hover:bg-[#58a6ff]/20 hover:text-[#58a6ff] text-[#f0f6fc] rounded-[40px] p-1.5 transition-all duration-300 shadow-[0_0_8px_rgba(88,166,255,0.1)]">
-            <i class="material-icons !text-[34px]">support_agent</i>
-        </a>
+    <a href="{{ route('help.index') }}">
+        <i class="material-icons !text-[34px]">support_agent</i>
+    </a>
 
-        <!-- Profile -->
-        <a href="{{ route('profile') }}"
-            class="hover:bg-[#58a6ff]/20 hover:text-[#58a6ff] text-[#f0f6fc] rounded-[40px] p-1.5 transition-all duration-300 shadow-[0_0_8px_rgba(88,166,255,0.1)]">
-            <i class="material-icons !text-[34px]">person</i>
-        </a>
+    <a href="{{ route('profile') }}">
+        <i class="material-icons !text-[34px]">person</i>
+    </a>
 
-    </div>
 </div>
 
+
     @endif
+
+    {{-- <!-- THEME SWITCHER SCRIPT -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute("data-theme") === "dark";
+            html.setAttribute("data-theme", isDark ? "light" : "dark");
+            localStorage.setItem("theme", isDark ? "light" : "dark");
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const saved = localStorage.getItem("theme") || "light";
+            document.documentElement.setAttribute("data-theme", saved);
+        });
+    </script> --}}
+    <!-- THEME SWITCHER (drop this in your main layout, replacing any older theme script) -->
+<script>
+  (function () {
+    const html = document.documentElement;
+    // keys / defaults
+    const KEY = 'theme';
+    const DEFAULT = 'light';
+
+    // helper to apply a theme across both systems:
+    function applyTheme(theme) {
+      // 1) data-theme for your CSS variable system
+      html.setAttribute('data-theme', theme);
+
+      // 2) also toggle 'dark' class so Tailwind dark: variants work
+      if (theme === 'dark') {
+        html.classList.add('dark');
+      } else {
+        html.classList.remove('dark');
+      }
+
+      // 3) persist
+      localStorage.setItem(KEY, theme);
+    }
+
+    // initialize on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem(KEY);
+
+      // if user hasn't chosen, prefer system preference
+      if (!saved) {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : DEFAULT);
+        return;
+      }
+
+      applyTheme(saved);
+    });
+
+    // expose toggle function globally (used by your buttons)
+    window.toggleTheme = function () {
+      const current = html.getAttribute('data-theme') || DEFAULT;
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    };
+
+    // also expose a force-apply helper for debugging if needed
+    window.applyTheme = applyTheme;
+  })();
+</script>
+
+
+    <!-- Real-time Notification Listener (unchanged) -->
     <script>
         window.userId = {{ Auth::id() ?? 'null' }};
 
         if (window.userId && window.Echo) {
             Echo.private(`App.Models.User.${window.userId}`)
                 .notification((notification) => {
-                    console.log('🔔 New notification:', notification);
-                    console.log("Received at:", data.created_at);
-
-
-                    // Example (you can later replace with Alpine.js, Livewire or your UI logic)
                     const notifList = document.querySelector('#notification-list');
+
                     if (notifList) {
                         const item = document.createElement('div');
                         item.className =
-                            'flex items-center gap-3 p-4 border border-white/10 rounded-xl mb-3 bg-gradient-to-br from-[#182430] to-[#0C141C]';
+                            'flex items-center gap-3 p-4 border border-accent rounded-xl mb-3 bg-bg3 shadow-accent';
                         item.innerHTML = `
-            <img src="{{ Vite::asset('resources/images/logo.png') }}" class="w-10 h-10 rounded-full border border-white" />
-            <div>
-              <p class="text-sm font-semibold text-white">${notification.title || 'New Notification'}</p>
-              <p class="text-xs text-white">${notification.message || ''}</p>
-            </div>
-          `;
+                            <img src="{{ Vite::asset('resources/images/logo.png') }}" class="w-10 h-10 rounded-full border border-white" />
+                            <div>
+                                <p class="text-sm font-semibold text-t1">${notification.title || 'New Notification'}</p>
+                                <p class="text-xs text-t2">${notification.message || ''}</p>
+                            </div>
+                        `;
                         notifList.prepend(item);
                     }
                 });
@@ -97,6 +154,5 @@
     </script>
 
 </body>
-
-
 </html>
+

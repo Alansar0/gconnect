@@ -35,6 +35,17 @@
                     </thead>
 
                     <tbody>
+                    @php
+                        $title = match($txn->description) {
+                            'voucher_purchase' => 'Voucher Purchased',
+                            'manual_deduction' => 'Manually Deducted',
+                            'manual_funding' => 'Manually Funded',
+                            'wallet_funded' => 'Wallet Funded',
+                            default => ucfirst($txn->description)
+                        };
+                    @endphp
+
+
                         @forelse($completed as $txn)
                             @php
                                 // --- Calculate previous and new balances dynamically ---
@@ -43,7 +54,7 @@
                         $amount = $txn->amount ?? 0;
 
                         if ($txn->status === 'completed') {
-                            if (in_array($txn->type, ['Bank funding', 'Manual funding'])) {
+                            if (in_array($txn->type, ['Bank funding', 'Manually funded'])) {
                                         $prevBalance = $userBalance - $amount;
                                         $newBalance = $userBalance;
                                     } else {
@@ -64,7 +75,6 @@
                                         Refund
                                     </button>
                                 </td>
-
                                 <!-- Transaction ID -->
                                 <td class="px-4 py-3 text-gray-300 font-semibold">{{ $txn->reference }}</td>
 
@@ -82,8 +92,8 @@
                                 </td>
 
                                 <!-- Description -->
-                                <td class="px-4 py-3 text-gray-400">{{ $txn->description }}</td>
-
+                                {{-- <td class="px-4 py-3 text-gray-400">{{ $txn->description }}</td> --}}
+                                 <td class="px-4 py-3 text-gray-400">{{ $title }}</td>
                                 <!-- Amount -->
                                 <td class="px-4 py-3 text-gray-200">₦{{ number_format($txn->amount, 2) }}</td>
 

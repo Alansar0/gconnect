@@ -7,6 +7,8 @@ use App\Notifications\AdminAnnouncement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
+use App\Models\AdminReward;
 use App\Models\SupportSubQuestion;
 use App\Models\SupportTopic;
 use App\Models\wallet;
@@ -92,4 +94,57 @@ class AdminSettingsController extends Controller
                 ]);
             }
         }
+
+ 
+    public function rewardIndex()
+    {
+        $rewards = AdminReward::orderBy('for')->get();
+        return view('admin.settings.rewardsIndex', compact('rewards'));
+    }
+
+    // ✅ Show edit form for a specific reward
+    public function rewardEdit(string $for)
+    {
+        $reward = AdminReward::firstWhere('for', $for);
+        if (!$reward) abort(404);
+        return view('admin.settings.cashbackReward', compact('reward'));
+    }
+
+    // ✅ Update reward
+
+    public function rewardUpdate(Request $request, string $for)
+{
+    $for = strtolower(trim($for)); // normalize
+
+    $request->validate([
+        'cashback_amount' => ['required','numeric','min:0'],
+        'voucher_rate' => ['required','numeric','min:1'],
+        'note' => ['nullable','string'],
+    ]);
+
+    // Always retrieve normalized
+    $reward = AdminReward::where('for', $for)->first();
+
+    if (!$reward) {
+        // create if missing
+        $reward = AdminReward::create([
+            'for' => $for,
+            'cashback_amount' => $request->cashback_amount,
+            'voucher_rate' => $request->voucher_rate,
+            'note' => $request->note,
+        ]);
+    } else {
+        // update existing
+        $reward->cashback_amount = $request->cashback_amount;
+        $reward->voucher_rate = $request->voucher_rate;
+        $reward->note = $request->note;
+        $reward->save(); // <-- important, use save() here
+    }
+
+    return redirect()->route('rewards.index')->with('success', 'Reward settings updated.');
+}
+
+
+
+
 }

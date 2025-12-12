@@ -13,7 +13,7 @@ class AdminTransactionController extends Controller
     $search = $request->input('search');
 
     $completed = Transaction::with('user')
-        ->whereIn('status', ['completed', 'failed'])
+        ->whereIn('status', ['success', 'failed'])
         ->when($search, function ($query, $search) {
             // Search user phone number
             $query->whereHas('user', function ($q) use ($search) {

@@ -1,0 +1,164 @@
+/* ============================== 
+   Tailwind (NEW v4 syntax)
+   ============================== */
+@import "tailwindcss";
+
+/* ==============================
+   Unique Bottom Nav Styles
+   ============================== */
+.unique-bottom-nav {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem 0;
+    z-index: 50;
+
+    background-color: var(--unique-bottom-bg);
+    border: 1px solid var(--unique-bottom-border);
+    box-shadow: 0 0 20px var(--unique-bottom-shadow);
+    backdrop-blur: 8px;
+}
+
+.unique-bottom-nav a {
+    border-radius: 40px;
+    padding: 0.375rem;
+    transition: all 0.3s;
+    color: var(--unique-bottom-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unique-bottom-nav a:hover {
+    background-color: var(--unique-bottom-hover-bg);
+    color: var(--unique-bottom-hover-text);
+}
+
+/* ==========================
+   Profit Icon
+   ========================== */
+#profit-icon { filter: brightness(0) invert(1); }
+[data-theme="light"] #profit-icon { filter: invert(0); }
+
+/* ==============================
+   GLOBAL COLORS
+   ============================== */
+:root {
+    /* Friday / Deep UI Colors */
+    --mint: #00FFD1;
+    --bg-deep: #0B141A;
+    --bg-header: #182430;
+    --border-deep: #233044;
+    --bg-alt: #0C141C;
+    --text-slate-400: #94A3B8;
+    --bg-range: #1B2938;
+    --grad-1: #0D2C35;
+    --grad-2: #112C3A;
+
+    /* Bottom nav */
+    --unique-bottom-bg: var(--bg-header);
+    --unique-bottom-border: rgba(88,166,255,0.20);
+    --unique-bottom-shadow: rgba(88,166,255,0.30);
+    --unique-bottom-text: #f0f6fc;
+    --unique-bottom-hover-bg: rgba(88,166,255,0.12);
+    --unique-bottom-hover-text: #58a6ff;
+
+    /* Cards */
+    --unique-card-bg: var(--bg-header);
+    --unique-card-border: rgba(88,166,255,0.20);
+
+    /* Page BGs */
+    --bg-friday-dark: var(--bg-deep);
+    --bg-friday-alt: #101E2B;
+    --bg-friday-switcher: var(--bg-alt);
+
+    /* Borders */
+    --card-border-friday: var(--border-deep);
+
+    /* Shadows */
+    --shadow-friday-switcher: rgba(0,255,209,0.4);
+
+    /* Texts */
+    --text-accent-friday: var(--mint);
+    --text-counter-friday: #101E2B;
+
+    /* Counter buttons */
+    --unique-counter-bg: var(--mint);
+
+    /* Default theme */
+    --bg-main: #101E2B;
+    --border-card: var(--border-deep);
+
+    --text-accent2: var(--mint);
+    --accent: #2563eb;
+    --accent-soft: #3b82f6;
+    --accent-border: rgba(37,99,235,0.2);
+    --shadow-accent: rgba(37,99,235,0.18);
+
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ==============================
+   LIGHT MODE
+   ============================== */
+[data-theme="light"] {
+    --unique-bottom-bg: #f3f4f6;
+    --unique-bottom-border: rgba(37,99,235,0.2);
+    --unique-bottom-shadow: rgba(37,99,235,0.3);
+    --unique-bottom-text: #1f2937;
+    --unique-bottom-hover-bg: rgba(37,99,235,0.12);
+    --unique-bottom-hover-text: #2563eb;
+    --unique-card-bg: #ffffff;
+    --unique-card-border: rgba(37,99,235,0.20);
+}
+
+/* ==============================
+   DARK MODE
+   (matching your old colors 100%)
+   ============================== */
+[data-theme="dark"] {
+    --bg-1: var(--bg-header);
+    --bg-2: #161b22;
+    --bg-3: #0f172a;
+
+    --text-1: #f0f6fc;
+    --text-2: rgba(240,246,252,0.8);
+    --text-3: rgba(240,246,252,0.6);
+
+    --accent: #58a6ff;
+    --accent-soft: #58a6ff;
+    --accent-border: rgba(88,166,255,0.3);
+    --shadow-accent: rgba(88,166,255,0.3);
+}
+
+/* ==============================
+   Arabic Font
+   ============================== */
+@font-face {
+    font-family: 'Arabic';
+    src: url('/fonts/Amiri-Regular.ttf') format('truetype');
+}
+
+.font-arabic { font-family: 'Arabic', serif; }
+.body-arabic { direction: rtl; text-align: right; }
+
+/* ==============================
+   Utility
+   ============================== */
+.bg-bg1 { background-color: var(--bg-1); }
+.bg-bg2 { background-color: var(--bg-2); }
+.bg-bg3 { background-color: var(--bg-3); }
+
+.text-t1 { color: var(--text-1); }
+.text-t2 { color: var(--text-2); }
+.text-t3 { color: var(--text-3); }
+
+.text-accent { color: var(--accent); }
+.bg-accent { background-color: var(--accent); }
+.border-accent { border-color: var(--accent-border); }
+.shadow-accent { box-shadow: 0 0 10px var(--shadow-accent); }

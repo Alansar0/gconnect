@@ -1,5 +1,10 @@
 <x-layouts.admin>
     <div class="min-h-screen bg-[#0B141A] text-white p-8">
+        <div class=" w-full flex justify-start mt-4 mb-4">
+            <a onclick="window.history.back()" class="text-[#58a6ff] hover:underline flex items-center">
+    <i class="material-icons mr-1">arrow_back</i> Back
+</a>
+        </div>
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-[#58a6ff]">Voucher Profiles</h1>
             <button onclick="toggleModal()"

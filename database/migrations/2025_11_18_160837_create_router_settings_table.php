@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('router_settings', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('reseller_id')->constrained()->onDelete('cascade');
-                $table->string('active_wan_port')->default('ether1');
+                // $table->string('active_wan_port')->default('ether1');
                 $table->integer('wan1_limit')->default(0);
                 $table->integer('wan2_limit')->default(0);
                 $table->integer('wan1_current_count')->default(0);

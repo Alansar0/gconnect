@@ -26,8 +26,6 @@ class AdminAnnouncement extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        // database = store in notifications table
-        // broadcast = fire real-time event for Echo listeners
         return ['database', 'broadcast'];
     }
 
@@ -43,22 +41,21 @@ class AdminAnnouncement extends Notification implements ShouldQueue
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'data' => [
-                'message' => $this->message,
-                'url' => $this->url,
-                'admin' => auth()->user()->full_name ?? 'System',
-                'created_at' => now()->toDateTimeString(),
-
-            ],
+            'message' => $this->message,
+            'url' => $this->url,
+            'admin' => auth()->user()->full_name ?? 'System',
+            'created_at' => now()->toDateTimeString(),
         ]);
     }
 
-    // This ensures broadcasts go to the private channel the frontend listens to.
-    public function broadcastOn(): array
-{
-    return [
-        new PrivateChannel('App.Models.User.' . $this->notifiable->id),
-    ];
+    // ✅ Correct: no parameters, return the channel(s)
+    public function broadcastOn()
+    {
+        return [
+            // Laravel will automatically pass the notifiable into toBroadcast()
+            new PrivateChannel('App.Models.User.' . auth()->id()),
+        ];
+    }
 }
 
-}
+

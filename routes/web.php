@@ -120,10 +120,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/earn/makaranta/quiz/{pageId}', [EarnController::class, 'submitQuiz'])->name('quiz.submit');
 
     // Notifications
+    Route::get('notifications/index', [NotificationController::class,'index'])->name('notifications.index');
+    Route::get('notifications/count', [NotificationController::class,'count'])->name('notifications.count');
+    Route::get('notifications/show/{id}', [NotificationController::class,'show'])->name('notifications.show');
     Route::post('notifications/{id}/read', [NotificationController::class,'markRead'])->name('notifications.read');
     Route::post('notifications/read-all', [NotificationController::class,'markAllRead'])->name('notifications.readAll');
-    Route::get('notifications/index', [NotificationController::class,'index'])->name('notifications.index');
-    Route::get('notifications/show/{id}', [NotificationController::class,'show'])->name('notifications.show');
+   
 
     // Route::view('/transactions/index', 'index')->name('transactions.index');
     Route::get('/transactions/index', [TransactionController::class, 'index'])->name('transactions.index');
@@ -178,6 +180,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Admin User Password Management
     Route::get('/admin/user/changepassword', [AdminUserController::class, 'displaychangepassword'])->name('display.change.password');
     Route::post('/admin/user/changepassword', [AdminUserController::class, 'updatechangePassword'])->name('update.change.Password');
+    Route::get('/admin/user/changPin', [AdminUserController::class, 'changePin'])->name('admin.user.changePin');
+    Route::post('/admin/user/changPin', [AdminUserController::class, 'updatePin'])->name('update.changePin');
+
 
     // Admin Settings Notify Users
     Route::get('Settings/notify', [AdminSettingsController::class, 'notify'])->name('Snotify');
@@ -187,6 +192,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/appContacts', [AdminSettingsController::class, 'contactView'])->name('admin.settings.appContacts');
     Route::post('/admin/appContacts/store', [AdminSettingsController::class, 'storeTitleQuestion'])->name('admin.settings.store');
     Route::post('/admin/appContacts/sub/store', [AdminSettingsController::class, 'storeSubQuestion'])->name('settings.sub.store');
+        // Cashback rewards management
+    Route::get('rewards', [AdminSettingsController::class, 'rewardIndex'])->name('rewards.index');
+    Route::get('rewards/{for}/edit', [AdminSettingsController::class, 'rewardEdit'])->name('rewards.edit');
+    Route::put('rewards/{for}', [AdminSettingsController::class, 'rewardUpdate'])->name('rewards.update');
 
     // Admin transactions
     Route::get('/admin/transactions/all', [AdminTransactionController::class, 'all'])->name('T.all');
@@ -199,7 +208,23 @@ Route::middleware(['auth', 'admin'])->group(function () {
     //voucher profiles management
     Route::resource('voucher-profiles', AdminVoucherController::class)
         ->names('admin.voucher_profiles');
-        // ->only(['index', 'store', 'update', 'destroy']);
+
+      
+
+    Route::get('/admin/router-settings/select', [AdminVoucherController::class, 'selectReseller'])
+    ->name('VoucherSettings.selectReseller');
+
+   // Show settings page
+    Route::get('/admin/resellers/{reseller}/router-settings', [AdminVoucherController::class, 'viewWanPort'])
+        ->name('VoucherSettings.addWanPort');
+
+    // Update limits & active WAN
+    Route::put('/admin/resellers/{reseller}/router-settings', [AdminVoucherController::class, 'addWanPort'])
+        ->name('admin.router-settings.update');
+    // Reset current counts
+    Route::post('/admin/resellers/{reseller}/router-settings/reset', [AdminVoucherController::class, 'resetCounts'])
+        ->name('admin.router-settings.reset');
+
 });
 
 

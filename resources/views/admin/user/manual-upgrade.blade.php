@@ -1,5 +1,10 @@
 <x-layouts.app>
 <div class="max-w-md mx-auto bg-[#0C141C] text-white rounded-xl p-6 shadow-lg mt-10">
+    <div class=" w-full flex justify-start -mt-4 mb-3">
+            <a onclick="window.history.back()" class="text-[#58a6ff] hover:underline flex items-center">
+    <i class="material-icons mr-1">arrow_back</i> Back
+</a>
+        </div>
     <h2 class="text-xl font-bold mb-4 text-center">Manual Reseller Upgrade</h2>
 
     <!-- Success Popup -->

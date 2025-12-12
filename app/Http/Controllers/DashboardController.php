@@ -13,12 +13,24 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function dashboard()
-    {
+    // public function dashboard()
+    // {
         
-        $wallet = Wallet::where('user_id', auth()->id())->first();
-        return view('dashboard', compact('wallet'));
-    }
+    //     $wallet = Wallet::where('user_id', auth()->id())->first();
+    //     return view('dashboard', compact('wallet'));
+    // }
+    public function dashboard()
+{
+    $wallet = auth()->user()->wallet;
+
+    $transactions = \App\Models\Transaction::where('user_id', auth()->id())
+        ->latest()
+        ->take(5)
+        ->get();
+
+    return view('dashboard', compact('wallet', 'transactions'));
+}
+
 
         public function acc()
     {

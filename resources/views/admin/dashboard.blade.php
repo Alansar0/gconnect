@@ -116,7 +116,7 @@
                         <a href="#"
                             class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Block/Unblock</a>
                         <a href="{{ route('display.change.password') }}"
-                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Change Password</a>
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Change Pass or Pin</a>
                     </div>
                 </div>
             </div>
@@ -136,8 +136,7 @@
                     <div class="py-1">
                         <a href="{{ route('admin.voucher_profiles.index') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Add vocher
                             plan</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Edit vocher
-                            plan</a>
+                        <a href="{{ route('VoucherSettings.selectReseller') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Add Wan port</a>
                         <a href="#" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Generate
                             vocher</a>
                     </div>
@@ -184,8 +183,9 @@
                             class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Notify Users</a>
                         <a href="#" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Add App
                             slide_image</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Update
-                            Slide text</a>
+                        <a href="{{ route('rewards.index') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Update
+                            Reward View</a>
+                            
                         <a href="{{ route('admin.settings.appContacts') }}"
                             class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">App Contacts</a>
                     </div>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('profile_id');
             $table->enum('status', ['active', 'used', 'expired'])->default('active');
             $table->timestamps();
+            $table->timestamp('expires_at')->nullable();
         });
 
     }
