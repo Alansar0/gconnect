@@ -5,7 +5,7 @@ return [
         'arabic' => 'اللَّهُمَّ صَلِّ وَ سَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',
         'ajami' => 'Allahumma salli wa sallim calâ nabiyyinâ Muhammad.',
         'hausa' => 'Ya Allah, Ka yi salati da sallama a kan Annabinmu Muhammadu.',
-        'count' => 1000,
+        'count' => 3,
     ],
 
     [
@@ -15,6 +15,6 @@ return [
 
         'hausa' => 'Ya Allah, Ka yi salati ga Annabi Muhammadu, da kuma iyalansa, kamar yadda Ka yi salati ga Annabi Ibrahim, da iyalansa. Lalle Kai Mai Yabo ne, Mai Daraja. Kuma Ka yi albarka ga Annabi Muhammadu, da kuma iyalansa, kamar yadda Ka yi albarka ga Annabi Ibrahim, da iyalansa. Lalle Kai Mai Yabo ne, Mai Daraja.',
 
-        'count' => 1000, // Recited once in Salah, or set to your desired Azkar count
+        'count' => 2, // Recited once in Salah, or set to your desired Azkar count
     ],
 ];

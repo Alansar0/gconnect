@@ -19,4 +19,6 @@ class AdminReward extends Model
     {
         return self::where('for', $type)->first();
     }
+
+    
 }

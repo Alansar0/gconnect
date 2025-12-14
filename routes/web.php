@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/earn/index',[EarnController::class, 'index'])->name('earn.index');
     Route::get('/earn/morningAzkar',[EarnController::class, 'morningAzkar'])->name('earn.morningAzkar');
     Route::get('/earn/eveningAzkar',[EarnController::class, 'eveningAzkar'])->name('earn.eveningAzkar');
+    Route::post('/earn/azkar/claim', [EarnController::class, 'claim'])->name('azkar.claim');
     // Allow optional page parameter for Friday view (defaults handled in controller)
     Route::get('/earn/friday/{shafi?}', [EarnController::class, 'friday'])->name('earn.friday');
     Route::get('/earn/makaranta/index',[EarnController::class, 'makaranta'])->name('earn.makaranta.index');

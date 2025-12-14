@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UserReward;
 use Illuminate\Http\Response;
 use App\Models\AdminReward;
+use App\Models\Wallet;
 
 
 
@@ -30,18 +31,72 @@ class EarnController extends Controller
 
             $adhkar = include resource_path('views/components/azkar/M_adhkar-data.blade.php');
 
-            return view('earn.morningAzkar', compact('adhkar'));
+            $type = 'morning';
+
+            return view('earn.morningAzkar', compact('adhkar', 'type'));
         }
 
 
     public function eveningAzkar()
         {
            $adhkar = include resource_path('views/components/azkar/E_adhkar-data.blade.php');
+           $type = 'evening';
 
-            return view('earn.eveningAzkar', compact('adhkar'));
+            return view('earn.eveningAzkar', compact('adhkar', 'type'));
 
 
         }
+
+        public function claim(Request $request)
+    {
+        $request->validate([
+            'type' => 'required|in:morning,evening'
+        ]);
+
+        $user = auth()->user();
+
+        $reward = AdminReward::where('for', $request->type)->first();
+
+        if (!$reward) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Reward not configured'
+            ], 404);
+        }
+
+        // Prevent double claim (daily optional)
+        $already = UserReward::where('user_id', $user->id)
+            ->where('type', $request->type)
+            ->whereDate('created_at', now())
+            ->exists();
+
+        if ($already) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Reward already claimed'
+            ], 403);
+        }
+
+        $wallet = Wallet::firstOrCreate(['user_id' => $user->id]);
+
+        // Apply cashback using admin voucher rate
+        $wallet->addCashback(
+            (float) $reward->cashback_amount,
+            (float) $reward->voucher_rate
+        );
+
+        UserReward::create([
+            'user_id' => $user->id,
+            'amount'  => $reward->cashback_amount,
+            'type'    => $request->type,
+            'source'  => 'azkar'
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'amount' => $reward->cashback_amount
+        ]);
+    }
 
     public function makaranta()
         {

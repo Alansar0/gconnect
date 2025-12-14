@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('admin_rewards', function (Blueprint $table) {
             $table->id();
-            $table->string('for')->unique(); // 'karanta' or 'sauraro'
+            $table->string('for')->unique(); // 'karanta', 'sauraro', 'morning', 'evening'
             $table->decimal('cashback_amount', 10, 2)->default(50); // default value
             $table->decimal('voucher_rate', 10, 2)->default(200); // how much cashback equals 1 voucher
             $table->text('note')->nullable();
@@ -22,6 +22,8 @@ return new class extends Migration
         DB::table('admin_rewards')->insert([
             ['for' => 'karanta', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
             ['for' => 'sauraro', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
+            ['for' => 'morning', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
+            ['for' => 'evening', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 
