@@ -33,7 +33,10 @@
 
         {{-- MAIN CONTENT --}}
         <section class="flex-grow w-full px-6 py-4 mt-[110px] max-w-3xl">
-            <div id="readerWrapper" class="touch-pan-x">
+            <div id="readerWrapper" 
+                class="touch-pan-x" 
+                data-prev="{{ $prevPage->page ?? '' }}" 
+                data-next="{{ $nextPage->page ?? '' }}"   >
                 <div class="bg-[var(--bg-2)] p-6 rounded-2xl shadow-lg border border-[var(--unique-card-border)] mb-6">
                     <h2 class="text-[var(--accent)] text-lg font-bold mb-2">{{ $page['header'] ?? 'Lesson Title' }}</h2>
                     <p id="reader" class="text-[var(--text-1)]/90 leading-relaxed whitespace-pre-line">
@@ -42,7 +45,7 @@
                 </div>
             </div>
 
-            {{-- Trigger Button --}}
+         {{-- Trigger Button --}}
             <div class="flex justify-center mt-6">
                 <button id="quizBtn"
                         class="bg-[var(--accent)] text-[var(--bg-2)] px-6 py-2 rounded-lg font-semibold hover:scale-105 transition">
@@ -65,12 +68,34 @@
                         @foreach ($randomTwo as $index => $quiz)
                             <div>
                                 <p class="mb-2">{{ $index + 1 }}. {{ $quiz['question'] }}</p>
-                                @foreach ($quiz['options'] as $i => $opt)
-                                    <label class="block">
-                                        <input type="radio" name="quiz{{ $index }}" value="{{ $i }}" class="mr-2" required>
-                                        {{ $opt }}
-                                    </label>
-                                @endforeach
+                               
+                            @php
+                                // Shuffle options and map correct
+                                $options = $quiz['options'];
+                                $correctIndex = $quiz['correct'];
+
+                                $shuffledOptions = collect($options)
+                                    ->map(function ($option, $i) use ($correctIndex) {
+                                        return [
+                                            'text' => $option,
+                                            'is_correct' => ($i == $correctIndex) // true if correct
+                                        ];
+                                    })
+                                    ->shuffle()
+                                    ->values();
+                            @endphp
+
+                            @foreach ($shuffledOptions as $i => $opt)
+                                <label class="block">
+                                    <input type="radio" 
+                                        name="quiz{{ $index }}" 
+                                        value="{{ $opt['is_correct'] ? 'correct' : 'wrong' }}"
+                                        class="mr-2" 
+                                        required>
+                                    {{ $opt['text'] }}
+                                </label>
+                            @endforeach
+
                             </div>
                         @endforeach
                         <button type="submit"
@@ -96,136 +121,92 @@
         </div>
  </div>
         {{-- SCRIPTS --}}
+            <script>
+                    
+                    document.addEventListener('DOMContentLoaded', () => {
+                                const quizBtn = document.getElementById('quizBtn');
+                                const quizModal = document.getElementById('quizModal');
+                                const rewardModal = document.getElementById('rewardModal');
+                                const closeReward = document.getElementById('closeReward');
+                                const quizForm = document.getElementById('quizForm');
 
-    {{-- <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                            const quizForm = document.getElementById('quizForm');
-                            const quizModal = document.getElementById('quizModal');
-                            const rewardModal = document.getElementById('rewardModal');
-                            const closeReward = document.getElementById('closeReward');
-                            const rewardTitle = document.getElementById('rewardTitle') || null;
-                            const rewardMessage = document.getElementById('rewardMessage') || null;
-
-                            // Keys for local storage per page - adapt page values accordingly
-                            const pageIdentifier = '{{$page["page"] ?? ($file ?? "unknown")}}';
-                            const quizLocalKey = 'quiz_completed_' + pageIdentifier;
-                            let quizCompleted = localStorage.getItem(quizLocalKey) === 'true';
-
-                            if (quizForm) {
-                                quizForm.addEventListener('submit', async (e) => {
-                                    e.preventDefault();
-                                    const formData = new FormData(quizForm);
-
-                                    try {
-                                        const res = await fetch(quizForm.action, {
-                                            method: 'POST',
-                                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                                            body: formData
-                                        });
-
-                                        const data = await res.json();
-
-                                        // close quiz modal
-                                        if (quizModal) quizModal.classList.add('hidden');
-
-                                        if (data.status === 'success') {
-                                            // mark quiz completed locally (so UI reflects it)
-                                            quizCompleted = true;
-                                            localStorage.setItem(quizLocalKey, 'true');
-
-                                            if(rewardTitle) rewardTitle.textContent = '🎉 Congratulations!';
-                                            if(rewardMessage) rewardMessage.textContent = data.message || 'You earned a reward';
-
-                                            if (rewardModal) rewardModal.classList.remove('hidden');
-
-                                            // Optionally: update any wallet UI in page, e.g. display new balances
-                                            console.log('Wallet updated:', data);
-                                        } else {
-                                            // incorrect or server-side error
-                                            if(rewardTitle) rewardTitle.textContent = '❌ Try Again';
-                                            if(rewardMessage) rewardMessage.textContent = data.message || 'Incorrect answers. Please try again.';
-                                            if (rewardModal) rewardModal.classList.remove('hidden');
-                                        }
-                                    } catch (err) {
-                                        console.error('Quiz submission failed', err);
-                                        if (rewardTitle) rewardTitle.textContent = '❌ Error';
-                                        if (rewardMessage) rewardMessage.textContent = 'Network error. Please try again.';
-                                        if (rewardModal) rewardModal.classList.remove('hidden');
-                                    }
-                                });
-                            }
-
-                            if (closeReward) {
-                                closeReward.addEventListener('click', () => {
-                                    if (rewardModal) rewardModal.classList.add('hidden');
-                                });
-                            }
-
-                            // Optionally, disable "Take Quiz" if already completed
-                            const takeButtons = document.querySelectorAll('#quizBtn');
-                            if (quizCompleted) {
-                                takeButtons.forEach(b => {
-                                    b.classList.add('opacity-60', 'cursor-not-allowed');
-                                    b.disabled = true;
-                                    b.title = 'Quiz already completed (local)';
-                                });
-                            }
-                        }); 
-    </script> --}}
-
-    <script>
-        
-        document.addEventListener('DOMContentLoaded', () => {
-                    const quizBtn = document.getElementById('quizBtn');
-                    const quizModal = document.getElementById('quizModal');
-                    const rewardModal = document.getElementById('rewardModal');
-                    const closeReward = document.getElementById('closeReward');
-                    const quizForm = document.getElementById('quizForm');
-
-                    if (quizBtn) {
-                        quizBtn.addEventListener('click', () => quizModal.classList.remove('hidden'));
-                    }
-
-                    if (quizForm) {
-                        quizForm.addEventListener('submit', async (e) => {
-                            e.preventDefault();
-                            try {
-                                const res = await fetch(quizForm.action, {
-                                    method: 'POST',
-                                    body: new FormData(quizForm),
-                                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
-                                });
-                                const result = await res.json();
-                                quizModal.classList.add('hidden');
-
-                                const rewardTitle = document.getElementById('rewardTitle');
-                                const rewardMessage = document.getElementById('rewardMessage');
-
-                                if (result.status === 'success') {
-                                    rewardTitle.textContent = '🎉 Congratulations!';
-                                    rewardMessage.textContent = result.message || 'You earned ₦50 reward 🎁';
-                                } else {
-                                    rewardTitle.textContent = '❌ Try Again';
-                                    rewardMessage.textContent = result.message || 'Incorrect answers. Please try again.';
+                                if (quizBtn) {
+                                    quizBtn.addEventListener('click', () => quizModal.classList.remove('hidden'));
                                 }
 
-                                rewardModal.classList.remove('hidden');
-                            } catch (err) {
-                                console.error('Quiz submission failed:', err);
-                                alert('Something went wrong. Please try again.');
+                                if (quizForm) {
+                                    quizForm.addEventListener('submit', async (e) => {
+                                        e.preventDefault();
+                                        try {
+                                            const res = await fetch(quizForm.action, {
+                                                method: 'POST',
+                                                body: new FormData(quizForm),
+                                                headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+                                            });
+                                            const result = await res.json();
+                                            quizModal.classList.add('hidden');
+
+                                            const rewardTitle = document.getElementById('rewardTitle');
+                                            const rewardMessage = document.getElementById('rewardMessage');
+
+                                            if (result.status === 'success') {
+                                                rewardTitle.textContent = '🎉 Congratulations!';
+                                                rewardMessage.textContent = result.message || 'You earned ₦50 reward 🎁';
+                                            } else {
+                                                rewardTitle.textContent = '❌ Try Again';
+                                                rewardMessage.textContent = result.message || 'Incorrect answers. Please try again.';
+                                            }
+
+                                            rewardModal.classList.remove('hidden');
+                                        } catch (err) {
+                                            console.error('Quiz submission failed:', err);
+                                            alert('Something went wrong. Please try again.');
+                                        }
+                                    });
+                                }
+
+                                if (closeReward) {
+                                    closeReward.addEventListener('click', () => rewardModal.classList.add('hidden'));
+                                }
+
+                                setTimeout(() => {
+                                    if (quizModal) quizModal.classList.remove('hidden');
+                                }, 45000);
+                            });
+            </script>
+            <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const readerWrapper = document.getElementById('readerWrapper');
+                        const prevPage = readerWrapper.dataset.prev;
+                        const nextPage = readerWrapper.dataset.next;
+
+                        let startX = 0;
+                        let endX = 0;
+                        const swipeThreshold = 50;
+
+                        // Touch devices
+                        readerWrapper.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+                        readerWrapper.addEventListener('touchend', (e) => { endX = e.changedTouches[0].clientX; handleSwipe(); });
+
+                        // Mouse drag
+                        let isDragging = false;
+                        readerWrapper.addEventListener('mousedown', (e) => { isDragging = true; startX = e.clientX; });
+                        readerWrapper.addEventListener('mouseup', (e) => { if(!isDragging) return; isDragging = false; endX = e.clientX; handleSwipe(); });
+
+                        function handleSwipe() {
+                            const diffX = endX - startX;
+                            const baseUrl = "{{ url('earn/makaranta/karanta') }}/"; // base URL for dynamic pages
+
+                            if (diffX > swipeThreshold && prevPage) {
+                                window.location.href = baseUrl + prevPage;
+                            } else if (diffX < -swipeThreshold && nextPage) {
+                                window.location.href = baseUrl + nextPage;
                             }
-                        });
-                    }
+                        }
+                    });
+            </script>
 
-                    if (closeReward) {
-                        closeReward.addEventListener('click', () => rewardModal.classList.add('hidden'));
-                    }
 
-                    setTimeout(() => {
-                        if (quizModal) quizModal.classList.remove('hidden');
-                    }, 45000);
-                });
-    </script>
 
 </x-layouts.app>
 

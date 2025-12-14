@@ -138,23 +138,23 @@ class EarnController extends Controller
                     ]);
                 }
                   // ✅ Get reward from DB
-    $reward = AdminReward::firstWhere('for', 'sauraro');
+                $reward = AdminReward::firstWhere('for', 'sauraro');
 
-    session(['current_course' => $course]);
-                // 🔹 Save course in session (for quiz reward logic)
                 session(['current_course' => $course]);
+                            // 🔹 Save course in session (for quiz reward logic)
+                            session(['current_course' => $course]);
 
-                return view('earn.makaranta.sauraro', [
-                    'course' => $course,
-                    'file' => $file,
-                    'path' => $relPath,
-                    'displayName' => $displayName,
-                    'displayFile' => $displayFile,
-                    'quizzes' => $quizzes,
-                     'reward' => $reward, // <-- pass to Blade
+                            return view('earn.makaranta.sauraro', [
+                                'course' => $course,
+                                'file' => $file,
+                                'path' => $relPath,
+                                'displayName' => $displayName,
+                                'displayFile' => $displayFile,
+                                'quizzes' => $quizzes,
+                                'reward' => $reward, // <-- pass to Blade
 
-                ]);
-            }
+                            ]);
+                        }
 
 
 
@@ -196,91 +196,77 @@ class EarnController extends Controller
                 }
 
 
-                public function submitQuiz(Request $request, $pageId)
-            {
-                $course = session('current_course', 'kurakurai100');
-                $type = $request->input('type', 'karanta'); // 'karanta' or 'sauraro'
+           
 
-                try {
-                    // Load quiz config path
-                    $quizConfigPath = config_path("{$type}/quiz_data_{$course}.php");
-                    if (!file_exists($quizConfigPath)) {
-                        \Log::error("Quiz config file not found", compact('quizConfigPath', 'type', 'course'));
-                        return response()->json(['status' => 'error', 'message' => 'Quiz configuration not found.'], 404);
-                    }
+            public function submitQuiz(Request $request, $pageId)
+{
+    $course = session('current_course', 'kurakurai100');
+    $type = $request->input('type', 'karanta'); // 'karanta' or 'sauraro'
 
-                    $quizConfig = include($quizConfigPath);
-                    $pageQuizzes = collect($quizConfig)->firstWhere(
-                        $type === 'karanta' ? 'page_id' : 'file',
-                        $type === 'karanta' ? (int) $pageId : $pageId
-                    );
+    try {
+        $quizConfigPath = config_path("{$type}/quiz_data_{$course}.php");
+        if (!file_exists($quizConfigPath)) {
+            return response()->json(['status' => 'error', 'message' => 'Quiz config not found.'], 404);
+        }
 
-                    $quizzes = $pageQuizzes ? $pageQuizzes['questions'] : [];
+        $quizConfig = include($quizConfigPath);
+        $pageQuizzes = collect($quizConfig)->firstWhere(
+            $type === 'karanta' ? 'page_id' : 'file',
+            $type === 'karanta' ? (int) $pageId : $pageId
+        );
 
-                    if (empty($quizzes)) {
-                        return response()->json(['status' => 'error', 'message' => 'No quizzes available for this lesson yet.'], 400);
-                    }
+        $quizzes = $pageQuizzes ? $pageQuizzes['questions'] : [];
 
-                    // Collect submitted answers
-                    $submitted = collect($request->all())
-                        ->filter(fn($v, $k) => str_starts_with($k, 'quiz'))
-                        ->toArray();
+        if (empty($quizzes)) {
+            return response()->json(['status' => 'error', 'message' => 'No quizzes available.'], 400);
+        }
 
-                    if (empty($submitted)) {
-                        return response()->json(['status' => 'error', 'message' => 'No answers submitted.'], 400);
-                    }
+        $submitted = collect($request->all())
+            ->filter(fn($v, $k) => str_starts_with($k, 'quiz'))
+            ->toArray();
 
-                    // Check answers
-                    $correctCount = 0;
-                    foreach ($submitted as $key => $answer) {
-                        $quizIndex = (int) str_replace('quiz', '', $key);
-                        if (isset($quizzes[$quizIndex]) && (string) $answer === (string) $quizzes[$quizIndex]['correct']) {
-                            $correctCount++;
-                        }
-                    }
+        if (empty($submitted)) {
+            return response()->json(['status' => 'error', 'message' => 'No answers submitted.'], 400);
+        }
 
-                    // Only reward when all answered and correct
-                    if ($correctCount === count($submitted)) {
-                        // find reward from admin config
-                        $type = strtolower(trim($type));
-                        $rewardConfig = \App\Models\AdminReward::firstWhere('for', $type);
-                        $cashbackAmount = $rewardConfig ? (float) $rewardConfig->cashback_amount : 50.0;
-                        $voucherRate = $rewardConfig ? (float) $rewardConfig->voucher_rate : 200.0;
-
-                        // Use user's wallet
-                        $wallet = \App\Models\Wallet::firstOrCreate(['user_id' => auth()->id()]);
-
-                        // Add cashback via existing method
-                        $wallet->addCashback($cashbackAmount);
-
-                            \App\Models\UserReward::create([
-                            'user_id' => auth()->id(),
-                            'amount' => $cashbackAmount,
-                            'type' => $type,
-                            'source' => $pageId,
-                        ]);
-
-                        // report current wallet balances
-                        return response()->json([
-                            'status' => 'success',
-                            'message' => "🎉 Correct! You earned ₦" . number_format($cashbackAmount,2) . " cashback.",
-                            'cashback' => (float) $wallet->cashback_balance,
-                            'voucher_balance' => (int) $wallet->voucher_balance,
-                            'voucher_rate' => $voucherRate
-                        ]);
-                    }
-
-                    return response()->json(['status' => 'error', 'message' => '❌ Incorrect answers. Try again later.'], 200);
-
-                } catch (\Throwable $e) {
-                    \Log::error('Quiz submission failed', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
-                    return response()->json(['status' => 'error', 'message' => 'An unexpected error occurred.'], 500);
-                }
-            }
+        $correctCount = 0;
+        foreach ($submitted as $key => $answer) {
+            if ($answer === 'correct') $correctCount++;
+        }
 
        
+        if ($correctCount === count($submitted)) {
+    $rewardConfig = \App\Models\AdminReward::firstWhere('for', $type);
+    $cashbackAmount = $rewardConfig ? (float)$rewardConfig->cashback_amount : 50.0;
+    $voucherRate = $rewardConfig ? (float)$rewardConfig->voucher_rate : 200.0;
 
+    // Update user's wallet (call addCashback only once)
+    $wallet = \App\Models\Wallet::firstOrCreate(['user_id' => auth()->id()]);
+    $wallet->addCashback($cashbackAmount, $voucherRate);
 
+    // Record user reward
+    \App\Models\UserReward::create([
+        'user_id' => auth()->id(),
+        'amount' => $cashbackAmount,
+        'type' => $type,
+        'source' => $pageId,
+    ]);
 
+    return response()->json([
+        'status' => 'success',
+        'message' => "You earned ₦" . number_format($cashbackAmount, 2) . "!",
+        'cashback_balance' => (float) $wallet->cashback_balance,
+        'voucher_balance' => (int) $wallet->voucher_balance,
+        'voucher_rate' => $voucherRate,
+    ]);
+}
+
+        return response()->json(['status' => 'error', 'message' => '❌ Some answers are incorrect.'], 200);
+
+    } catch (\Throwable $e) {
+        \Log::error('Quiz submission failed', ['error' => $e->getMessage()]);
+        return response()->json(['status' => 'error', 'message' => 'An unexpected error occurred.'], 500);
+    }
+}
 
 }

@@ -64,15 +64,16 @@ class Wallet extends Model
      /**
      * Add cashback from quiz or reward.
      */
-    public function addCashback($amount)
-    {
-        $this->cashback_balance += $amount;
+    public function addCashback($amount, $voucherRate = 200)
+{
+    $this->cashback_balance += $amount;
 
-        // 👇 Don't deduct cashback, just sync voucher equivalence
-        $this->voucher_balance = floor($this->cashback_balance / 200);
+    // use dynamic voucher rate
+    $this->voucher_balance = floor($this->cashback_balance / $voucherRate);
 
-        $this->save();
-    }
+    $this->save();
+}
+
 
     /**
      * User purchases something using vouchers.

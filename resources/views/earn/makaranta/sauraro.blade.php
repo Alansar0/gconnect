@@ -91,11 +91,30 @@
                     @foreach ($randomTwo as $index => $quiz)
                         <div>
                             <p class="mb-2">{{ $index + 1 }}. {{ $quiz['question'] }}</p>
-                            @foreach ($quiz['options'] as $i => $opt)
-                                <label class="block text-text-soft">
-                                    <input type="radio" name="quiz{{ $index }}" value="{{ $i }}" required
-                                        class="mr-2">
-                                    {{ $opt }}
+                            @php
+                                // Shuffle options and map correct
+                                $options = $quiz['options'];
+                                $correctIndex = $quiz['correct'];
+
+                                $shuffledOptions = collect($options)
+                                    ->map(function ($option, $i) use ($correctIndex) {
+                                        return [
+                                            'text' => $option,
+                                            'is_correct' => ($i == $correctIndex) // true if correct
+                                        ];
+                                    })
+                                    ->shuffle()
+                                    ->values();
+                            @endphp
+
+                            @foreach ($shuffledOptions as $i => $opt)
+                                <label class="block">
+                                    <input type="radio" 
+                                        name="quiz{{ $index }}" 
+                                        value="{{ $opt['is_correct'] ? 'correct' : 'wrong' }}"
+                                        class="mr-2" 
+                                        required>
+                                    {{ $opt['text'] }}
                                 </label>
                             @endforeach
                         </div>
@@ -117,7 +136,8 @@
         class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center z-50">
         <div class="bg-bg2 rounded-2xl p-6 w-10/12 max-w-sm border border-border text-center text-text">
             <h3 class="text-accent text-xl font-semibold mb-3">Congratulations!</h3>
-            <p class="text-text-soft mb-4">You earned ₦{{ number_format($reward->cashback_amount, 2) }} Cashback and 1 Voucher</p>
+            <p id="rewardMessage" class="text-text-soft mb-4"></p>
+            {{-- <p class="text-text-soft mb-4">You earned ₦{{ number_format($reward->cashback_amount, 2) }} Cashback and 1 Voucher</p> --}}
             <button id="closeReward"
                 class="bg-accent text-bg1 px-6 py-2 rounded-lg font-semibold hover:scale-105 transition-transform duration-200">OK</button>
         </div>
@@ -135,7 +155,11 @@
     </div>
 </div>
 
-    <script>
+    
+<script>
+        /* =========================
+        ELEMENTS
+        ========================= */
         const audio = document.getElementById('audioPlayer');
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -145,6 +169,7 @@
         const totalTime = document.getElementById('totalTime');
         const downloadBtn = document.getElementById('downloadBtn');
         const quizBtn = document.getElementById('quizBtn');
+
         const quizModal = document.getElementById('quizModal');
         const rewardModal = document.getElementById('rewardModal');
         const closeReward = document.getElementById('closeReward');
@@ -153,34 +178,58 @@
         const warningMessage = document.getElementById('warningMessage');
         const closeWarning = document.getElementById('closeWarning');
 
+        /* =========================
+        PROGRESS CONSTANTS
+        ========================= */
         const CIRCLE_RADIUS = 48;
         const CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
 
+        /* =========================
+        STORAGE KEYS
+        ========================= */
         const pageKey = 'audioPage_{{ $file }}';
         const progressKey = pageKey + '_progress';
         const finishedKey = pageKey + '_finished';
         const quizKey = pageKey + '_quizCompleted';
 
+        /* =========================
+        STATE
+        ========================= */
         let isSeeking = false;
+        let lastSeekValue = 0;
         let audioFinished = localStorage.getItem(finishedKey) === 'true';
         let quizCompleted = localStorage.getItem(quizKey) === 'true';
-        let lastSeekValue = 0;
 
-        // Restore saved audio progress
+        /* =========================
+        RESTORE PROGRESS
+        ========================= */
         const savedTime = localStorage.getItem(progressKey);
         if (savedTime) {
             audio.currentTime = parseFloat(savedTime);
             lastSeekValue = audio.currentTime;
         }
 
-        // Warning modal function
+        /* =========================
+        HELPERS
+        ========================= */
         function showWarning(msg) {
             warningMessage.textContent = msg;
             warningModal.classList.remove('hidden');
         }
-        closeWarning.addEventListener('click', () => warningModal.classList.add('hidden'));
 
-        // Play/Pause
+        closeWarning.addEventListener('click', () => {
+            warningModal.classList.add('hidden');
+        });
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        /* =========================
+        PLAY / PAUSE
+        ========================= */
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
@@ -191,7 +240,9 @@
             }
         });
 
-        // Load metadata
+        /* =========================
+        METADATA
+        ========================= */
         audio.addEventListener('loadedmetadata', () => {
             seekBar.max = audio.duration;
             totalTime.textContent = formatTime(audio.duration);
@@ -199,92 +250,197 @@
             progressCircle.style.strokeDashoffset = CIRCUMFERENCE;
         });
 
-        // Seek bar events
+        /* =========================
+        SEEK CONTROL
+        ========================= */
         seekBar.addEventListener('mousedown', () => isSeeking = true);
         seekBar.addEventListener('touchstart', () => isSeeking = true);
 
         seekBar.addEventListener('input', e => {
             const seekTo = Number(e.target.value);
-            if (seekTo > lastSeekValue && !audioFinished) {
-                audio.pause();
-                showWarning("You must listen to the audio without skipping to take the quiz.");
+
+            if (!audioFinished && seekTo > lastSeekValue + 0.2) {
                 seekBar.value = lastSeekValue;
+                showWarning("You must listen to the audio completely before skipping.");
                 return;
             }
+
             currentTime.textContent = formatTime(seekTo);
-            const progress = seekTo / audio.duration;
-            progressCircle.style.strokeDashoffset = CIRCUMFERENCE - (CIRCUMFERENCE * progress);
         });
 
-        seekBar.addEventListener('mouseup', () => { isSeeking = false; audio.currentTime = Number(seekBar.value); });
-        seekBar.addEventListener('touchend', () => { isSeeking = false; audio.currentTime = Number(seekBar.value); });
+        seekBar.addEventListener('mouseup', () => {
+            isSeeking = false;
+            audio.currentTime = Number(seekBar.value);
+        });
 
-        // Timeupdate + smooth linear animation
+        seekBar.addEventListener('touchend', () => {
+            isSeeking = false;
+            audio.currentTime = Number(seekBar.value);
+        });
+
+        /* =========================
+        TIME UPDATE (MASTER SYNC)
+        ========================= */
         audio.addEventListener('timeupdate', () => {
             const ct = audio.currentTime;
             const dur = audio.duration;
+            if (!dur) return;
+
             const progress = ct / dur;
 
-            progressCircle.style.strokeDashoffset = CIRCUMFERENCE - (CIRCUMFERENCE * progress);
+            progressCircle.style.strokeDashoffset =
+                CIRCUMFERENCE - (CIRCUMFERENCE * progress);
+
             if (!isSeeking) seekBar.value = ct;
             currentTime.textContent = formatTime(ct);
 
-            localStorage.setItem(progressKey, ct);
             lastSeekValue = Math.max(lastSeekValue, ct);
+            localStorage.setItem(progressKey, ct);
 
-            if (!audioFinished && ct >= dur - 0.05) {
-                audioFinished = true;
-                localStorage.setItem(finishedKey, 'true');
-                playIcon.classList.replace('fa-pause', 'fa-play');
-                if (!quizCompleted) quizModal.classList.remove('hidden');
+            if (!audioFinished && ct >= dur - 0.1) {
+                markAudioFinished();
             }
         });
 
-        // Reset flags on replay from start
-        audio.addEventListener('play', () => {
-            if (audio.currentTime <= 0.05) {
-                audioFinished = false;
-                quizCompleted = false;
-                localStorage.setItem(finishedKey, 'false');
-                localStorage.setItem(quizKey, 'false');
-                lastSeekValue = 0;
-            }
-        });
-
-        // Audio ended
-        audio.addEventListener('ended', () => {
+        /* =========================
+        AUDIO FINISHED
+        ========================= */
+        function markAudioFinished() {
             audioFinished = true;
             localStorage.setItem(finishedKey, 'true');
             playIcon.classList.replace('fa-pause', 'fa-play');
-            if (!quizCompleted) quizModal.classList.remove('hidden');
-        });
 
-        // Quiz button
-        quizBtn.addEventListener('click', () => {
-            if (!audioFinished) { showWarning("You must finish listening to the audio before taking the quiz."); return; }
-            if (quizCompleted) { showWarning("You have already completed this quiz. Listen to the audio again to retake."); return; }
-            quizModal.classList.remove('hidden');
-        });
+            if (!quizCompleted) {
+                quizModal.classList.remove('hidden');
+            }
+        }
 
-        // Quiz submission
-        document.getElementById('quizForm').addEventListener('submit', e => {
-            e.preventDefault();
-            const allCorrect = true; // demo
-            if (allCorrect) {
-                quizCompleted = true;
-                localStorage.setItem(quizKey, 'true');
-                quizModal.classList.add('hidden');
-                rewardModal.classList.remove('hidden');
-            } else {
-                showWarning("Some answers are incorrect. Listen to the audio again to retry.");
-                quizModal.classList.add('hidden');
+        audio.addEventListener('ended', markAudioFinished);
+
+        /* =========================
+        RESET ON REPLAY
+        ========================= */
+        audio.addEventListener('play', () => {
+            if (audio.currentTime <= 0.1) {
+                audioFinished = false;
+                quizCompleted = false;
+                lastSeekValue = 0;
+
+                localStorage.setItem(finishedKey, 'false');
+                localStorage.setItem(quizKey, 'false');
+                localStorage.removeItem(progressKey);
+            }
+        });
+let allowRetry = false;
+
+document.getElementById('quizForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+        const res = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
             }
         });
 
-        // Close reward modal
-        closeReward.addEventListener('click', () => rewardModal.classList.add('hidden'));
+        if (!res.ok) throw new Error('Server error');
+        const data = await res.json();
 
-        // Download
+        quizModal.classList.add('hidden');
+
+        if (data.status === 'success') {
+            quizCompleted = true;
+            allowRetry = false; // reset retry
+            localStorage.setItem(quizKey, 'true');
+            document.getElementById('rewardMessage').textContent = data.message;
+            rewardModal.classList.remove('hidden');
+        } else {
+            showWarning(data.message || 'Some answers are incorrect. You can retry without listening again.');
+            allowRetry = true; // allow retry
+        }
+    } catch (err) {
+        console.error(err);
+        showWarning('An unexpected error occurred. Please try again.');
+    }
+});
+
+        /* =========================
+        QUIZ BUTTON
+        ========================= */
+        
+    quizBtn.addEventListener('click', () => {
+    if (!audioFinished && !allowRetry) {
+        showWarning("Finish listening to the audio before taking the quiz.");
+        return;
+    }
+    quizModal.classList.remove('hidden');
+});
+
+        /* =========================
+        QUIZ SUBMIT (BACKEND SAFE)
+        ========================= */
+        
+        document.getElementById('quizForm').addEventListener('submit', async e => {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!res.ok) {
+                    throw new Error('Server error');
+                }
+
+                const data = await res.json();
+
+                quizModal.classList.add('hidden');
+
+                /* ===== THIS IS WHERE IT GOES ===== */
+                if (data.status === 'success') {
+                    quizCompleted = true;
+                    localStorage.setItem(quizKey, 'true');
+
+                    document.getElementById('rewardMessage').textContent = data.message;
+
+                    rewardModal.classList.remove('hidden');
+                } else {
+                    showWarning(
+                        data.message || 'Some answers are incorrect. Listen again to retry.'
+                    );
+                }
+                /* ===== END ===== */
+
+            } catch (err) {
+                console.error(err);
+                showWarning('An unexpected error occurred. Please try again.');
+            }
+        });
+
+
+        /* =========================
+        CLOSE REWARD
+        ========================= */
+        closeReward.addEventListener('click', () => {
+            rewardModal.classList.add('hidden');
+        });
+
+        /* =========================
+        DOWNLOAD
+        ========================= */
         downloadBtn.addEventListener('click', () => {
             const link = document.createElement('a');
             link.href = audio.src;
@@ -293,14 +449,10 @@
             link.click();
             document.body.removeChild(link);
         });
+</script>
 
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-    </script>
-    
+
+     
     <script src="https://kit.fontawesome.com/a2d9d5e6c1.js" crossorigin="anonymous"></script>
 </x-layouts.app>
 
