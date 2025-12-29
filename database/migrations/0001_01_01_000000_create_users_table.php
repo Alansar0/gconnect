@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('reseller_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->default('user');
+            $table->boolean('is_super_admin')->default(false);
             $table->boolean('is_blocked')->default(false);
             $table->string('password');
             $table->string('virtual_account')->nullable()->unique();

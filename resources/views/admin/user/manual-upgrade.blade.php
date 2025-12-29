@@ -18,7 +18,7 @@
         <!-- Error Popup -->
         <div id="popup-error" class="hidden bg-red-500 text-bg1 p-3 rounded-lg mb-3 text-center"></div>
 
-        <form id="upgradeForm">
+    <form id="upgradeForm" onsubmit="return false;">
             @csrf
 
             <label class="block text-t2 dark:text-t2 mb-1">User ID</label>
@@ -39,55 +39,63 @@
             <label class="block text-t2 dark:text-t2 mb-1">Password</label>
             <input type="password" name="password" class="w-full p-2 mb-3 rounded bg-bg3 dark:bg-bg3 text-t1 dark:text-t1" required>
 
-            <button type="submit" class="bg-accent text-bg1 px-4 py-2 rounded-lg w-full font-semibold hover:opacity-90">
+            <button id="submitBtn" type="submit" class="bg-accent text-bg1 px-4 py-2 rounded-lg w-full font-semibold hover:opacity-90">
                 Upgrade User
             </button>
+
         </form>
     </div>
 
     <script>
-        document.getElementById('upgradeForm').addEventListener('submit', async function (e) {
-            e.preventDefault(); // prevent page reload
+        const form = document.getElementById('upgradeForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const popupSuccess = document.getElementById('popup-success');
+        const popupError = document.getElementById('popup-error');
 
-            const form = e.target;
-            const formData = new FormData(form);
-            const popupSuccess = document.getElementById('popup-success');
-            const popupError = document.getElementById('popup-error');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-            // reset popups
+            // prevent double click
+            if (submitBtn.disabled) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+
             popupSuccess.classList.add('hidden');
             popupError.classList.add('hidden');
 
             try {
+                const formData = new FormData(form);
+
                 const response = await fetch("{{ route('admin.reseller.upgrade') }}", {
                     method: "POST",
                     headers: {
-                        "X-CSRF-TOKEN": formData.get('_token'),
+                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                        "Accept": "application/json"
                     },
                     body: formData
                 });
 
                 const data = await response.json();
 
-                if (data.success) {
-                    popupSuccess.textContent = data.message;
-                    popupSuccess.classList.remove('hidden');
-                    form.reset();
-                } else {
-                    popupError.textContent = data.message || 'Something went wrong.';
-                    popupError.classList.remove('hidden');
+                if (!response.ok) {
+                    throw data;
                 }
 
-            } catch (error) {
-                popupError.textContent = 'Server error. Please try again.';
-                popupError.classList.remove('hidden');
-            }
+                popupSuccess.textContent = data.message;
+                popupSuccess.classList.remove('hidden');
+                form.reset();
 
-            // Hide messages after 15 seconds
-            setTimeout(() => {
-                popupSuccess.classList.add('hidden');
-                popupError.classList.add('hidden');
-            }, 15000);
+            } catch (error) {
+                popupError.textContent =
+                    error?.message ||
+                    Object.values(error?.errors || {}).flat().join(' ') ||
+                    'Request failed. Please try again.';
+                popupError.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Upgrade User';
+            }
         });
     </script>
 </x-layouts.app>

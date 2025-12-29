@@ -148,48 +148,56 @@ class AdminSettingsController extends Controller
 
 
 // Toggle Emergency Mode
-public function toggleEmergency(Request $request)
-{
-    $current = Cache::get('emergency_mode', false);
-
-    Cache::put('emergency_mode', !$current);
-
-    return back()->with(
-        'success',
-        !$current ? 'Emergency mode activated' : 'Emergency mode deactivated'
-    );
-}
     // public function toggleEmergency(Request $request)
     // {
-    //     // Toggle config in .env or settings table
-    //     $current = config('app.emergency_mode', false);
+    //     $current = Cache::get('emergency_mode', false);
 
-    //     // Save to database (recommended) or use cache
-    //     setting(['emergency_mode' => !$current])->save(); // Use spatie/laravel-settings or your preferred way
+    //     Cache::put('emergency_mode', !$current);
 
-    //     // Clear config cache if needed
-    //     Artisan::call('config:clear');
-
-    //     return redirect()->back()->with('success', 'Emergency mode ' . (!$current ? 'activated' : 'deactivated') . ' successfully.');
+    //     return back()->with(
+    //         'success',
+    //         !$current ? 'Emergency mode activated' : 'Emergency mode deactivated'
+    //     );
     // }
+    
 
     // Log Emergency Note
-    public function logEmergency(Request $request)
+    // public function logEmergency(Request $request)
+    // {
+    //     $request->validate([
+    //         'note' => 'nullable|string|max:500'
+    //     ]);
+
+    //     // Save note to DB or log table
+    //     \App\Models\EmergencyLog::create([
+    //         'note' => $request->note,
+    //         'activated_by' => auth()->id(),
+    //         'status' => config('app.emergency_mode', false) ? 'active' : 'inactive',
+    //     ]);
+
+    //     return redirect()->back()->with('success', 'Emergency note saved successfully.');
+    // }
+
+     public function toggleEmergency()
     {
-        $request->validate([
-            'note' => 'nullable|string|max:500'
+        return view('admin.settings.emergency', [
+            'status' => cache()->get('emergency_mode', false),
         ]);
-
-        // Save note to DB or log table
-        \App\Models\EmergencyLog::create([
-            'note' => $request->note,
-            'activated_by' => auth()->id(),
-            'status' => config('app.emergency_mode', false) ? 'active' : 'inactive',
-        ]);
-
-        return redirect()->back()->with('success', 'Emergency note saved successfully.');
     }
 
+    public function toggle(Request $request)
+    {
+        abort_unless(auth()->user()->is_super_admin, 403);
+
+        $current = cache()->get('emergency_mode', false);
+
+        cache()->forever('emergency_mode', ! $current);
+
+        return back()->with(
+            'success',
+            'Emergency mode ' . (! $current ? 'ENABLED' : 'DISABLED')
+        );
+    }
 
 
 }

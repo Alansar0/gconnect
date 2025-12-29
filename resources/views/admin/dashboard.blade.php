@@ -18,7 +18,7 @@
         <div class="grid grid-cols-2 gap-4 mb-6">
 
             <!-- All Users -->
-            <div class="bg-gradient-to-br from-bg-bg1 to-bg-bg3 bg-1 rounded-2xl p-5 shadow-2xl">
+            <a href="{{ route('viewUser') }}" class="bg-gradient-to-br from-bg-bg1 to-bg-bg3 bg-1 rounded-2xl p-5 shadow-2xl">
                 <p class="text-sm text-t2">All Users</p>
                 <div class="flex items-center gap-3">
                     <div class="bg-orange-500/20 p-3 rounded-xl">
@@ -28,7 +28,7 @@
                         {{ short_amount($totalUsers) }}
                     </h2>
                 </div>
-            </div>
+            </a>
 
             <!-- Users Balance -->
             <div class="bg-gradient-to-br from-bg-bg1 to-bg-bg3 bg-1 rounded-2xl p-5 shadow-2xl">
@@ -62,8 +62,8 @@
                     <p class="text-sm opacity-80">Pending Oders</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div class="bg-green-500/20 p-3 rounded-xl">
-                        <i class="fas fa-shopping-cart text-green-400 text-xl"></i>
+                    <div class="bg-rose-500/20 p-3 rounded-xl">
+                        <i class="fas fa-shopping-cart text-rose-400 text-xl"></i>
                     </div>
                     <div>
                         <h2 class="text-xl font-bold">
@@ -73,26 +73,6 @@
                 </div>
             </div>
             
-          {{-- <a href="{{ route('admin.routers.online') }}"
-            class="bg-gradient-to-br from-bg-bg1 to-bg-bg3 rounded-2xl p-5 shadow-2xl block hover:opacity-90">
-
-                <p class="text-sm text-t2">Active Routers</p>
-
-                <div class="flex items-center gap-3">
-                    <div class="bg-green-500/20 p-3 rounded-xl">
-                        <i class="fas fa-network-wired text-green-400 text-xl"></i>
-                    </div>
-
-                    <h2 class="text-xl font-bold">
-                       {{ $onlineRouters ?? 0 }}
-                    </h2>
-                </div>
-
-                <p class="text-xs text-t3 mt-1">
-                    Online & reachable
-                </p>
-            </a> --}}
-
         </div>
 
         <!-- Active Routers -->
@@ -149,6 +129,8 @@
                 <div id="userMenu2" class="{{ $menu }}">
                     <a href="{{ route('admin.voucher_profiles.index') }}" class="{{ $item }}">Add Vocher Plan</a> 
                     <a href="{{ route('VoucherSettings.selectReseller') }}" class="{{ $item }}">Manage Wan Port</a>
+                    <a href="{{ route('admin.routers.online') }}" class="{{ $item }}">Resellers Status </a>
+
                 </div>
             </div>
 

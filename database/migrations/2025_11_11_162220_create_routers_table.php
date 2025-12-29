@@ -22,6 +22,8 @@ return new class extends Migration
                 $table->boolean('active')->default(false);
                 $table->boolean('is_online')->default(false);
                 $table->timestamp('last_seen_at')->nullable();
+                $table->timestamps();
+
     });
 
     }

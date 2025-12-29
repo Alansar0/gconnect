@@ -18,7 +18,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $guarded = [];
+    protected $guarded = ['is_super_admin'];
+
 
       // If you want constants to avoid magic strings
     public const ROLE_USER  = 'user';

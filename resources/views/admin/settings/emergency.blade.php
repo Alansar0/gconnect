@@ -12,7 +12,7 @@
         <h1 class="text-2xl font-bold text-accent mb-6">Emergency Mode Settings</h1>
 
         <!-- Current State -->
-        <div class="mb-6 p-4 rounded-xl bg-bg2 border border-accent-border">
+        {{-- <div class="mb-6 p-4 rounded-xl bg-bg2 border border-accent-border">
             <div class="flex justify-between items-center">
                 <div>
                     <span class="font-semibold text-t1">Current App State:</span>
@@ -33,7 +33,44 @@
                     </button>
                 </form>
             </div>
+        </div> --}}
+        <!-- Current State -->
+<div class="mb-6 p-4 rounded-xl bg-bg2 border border-accent-border">
+    <div class="flex justify-between items-center">
+
+        <div>
+            <span class="font-semibold text-t1">Current App State:</span>
+
+            @if(cache('emergency_mode'))
+                <span class="ml-2 text-red-500 font-bold">
+                    EMERGENCY ACTIVE
+                </span>
+            @else
+                <span class="ml-2 text-green-500 font-bold">
+                    Normal
+                </span>
+            @endif
         </div>
+
+        <form method="POST" action="{{ route('toggleE') }}">
+            @csrf
+
+            <button
+                type="submit"
+                class="px-4 py-2 rounded-xl font-semibold text-bg1 transition
+                    {{ cache('emergency_mode')
+                        ? 'bg-green-600 hover:bg-green-700'
+                        : 'bg-red-600 hover:bg-red-700' }}"
+            >
+                {{ cache('emergency_mode')
+                    ? 'Disable Emergency'
+                    : 'Enable Emergency' }}
+            </button>
+        </form>
+
+    </div>
+</div>
+
 
         <!-- Info / Warning -->
         <div class="p-4 bg-bg3 border border-accent-border rounded-xl text-t3 mb-6">

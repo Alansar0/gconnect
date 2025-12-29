@@ -229,7 +229,7 @@ public function updatePin(Request $request)
             // Ensures the user exists AND their role is NOT already 'reseller'
             // to prevent accidental re-upgrade, though updateOrCreate handles that model-wise.
             'user_id' => 'required|exists:users,id',
-            'name' => 'required|string|max:100|unique:resellers,name',
+            'name' => 'required|string|max:100',
             'host' => 'required|string|max:255',
             'port' => 'required|numeric',
             'username' => 'required|string|max:100',

@@ -14,27 +14,28 @@ class AppLocked
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
-    {
-         // If user is authenticated but app not unlocked, redirect to pin authorize
-        if (Auth::check() && ! $request->session()->get('app_unlocked', false)) {
+   public function handle(Request $request, Closure $next): Response
+{
+    // only if user is authenticated AND session has expired
+    if (Auth::check() && ! $request->session()->get('app_unlocked', true)) {
 
-            // allow the pin creation page and authorize endpoints and logout routes to avoid loop
-            $allow = [
-                route('pin.create'),
-                route('pin.store'),
-                route('pin.authorize'),
-                route('pin.authorize.check'),
-                route('logout'), // if you have named route
-            ];
+        // allow PIN routes to prevent loop
+        $allow = [
+            route('pin.create'),
+            route('pin.store'),
+            route('pin.authorize'),
+            route('pin.authorize.check'),
+            route('logout'),
+        ];
 
-            if (! in_array($request->url(), $allow)) {
-                return redirect()->route('pin.authorize');
-            }
+        if (! in_array($request->url(), $allow)) {
+            return redirect()->route('pin.authorize');
         }
-        
-        return $next($request);
     }
+
+    return $next($request);
+}
+
 }
 
 

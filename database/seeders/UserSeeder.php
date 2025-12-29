@@ -20,13 +20,22 @@ class UserSeeder extends Seeder
             ->first();
 
         if (!$admin) {
-            User::create([
-                'full_name'    => env('ADMIN_NAME', 'Local Admin'),
-                'email'        => env('ADMIN_EMAIL', 'admin@example.com'),
-                'phone_number' => env('ADMIN_PHONE', '08000000000'),
-                'password'     => Hash::make(env('ADMIN_PASSWORD', '@security')),
-                'role'         => 'admin',
+            // User::create([
+            //     'full_name'    => env('ADMIN_NAME', 'Local Admin'),
+            //     'email'        => env('ADMIN_EMAIL', 'admin@example.com'),
+            //     'phone_number' => env('ADMIN_PHONE', '08000000000'),
+            //     'password'     => Hash::make(env('ADMIN_PASSWORD', '@security')),
+            //     'role'         => 'admin',
+            // ]);
+             User::create([
+                'full_name'       => env('ADMIN_NAME', 'Local Admin'),
+                'email'           => env('ADMIN_EMAIL'),
+                'phone_number'    => env('ADMIN_PHONE'),
+                'password'        => Hash::make(env('ADMIN_PASSWORD')),
+                'role'            => 'admin',
+                'is_super_admin'  => true, // 🔐 ONLY THIS ACCOUNT
             ]);
+
 
             $this->command->info('✅ Admin user created');
         } else {

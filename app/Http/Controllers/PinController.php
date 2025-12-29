@@ -64,7 +64,7 @@ class PinController extends Controller
     }
 
     // check authorize pin
-    public function showLockScreeneCheck(Request $request)
+    public function showLockScreenCheck(Request $request)
     {
         $request->validate(['pin' => 'required|digits:4']);
 

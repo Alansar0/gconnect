@@ -71,7 +71,7 @@ Route::match(['get', 'post'], '/simulate-webhook', function () {
     return $response->json();
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth','applock','emergency')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
 
      // PIN creation / confirmation (after registration)
@@ -205,11 +205,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('rewards/{for}/edit', [AdminSettingsController::class, 'rewardEdit'])->name('rewards.edit');
     Route::put('rewards/{for}', [AdminSettingsController::class, 'rewardUpdate'])->name('rewards.update');
     //emergency mode 
-    Route::post('toggle-emergency', [AdminSettingsController::class, 'toggleEmergency'])->name('admin.settings.toggleEmergency');
+    Route::get('toggle-emergency', [AdminSettingsController::class, 'toggleEmergency'])->name('admin.settings.emergency');
+    Route::post('toggle', [AdminSettingsController::class, 'toggle'])->name('toggleE');
     Route::post('log-emergency', [AdminSettingsController::class, 'logEmergency'])->name('admin.settings.logEmergency');
-    Route::get('emergency', function() {
-        return view('admin.settings.emergency');
-    })->name('admin.settings.emergency');
+
+    // Route::get('emergency', function() {
+    //     return view('admin.settings.emergency');
+    // })->name('admin.settings.emergency');
 
     // Admin transactions
     Route::get('/admin/transactions/all', [AdminTransactionController::class, 'all'])->name('T.all');
