@@ -184,6 +184,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/user/changPin', [AdminUserController::class, 'changePin'])->name('admin.user.changePin');
     Route::post('/admin/user/changPin', [AdminUserController::class, 'updatePin'])->name('update.changePin');
 
+      //Block or unblocked user
+    Route::get('admin/users/block', [AdminUserController::class, 'blockForm'])->name('admin.users.blockForm');
+    Route::post('admin/users/block-toggle', [AdminUserController::class, 'toggleBlock'])->name('admin.users.toggleBlock');
+
+
 
     // Admin Settings Notify Users
     Route::get('Settings/notify', [AdminSettingsController::class, 'notify'])->name('Snotify');
@@ -193,10 +198,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/appContacts', [AdminSettingsController::class, 'contactView'])->name('admin.settings.appContacts');
     Route::post('/admin/appContacts/store', [AdminSettingsController::class, 'storeTitleQuestion'])->name('admin.settings.store');
     Route::post('/admin/appContacts/sub/store', [AdminSettingsController::class, 'storeSubQuestion'])->name('settings.sub.store');
-        // Cashback rewards management
+
+    // Cashback rewards management
+    
     Route::get('rewards', [AdminSettingsController::class, 'rewardIndex'])->name('rewards.index');
     Route::get('rewards/{for}/edit', [AdminSettingsController::class, 'rewardEdit'])->name('rewards.edit');
     Route::put('rewards/{for}', [AdminSettingsController::class, 'rewardUpdate'])->name('rewards.update');
+    //emergency mode 
+    Route::post('toggle-emergency', [AdminSettingsController::class, 'toggleEmergency'])->name('admin.settings.toggleEmergency');
+    Route::post('log-emergency', [AdminSettingsController::class, 'logEmergency'])->name('admin.settings.logEmergency');
+    Route::get('emergency', function() {
+        return view('admin.settings.emergency');
+    })->name('admin.settings.emergency');
 
     // Admin transactions
     Route::get('/admin/transactions/all', [AdminTransactionController::class, 'all'])->name('T.all');
@@ -211,7 +224,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->names('admin.voucher_profiles');
 
       
-
     Route::get('/admin/router-settings/select', [AdminVoucherController::class, 'selectReseller'])
     ->name('VoucherSettings.selectReseller');
 
@@ -226,6 +238,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/resellers/{reseller}/router-settings/reset', [AdminVoucherController::class, 'resetCounts'])
         ->name('admin.router-settings.reset');
 
+        Route::get('/admin/routers/online', [AdminVoucherController::class, 'online'])
+    ->name('admin.routers.online');
+
+
+     
 });
 
 

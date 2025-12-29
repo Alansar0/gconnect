@@ -128,24 +128,64 @@ public function updatePin(Request $request)
 
 
 
-     public function walletView(Request $request)
-        {
-            $wallet = null;
-            $transactions = collect();
+    // Show the search form
+    public function blockForm(Request $request)
+    {
+        $user = null;
 
-            if ($q = $request->query('query')) {
-                $wallet = Wallet::where('account_number', $q)
-                    ->orWhereHas('user', function ($query) use ($q) {
-                        $query->where('email', $q)->orWhere('phone_number', $q);
-                    })->first();
-                if ($wallet) {
-                    $transactions = Transaction::where('user_id', $wallet->user_id)
-                        ->latest()->take(10)->get();
-                }
-            }
-
-            return view('admin.user.walletManage', compact('wallet', 'transactions'));
+        if ($q = $request->input('query')) {
+            $user = User::where('email', $q)->orWhere('phone_number', $q)
+                ->first();
         }
+
+        return view('admin.user.blockUser', compact('user'));
+    }
+
+    // Toggle block/unblock
+    public function toggleBlock(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $user = User::findOrFail($request->user_id);
+
+        // Prevent admin from blocking themselves
+        if ($user->id == auth()->id()) {
+            return back()->with('error', "You cannot block yourself.");
+        }
+
+        $user->is_blocked = !$user->is_blocked;
+        $user->save();
+
+        $status = $user->is_blocked ? 'blocked' : 'unblocked';
+
+        return back()->with('success', "User {$user->full_name} has been {$status} successfully.");
+    }
+
+        public function walletView(Request $request)
+    {
+        $wallet = null;
+        $transactions = collect();
+
+        if ($q = $request->query('query')) {
+            $wallet = Wallet::where('account_number', $q)
+                ->orWhereHas('user', function ($query) use ($q) {
+                    $query->where('email', 'LIKE', "%$q%")
+                        ->orWhere('phone_number', 'LIKE', "%$q%");
+                })->first();
+
+            if ($wallet) {
+                $transactions = Transaction::where('user_id', $wallet->user_id)
+                    ->latest()
+                    ->take(10)
+                    ->get();
+            }
+        }
+
+        return view('admin.user.walletManage', compact('wallet', 'transactions'));
+    }
+
 
 
     public function updateWallet(Request $request, Wallet $wallet)

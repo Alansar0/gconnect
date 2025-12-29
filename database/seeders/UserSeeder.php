@@ -10,29 +10,50 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Read admin credentials from .env (with safe defaults)
-        $adminEmail = env('ADMIN_EMAIL', 'admin@example.com');
-        $adminName = env('ADMIN_NAME', 'Local Admin');
-        $adminPhone = env('ADMIN_PHONE', '08000000000');
-        $adminPassword = env('ADMIN_PASSWORD', '@security');
-
-        // Check if admin already exists
-        $existingAdmin = User::where('email', $adminEmail)
-            ->orWhere('phone_number', $adminPhone)
+        /*
+        |--------------------------------------------------------------------------
+        | Admin Account
+        |--------------------------------------------------------------------------
+        */
+        $admin = User::where('email', env('ADMIN_EMAIL'))
+            ->orWhere('phone_number', env('ADMIN_PHONE'))
             ->first();
 
-        if (!$existingAdmin) {
+        if (!$admin) {
             User::create([
-                'full_name'    => $adminName,
-                'email'        => $adminEmail,
-                'phone_number' => $adminPhone,
-                'password'     => Hash::make($adminPassword),
+                'full_name'    => env('ADMIN_NAME', 'Local Admin'),
+                'email'        => env('ADMIN_EMAIL', 'admin@example.com'),
+                'phone_number' => env('ADMIN_PHONE', '08000000000'),
+                'password'     => Hash::make(env('ADMIN_PASSWORD', '@security')),
                 'role'         => 'admin',
             ]);
 
-            $this->command->info("✅ Admin user created successfully!");
+            $this->command->info('✅ Admin user created');
         } else {
-            $this->command->warn("⚠️ Admin user already exists, skipping seeding.");
+            $this->command->warn('⚠️ Admin already exists');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Default User Account
+        |--------------------------------------------------------------------------
+        */
+        $user = User::where('email', env('USER_EMAIL'))
+            ->orWhere('phone_number', env('USER_PHONE'))
+            ->first();
+
+        if (!$user) {
+            User::create([
+                'full_name'    => env('USER_NAME', 'Default User'),
+                'email'        => env('USER_EMAIL', 'user@example.com'),
+                'phone_number' => env('USER_PHONE', '08099999999'),
+                'password'     => Hash::make(env('USER_PASSWORD', 'password123')),
+                'role'         => 'user',
+            ]);
+
+            $this->command->info('✅ Default user created');
+        } else {
+            $this->command->warn('⚠️ Default user already exists');
         }
     }
 }

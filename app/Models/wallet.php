@@ -43,6 +43,19 @@ class Wallet extends Model
         ]);
     }
 
+    public function debitCashback($amount)
+{
+    $prev = $this->cashback_balance;
+    $this->cashback_balance -= $amount;
+
+    // store history in the same columns
+    $this->prev_balance = $prev;
+    $this->new_balance  = $this->cashback_balance;
+
+    $this->save();
+}
+
+
 
     public function debit($amount, $description = 'Manual Debit')
     {
@@ -52,14 +65,7 @@ class Wallet extends Model
         $this->new_balance = $this->balance;
         $this->save();
 
-        Transaction::create([
-            'user_id' => $this->user_id,
-            'amount' => $amount,
-            'type' => 'debit',
-            'description' => $description,
-            'reference' => strtoupper(uniqid('TXN')),
-            'status' => 'success',
-        ]);
+        
     }
      /**
      * Add cashback from quiz or reward.

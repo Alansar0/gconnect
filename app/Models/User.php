@@ -79,6 +79,12 @@ class User extends Authenticatable
         ];
     }
 
+    public function reseller()
+    {
+        return $this->belongsTo(Reseller::class)
+                    ->where('status', 'active');
+    }
 
+    
 
 }

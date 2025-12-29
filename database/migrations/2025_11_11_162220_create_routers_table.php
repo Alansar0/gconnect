@@ -20,7 +20,8 @@ return new class extends Migration
                 $table->text('password')->nullable(); // encrypted password blob
                 $table->string('notes')->nullable();
                 $table->boolean('active')->default(false);
-                $table->timestamps();
+                $table->boolean('is_online')->default(false);
+                $table->timestamp('last_seen_at')->nullable();
     });
 
     }

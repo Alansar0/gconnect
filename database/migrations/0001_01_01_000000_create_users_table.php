@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('phone_number')->unique()->nullable();
-            $table->string('location')->nullable();
+            $table->unsignedBigInteger('reseller_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->default('user');
+            $table->boolean('is_blocked')->default(false);
             $table->string('password');
             $table->string('virtual_account')->nullable()->unique();
             $table->string('pin_code')->nullable();

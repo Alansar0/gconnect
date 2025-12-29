@@ -18,9 +18,11 @@ class Transaction extends Model
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'user_id', 'type', 'amount', 'status', 'reference', 'description',
-    ];
+    protected $guarded = [];
+
+    // protected $fillable = [
+    //     'user_id', 'type', 'amount', 'status', 'reference', 'description',
+    // ];
 
     public function user()
     {

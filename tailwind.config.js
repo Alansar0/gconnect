@@ -34,6 +34,12 @@ module.exports = {
         'bg1': 'var(--bg-1)',
         'bg2': 'var(--bg-2)',
         'bg3': 'var(--bg-3)',
+        'bg4': 'var(--bg-4)',
+        'bg5': 'var(--bg-5)',
+        'bg6': 'var(--bg-6)',
+        'bg7': 'var(--bg-7)',
+
+
         't1': 'var(--text-1)',
         't2': 'var(--text-2)',
         't3': 'var(--text-3)',

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('waitlist_daily_stats', function (Blueprint $table) {
-            $table->id();
-            $table->integer('count');
-            $table->date('day')->default(now());
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+    $table->foreign('reseller_id')
+          ->references('id')
+          ->on('resellers')
+          ->onDelete('set null');
 });
 
     }
@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('waitlist_daily_stats');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Artisan;
 use App\Models\AdminReward;
 use App\Models\SupportSubQuestion;
 use App\Models\SupportTopic;
@@ -144,6 +146,49 @@ class AdminSettingsController extends Controller
     return redirect()->route('rewards.index')->with('success', 'Reward settings updated.');
 }
 
+
+// Toggle Emergency Mode
+public function toggleEmergency(Request $request)
+{
+    $current = Cache::get('emergency_mode', false);
+
+    Cache::put('emergency_mode', !$current);
+
+    return back()->with(
+        'success',
+        !$current ? 'Emergency mode activated' : 'Emergency mode deactivated'
+    );
+}
+    // public function toggleEmergency(Request $request)
+    // {
+    //     // Toggle config in .env or settings table
+    //     $current = config('app.emergency_mode', false);
+
+    //     // Save to database (recommended) or use cache
+    //     setting(['emergency_mode' => !$current])->save(); // Use spatie/laravel-settings or your preferred way
+
+    //     // Clear config cache if needed
+    //     Artisan::call('config:clear');
+
+    //     return redirect()->back()->with('success', 'Emergency mode ' . (!$current ? 'activated' : 'deactivated') . ' successfully.');
+    // }
+
+    // Log Emergency Note
+    public function logEmergency(Request $request)
+    {
+        $request->validate([
+            'note' => 'nullable|string|max:500'
+        ]);
+
+        // Save note to DB or log table
+        \App\Models\EmergencyLog::create([
+            'note' => $request->note,
+            'activated_by' => auth()->id(),
+            'status' => config('app.emergency_mode', false) ? 'active' : 'inactive',
+        ]);
+
+        return redirect()->back()->with('success', 'Emergency note saved successfully.');
+    }
 
 
 

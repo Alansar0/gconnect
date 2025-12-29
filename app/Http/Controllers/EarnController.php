@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use App\Models\UserReward;
 use Illuminate\Http\Response;
 use App\Models\AdminReward;
@@ -23,9 +25,7 @@ class EarnController extends Controller
             return view('earn.index', compact('cashback', 'vouchers'));
 
         }
-
-
-
+         
     public function morningAzkar()
         {
 
@@ -35,7 +35,6 @@ class EarnController extends Controller
 
             return view('earn.morningAzkar', compact('adhkar', 'type'));
         }
-
 
     public function eveningAzkar()
         {
@@ -47,78 +46,137 @@ class EarnController extends Controller
 
         }
 
-        public function claim(Request $request)
-    {
-        $request->validate([
-            'type' => 'required|in:morning,evening'
-        ]);
+    public function claim(Request $request)
+        {
+            // ✅ 1. Validate request
+            $request->validate([
+                'type' => 'required|in:morning,evening,surah,salawat',
+                'multiplier' => 'nullable|integer|min:1|max:2',
+            ]);
 
-        $user = auth()->user();
+            $user = auth()->user();
 
-        $reward = AdminReward::where('for', $request->type)->first();
+            // ✅ 2. Fetch admin base reward
+            $reward = AdminReward::where('for', $request->type)->first();
 
-        if (!$reward) {
+            if (!$reward) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Reward not configured'
+                ], 404);
+            }
+
+            // ✅ 3. Prevent double claim (daily)
+            $already = UserReward::where('user_id', $user->id)
+                ->where('type', $request->type)
+                ->whereDate('created_at', now())
+                ->exists();
+
+            if ($already) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Reward already claimed'
+                ], 403);
+            }
+
+            // ✅ 4. Determine multiplier (SALAWAT ONLY)
+            $multiplier = ($request->type === 'salawat')
+                ? ($request->multiplier ?? 1)
+                : 1;
+
+            // Extra safety (anti-cheat)
+            if ($request->type === 'salawat' && $multiplier > 2) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid multiplier'
+                ], 403);
+            }
+
+            // ✅ 5. Final reward calculation
+            $finalAmount = $reward->cashback_amount * $multiplier;
+
+            // ✅ 6. Credit wallet
+            $wallet = Wallet::firstOrCreate(['user_id' => $user->id]);
+            $wallet->addCashback(
+                (float) $finalAmount,
+                (float) $reward->voucher_rate
+            );
+
+            // ✅ 7. Save reward history
+            UserReward::create([
+                'user_id' => $user->id,
+                'amount'  => $finalAmount,
+                'type'    => $request->type,
+                'source'  => 'azkar'
+            ]);
+
+            // ✅ 8. Return correct reward
             return response()->json([
-                'status' => 'error',
-                'message' => 'Reward not configured'
-            ], 404);
+                'status' => 'success',
+                'amount' => $finalAmount
+            ]);
         }
-
-        // Prevent double claim (daily optional)
-        $already = UserReward::where('user_id', $user->id)
-            ->where('type', $request->type)
-            ->whereDate('created_at', now())
-            ->exists();
-
-        if ($already) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Reward already claimed'
-            ], 403);
-        }
-
-        $wallet = Wallet::firstOrCreate(['user_id' => $user->id]);
-
-        // Apply cashback using admin voucher rate
-        $wallet->addCashback(
-            (float) $reward->cashback_amount,
-            (float) $reward->voucher_rate
-        );
-
-        UserReward::create([
-            'user_id' => $user->id,
-            'amount'  => $reward->cashback_amount,
-            'type'    => $request->type,
-            'source'  => 'azkar'
-        ]);
-
-        return response()->json([
-            'status' => 'success',
-            'amount' => $reward->cashback_amount
-        ]);
-    }
 
     public function makaranta()
         {
-
             return view('earn.makaranta.index');
         }
 
-        public function friday($shafi = 1)
-            {
-                $adhkar = include resource_path('views/components/friday/salawat.blade.php');
 
-                $quran = collect(include resource_path('views/components/friday/suratukahf.blade.php'));
-                $page = $quran->firstWhere('page', $shafi);
+    public function friday($shafi = 1)
+        {
+            // Load Salawat (2 types)
+            $adhkar = include resource_path('views/components/friday/salawat.blade.php');
 
-                if (!$page) {
-                    abort(404);
+            // Fetch & cache Surah Al-Kahf
+            $pages = Cache::remember('surah_kahf_pages', now()->addDays(7), function () {
+
+                $response = Http::get('https://api.alquran.cloud/v1/surah/18/quran-uthmani');
+
+                if (!$response->successful()) {
+                    abort(500, 'Failed to load Surah Al-Kahf');
                 }
 
-                return view('earn.friday', compact('adhkar', 'page'));
-            }
+                $ayahs = $response->json('data.ayahs');
 
-    /**
+                $perPage = 15;
+                $chunks = array_chunk($ayahs, $perPage);
+
+                $pages = [];
+                foreach ($chunks as $index => $chunk) {
+                    $content = collect($chunk)
+                        ->map(fn ($a) => $a['text'])
+                        ->implode(' ');
+
+                    $pages[] = [
+                        'page' => $index + 1,
+                        'surah_name' => 'سُورَةُ ٱلْكَهْف',
+                        'content' => nl2br($content),
+                    ];
+                }
+
+                return $pages;
+            });
+
+            $page = collect($pages)->firstWhere('page', (int) $shafi);
+            if (!$page) abort(404);
+
+            // ✅ Load admin rewards (important)
+            $surahReward   = AdminReward::firstWhere('for', 'friday_surah');
+            $salawatReward = AdminReward::firstWhere('for', 'friday_salawat');
+
+            return view('earn.friday', [
+                'adhkar'        => $adhkar,
+                'page'          => $page,
+                'pages'         => $pages,
+                'surahReward'   => $surahReward,
+                'salawatReward' => $salawatReward,
+            ]);
+        }
+
+
+
+        /**
      * Show the darasi view with audio files.
      *
      * @return \Illuminate\View\View
@@ -209,7 +267,7 @@ class EarnController extends Controller
                                 'reward' => $reward, // <-- pass to Blade
 
                             ]);
-                        }
+            }
 
 
 
@@ -219,7 +277,7 @@ class EarnController extends Controller
          * @param int $pageId
          * @return \Illuminate\View\View
          */
-            public function karanta($pageId)
+        public function karanta($pageId)
                 {
                     // Get the current course from the session or default to kurakurai100
                     $course = session('current_course', 'kurakurai100');
@@ -250,71 +308,68 @@ class EarnController extends Controller
                     return view('earn.makaranta.karanta', compact('page', 'quizzes', 'course', 'displayName'));
                 }
 
+        public function submitQuiz(Request $request, $pageId)
+                {
+                    $course = session('current_course', 'kurakurai100');
+                    $type = $request->input('type', 'karanta'); // 'karanta' or 'sauraro'
 
-           
+                    try {
+                        $quizConfigPath = config_path("{$type}/quiz_data_{$course}.php");
+                        if (!file_exists($quizConfigPath)) {
+                            return response()->json(['status' => 'error', 'message' => 'Quiz config not found.'], 404);
+                        }
 
-            public function submitQuiz(Request $request, $pageId)
-{
-    $course = session('current_course', 'kurakurai100');
-    $type = $request->input('type', 'karanta'); // 'karanta' or 'sauraro'
+                        $quizConfig = include($quizConfigPath);
+                        $pageQuizzes = collect($quizConfig)->firstWhere(
+                            $type === 'karanta' ? 'page_id' : 'file',
+                            $type === 'karanta' ? (int) $pageId : $pageId
+                        );
 
-    try {
-        $quizConfigPath = config_path("{$type}/quiz_data_{$course}.php");
-        if (!file_exists($quizConfigPath)) {
-            return response()->json(['status' => 'error', 'message' => 'Quiz config not found.'], 404);
-        }
+                        $quizzes = $pageQuizzes ? $pageQuizzes['questions'] : [];
 
-        $quizConfig = include($quizConfigPath);
-        $pageQuizzes = collect($quizConfig)->firstWhere(
-            $type === 'karanta' ? 'page_id' : 'file',
-            $type === 'karanta' ? (int) $pageId : $pageId
-        );
+                        if (empty($quizzes)) {
+                            return response()->json(['status' => 'error', 'message' => 'No quizzes available.'], 400);
+                        }
 
-        $quizzes = $pageQuizzes ? $pageQuizzes['questions'] : [];
+                        $submitted = collect($request->all())
+                            ->filter(fn($v, $k) => str_starts_with($k, 'quiz'))
+                            ->toArray();
 
-        if (empty($quizzes)) {
-            return response()->json(['status' => 'error', 'message' => 'No quizzes available.'], 400);
-        }
+                        if (empty($submitted)) {
+                            return response()->json(['status' => 'error', 'message' => 'No answers submitted.'], 400);
+                        }
 
-        $submitted = collect($request->all())
-            ->filter(fn($v, $k) => str_starts_with($k, 'quiz'))
-            ->toArray();
+                        $correctCount = 0;
+                        foreach ($submitted as $key => $answer) {
+                            if ($answer === 'correct') $correctCount++;
+                        }
 
-        if (empty($submitted)) {
-            return response()->json(['status' => 'error', 'message' => 'No answers submitted.'], 400);
-        }
+                    
+                        if ($correctCount === count($submitted)) {
+                    $rewardConfig = \App\Models\AdminReward::firstWhere('for', $type);
+                    $cashbackAmount = $rewardConfig ? (float)$rewardConfig->cashback_amount : 50.0;
+                    $voucherRate = $rewardConfig ? (float)$rewardConfig->voucher_rate : 200.0;
 
-        $correctCount = 0;
-        foreach ($submitted as $key => $answer) {
-            if ($answer === 'correct') $correctCount++;
-        }
+                    // Update user's wallet (call addCashback only once)
+                    $wallet = \App\Models\Wallet::firstOrCreate(['user_id' => auth()->id()]);
+                    $wallet->addCashback($cashbackAmount, $voucherRate);
 
-       
-        if ($correctCount === count($submitted)) {
-    $rewardConfig = \App\Models\AdminReward::firstWhere('for', $type);
-    $cashbackAmount = $rewardConfig ? (float)$rewardConfig->cashback_amount : 50.0;
-    $voucherRate = $rewardConfig ? (float)$rewardConfig->voucher_rate : 200.0;
+                    // Record user reward
+                    \App\Models\UserReward::create([
+                        'user_id' => auth()->id(),
+                        'amount' => $cashbackAmount,
+                        'type' => $type,
+                        'source' => $pageId,
+                    ]);
 
-    // Update user's wallet (call addCashback only once)
-    $wallet = \App\Models\Wallet::firstOrCreate(['user_id' => auth()->id()]);
-    $wallet->addCashback($cashbackAmount, $voucherRate);
-
-    // Record user reward
-    \App\Models\UserReward::create([
-        'user_id' => auth()->id(),
-        'amount' => $cashbackAmount,
-        'type' => $type,
-        'source' => $pageId,
-    ]);
-
-    return response()->json([
-        'status' => 'success',
-        'message' => "You earned ₦" . number_format($cashbackAmount, 2) . "!",
-        'cashback_balance' => (float) $wallet->cashback_balance,
-        'voucher_balance' => (int) $wallet->voucher_balance,
-        'voucher_rate' => $voucherRate,
-    ]);
-}
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => "You earned ₦" . number_format($cashbackAmount, 2) . "!",
+                        'cashback_balance' => (float) $wallet->cashback_balance,
+                        'voucher_balance' => (int) $wallet->voucher_balance,
+                        'voucher_rate' => $voucherRate,
+                    ]);
+                }
 
         return response()->json(['status' => 'error', 'message' => '❌ Some answers are incorrect.'], 200);
 

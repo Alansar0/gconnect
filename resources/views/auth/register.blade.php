@@ -51,14 +51,14 @@
                 @error('password_confirmation') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
 
                 <!-- Location -->
-                <select name="location" id="location" required
-                    class="w-full px-3 py-2 border border-[#30363d] rounded-md bg-[#0d1117] text-sm text-[#f0f6fc] focus:outline-none focus:ring-1 focus:ring-[#58a6ff]">
-                    <option value="" disabled selected>Select Location</option>
-                    <option value="kano">Bachirawa</option>
-                    <option value="lagos">R/lemo</option>
-                    <option value="abuja">Kurna</option>
-                    <option value="kaduna">K/ruwa</option>
+                <select name="reseller_id" id="reseller_id" required
+                    class=" w-full px-3 py-2 border border-[#30363d] rounded-md bg-[#0d1117] text-sm text-[#f0f6fc] focus:outline-none focus:ring-1 focus:ring-[#58a6ff]">
+                    <option value="" disabled selected>Select Your Area</option>
+                     @foreach ($resellers as $reseller)
+                        <option value="{{ $reseller->id }}">{{ $reseller->name }}</option>
+                    @endforeach
                 </select>
+
 
                 <!-- Button -->
                 <button type="submit"

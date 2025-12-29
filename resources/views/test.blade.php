@@ -1,123 +1,251 @@
-<x-layouts.app>
-    <div class="bg-[#0d0d0f] text-white min-h-screen font-sans py-2 px-4">
+<x-layouts.admin>
+    <div class="min-h-screen bg-[#0d1117] text-[#f0f6fc] p-6 font-['Roboto']">
+
         <div class=" w-full flex justify-start mt-6 mb-4">
             <a href="{{ url()->previous() }}" class="text-[#58a6ff] hover:underline flex items-center">
                 <i class="material-icons mr-1">arrow_back</i> Back
             </a>
         </div>
-        <!-- Header -->
-        <div class="text-center mt-6 mb-6">
-            <div class="flex justify-center mb-4">
-                <img src="https://cdn-icons-png.flaticon.com/512/2331/2331942.png" alt="Help Icon" class="w-20 h-20">
-            </div>
-            <h1 class="text-2xl font-bold text-[#58a6ff] mb-2">Get Your Voucher</h1>
-            <p class="text-gray-300 text-sm leading-relaxed max-w-sm mx-auto">
-                Purchase a data or Wi-Fi voucher easily and get your access code instantly.
-                Stay connected — anytime, anywhere.
-            </p>
+        <div class="w-full text-center -mt-1 p-4">
+            <span class="text-2xl font-bold text-[#58a6ff] mb-6">
+                Admin Panel
+            </span>
         </div>
 
-        <!-- Flash Sales Section -->
-        <h2 class="text-white font-semibold text-lg mb-2">
-            Flash Sales <span class="text-gray-400 text-sm">ℹ️</span>
-        </h2>
-
-        <!-- Flash Sales Carousel -->
-        <div class="relative max-w-md mx-auto overflow-hidden rounded-2xl mb-8">
-            <div id="flash-track" class="flex transition-transform duration-700 ease-in-out">
-                <!-- Flash Card 1 -->
-                <div class="min-w-full p-3">
-                    <div class="bg-[#1b1b1f] rounded-2xl border border-gray-700 p-4">
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-semibold text-white">1GB / 1 DAY</p>
-                            <span class="bg-gray-600 text-xs px-2 py-1 rounded-md">Sold Out</span>
-                        </div>
-                        <div class="text-gray-400 text-sm line-through">₦500</div>
-                        <div class="text-[#58a6ff] text-sm">₦10 | 98% OFF</div>
-                        <div class="h-1 bg-[#58a6ff] mt-3 rounded-full"></div>
-                    </div>
+        
+        <!-- Top Section -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <!-- Balance -->
+            <div class="bg-gradient-to-br from-[#182430] to-[#0C141C] rounded-2xl p-5 shadow-md">
+                <div class=" flex justify-start ">
+                    <p class="text-sm opacity-80">All Users</p>
                 </div>
-
-                <!-- Flash Card 2 -->
-                <div class="min-w-full p-3">
-                    <div class="bg-[#1b1b1f] rounded-2xl border border-gray-700 p-4">
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-semibold text-white">2GB / 3 DAYS</p>
-                            <span class="bg-green-600 text-xs px-2 py-1 rounded-md">Active</span>
-                        </div>
-                        <div class="text-gray-400 text-sm line-through">₦1000</div>
-                        <div class="text-[#58a6ff] text-sm">₦20 | 97% OFF</div>
-                        <div class="h-1 bg-[#58a6ff] mt-3 rounded-full"></div>
+                <div class="flex items-center gap-3">
+                    <div class="bg-orange-500/20 p-3 rounded-xl">
+                        <i class="fas fa-users text-orange-400 text-xl"></i>
                     </div>
-                </div>
+                    <div>
+                        <h2 class="text-xl font-bold">
+                            {{ short_amount($totalUsers) }}
+                        </h2>
 
-                <!-- Flash Card 3 -->
-                <div class="min-w-full p-3">
-                    <div class="bg-[#1b1b1f] rounded-2xl border border-gray-700 p-4">
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-semibold text-white">500MB / 6 HRS</p>
-                            <span class="bg-[#58a6ff]/40 text-xs px-2 py-1 rounded-md">Hot 🔥</span>
-                        </div>
-                        <div class="text-gray-400 text-sm line-through">₦300</div>
-                        <div class="text-[#58a6ff] text-sm">₦5 | 99% OFF</div>
-                        <div class="h-1 bg-[#58a6ff] mt-3 rounded-full"></div>
                     </div>
                 </div>
             </div>
+
+            <!-- Users Balance -->
+            <div class="bg-gradient-to-br from-[#182430] to-[#0C141C] rounded-2xl p-5 shadow-md">
+                <div class=" flex justify-start ">
+                    <p class="text-sm opacity-80">Users Balance</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="bg-[#58a6ff]/20 p-3 rounded-xl">
+                        <i class="fas fa-wallet text-[#58a6ff] text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold">
+                            ₦{{ short_amount($totalUserBalance) }}
+                        </h2>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div class="bg-gradient-to-br from-[#182430] to-[#0C141C] rounded-2xl p-5 shadow-md">
+                <div class=" flex justify-start ">
+                    <p class="text-sm opacity-80">Total Funding</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="bg-purple-500/20 p-3 rounded-xl">
+                        <i class="fas fa-arrow-alt-circle-down text-purple-400 text-xl"></i>
+                        {{-- <i class="fas fa-box text-purple-400 text-xl"></i> --}}
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold">
+                            ₦{{ short_amount($totalFunding) }}
+                        </h2>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers -->
+            <div class="bg-gradient-to-br from-[#182430] to-[#0C141C] rounded-2xl p-5 shadow-md">
+                <div class=" flex justify-start ">
+                    <p class="text-sm opacity-80">Pending Oders</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="bg-green-500/20 p-3 rounded-xl">
+                        <i class="fas fa-shopping-cart text-green-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold">
+                            {{ short_amount($processingTransactions) }}
+                        </h2>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
+        {{-- processing  Oders --}}
+        <div class="grid grid-row-2 gap-4">
+            <div class="bg-[#182430] rounded-xl p-4 flex justify-between items-center mb-4">
+                <div>
+                    <i class="fas fa-hourglass-half  mr-3  text-[#58a6ff] text-xl p-3 rounded-xl bg-[#58a6ff]/20"></i>
+                        <span>processing Oders</span>
+                </div>
+                    <span class="text-[#58a6ff] font-bold">
+                        {{ number_format($processingTransactions) }}
+                    </span>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <!-- User Management Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+
+            <!-- Dropdown 1 -->
+            <div class="relative inline-block text-left bg-[#182430] rounded-xl p-4 shadow-md">
+                <button id="userDropdown1"
+                    class="w-full inline-flex justify-between items-center text-sm font-medium text-[#f0f6fc] focus:outline-none">
+                    Users
+                    <svg class="w-5 h-5 ml-2 text-[#58a6ff]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="userMenu1"
+                    class="hidden absolute mt-2 w-56 rounded-lg shadow-lg bg-[#161b22] ring-1 ring-[#58a6ff]/40 divide-y divide-gray-700 z-50">
+                    <div class="py-1">
+                        <a href="{{ route('viewUser') }}"
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">All Users</a>
+                        <a href="{{ route('wallets.manage') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Manage
+                            User Wallet</a>
+                        
+                        <a href="{{ route('admin.reseller-view') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Upgrade
+                            User</a>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Block/Unblock</a>
+                        <a href="{{ route('display.change.password') }}"
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Change Pass or Pin</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown 2 -->
+            <div class="relative inline-block text-left bg-[#182430] rounded-xl p-4 shadow-md">
+                <button id="userDropdown2"
+                    class="w-full inline-flex justify-between items-center text-sm font-medium text-[#f0f6fc] focus:outline-none">
+                    Vocher settings
+                    <svg class="w-5 h-5 ml-2 text-[#58a6ff]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="userMenu2"
+                    class="hidden absolute mt-2 w-56 rounded-lg shadow-lg bg-[#161b22] ring-1 ring-[#58a6ff]/40 divide-y divide-gray-700 z-50">
+                    <div class="py-1">
+                        <a href="{{ route('admin.voucher_profiles.index') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Add vocher
+                            plan</a>
+                        <a href="{{ route('VoucherSettings.selectReseller') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Add Wan port</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Generate
+                            vocher</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown 3 -->
+            <div class="relative inline-block text-left bg-[#182430] rounded-xl p-4 shadow-md">
+                <button id="userDropdown3"
+                    class="w-full inline-flex justify-between items-center text-sm font-medium text-[#f0f6fc] focus:outline-none">
+                    Transaction
+                    <svg class="w-5 h-5 ml-2 text-[#58a6ff]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="userMenu3"
+                    class="hidden absolute mt-2 w-56 rounded-lg shadow-lg bg-[#161b22] ring-1 ring-[#58a6ff]/40 divide-y divide-gray-700 z-50">
+                    <div class="py-1">
+                        <a href="{{ route('T.all') }}"
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">All Transaction</a>
+                        <a href="{{ route('T.processings') }}"
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">processind Oders</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">pending
+                            Oders</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown 4 -->
+            <div class="relative inline-block text-left bg-[#182430] rounded-xl p-4 shadow-md">
+                <button id="userDropdown4"
+                    class="w-full inline-flex justify-between items-center text-sm font-medium text-[#f0f6fc] focus:outline-none">
+                    Settings
+                    <svg class="w-5 h-5 ml-2 text-[#58a6ff]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="userMenu4"
+                    class="hidden absolute mt-2 w-56 rounded-lg shadow-lg bg-[#161b22] ring-1 ring-[#58a6ff]/40 divide-y divide-gray-700 z-50">
+                    <div class="py-1">
+                        <a href="{{ route('Snotify') }}"
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Notify Users</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Add App
+                            slide_image</a>
+                        <a href="{{ route('rewards.index') }}" class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">Update
+                            Reward View</a>
+                            
+                        <a href="{{ route('admin.settings.appContacts') }}"
+                            class="block px-4 py-2 text-sm text-[#f0f6fc] hover:bg-[#182430]">App Contacts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+
+
+        </div>
         <script>
-            const flashTrack = document.getElementById('flash-track');
-            let flashIndex = 0;
-            const flashTotal = 3;
+            document.addEventListener('DOMContentLoaded', () => {
+                // find all dropdown buttons that follow the pattern userDropdown1..N
+                const buttons = Array.from(document.querySelectorAll('[id^="userDropdown"]'));
+                const menus = buttons
+                    .map(btn => {
+                        const idx = btn.id.replace('userDropdown', '');
+                        return document.getElementById('userMenu' + idx);
+                    })
+                    .filter(Boolean);
 
-            function updateFlashCarousel() {
-                flashTrack.style.transform = `translateX(-${flashIndex * 100}%)`;
-            }
+                // toggle clicked menu, close the rest
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const idx = btn.id.replace('userDropdown', '');
+                        const menu = document.getElementById('userMenu' + idx);
+                        if (!menu) return;
+                        const wasHidden = menu.classList.contains('hidden');
+                        // close all menus
+                        menus.forEach(m => m.classList.add('hidden'));
+                        // open the clicked one if it was hidden
+                        if (wasHidden) menu.classList.remove('hidden');
+                    });
+                });
 
-            setInterval(() => {
-                flashIndex = (flashIndex + 1) % flashTotal;
-                updateFlashCarousel();
-            }, 3000);
+                // prevent clicks inside menu from closing it
+                menus.forEach(m => m.addEventListener('click', e => e.stopPropagation()));
+
+                // click outside -> close all
+                document.addEventListener('click', () => menus.forEach(m => m.classList.add('hidden')));
+
+                // esc -> close all
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') menus.forEach(m => m.classList.add('hidden'));
+                });
+            });
         </script>
-        @if (session('success'))
-            <div class="bg-green-600/30 text-green-200 p-4 rounded-xl mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="bg-red-600/30 text-red-200 p-4 rounded-xl mb-4">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('voucher.select') }}" class="space-y-5">
-            @csrf
-            <div>
-                <label class="block mb-2 text-sm font-semibold">Select Reseller</label>
-                <select name="reseller_id" class="w-full bg-[#141E26] p-3 rounded-xl border border-[#1F2A33]">
-                    @foreach ($resellers as $reseller)
-                        <option value="{{ $reseller->id }}">{{ $reseller->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- Data Plans Grid -->
-            <div class="grid grid-cols-3 gap-3">
-                @foreach ($profiles as $profile)
-                    <div class="bg-[#1b1b1f] rounded-xl px-4 py-6 flex flex-col text-center border border-gray-700 h-full">
-                        <p value="{{ $profile->id }}" class="text-white font-bold text-lg">{{ $profile->name }}</p>
-                        <p class="text-gray-300 text-sm mb-4"> ₦{{ number_format($profile->price, 2) }}</p>
-                        <button type="submit"
-                            class="mt-auto flex justify-between items-center border border-[#58a6ff] rounded-lg px-4 py-2 text-lg text-[#58a6ff] font-medium hover:bg-[#58a6ff]/10 transition-all">
-                            <span>Get</span>
-                            <i class="material-icons">chevron_right</i>
-                        </button>
-                    </div>
-                @endforeach
-                <input type="hidden" name="pin" id="transaction-pin-final">
-            </div>
-        </form>
-
-    </div>
-</x-layouts.app>
+</x-layouts.admin>

@@ -12,8 +12,22 @@ class Voucher extends Model {
     
     protected $casts = [
     'expires_at' => 'datetime',
-];
+    ];
+     public function minutesLeft(): int
+    {
+        return now()->diffInMinutes($this->expires_at, false);
+    }
 
+    public function isExpired(): bool
+    {
+        return now()->gte($this->expires_at);
+    }
+
+        // App\Models\Voucher.php
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function reseller(){
 

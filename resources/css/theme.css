@@ -38,6 +38,25 @@
     background-color: var(--unique-bottom-hover-bg);
     color: var(--unique-bottom-hover-text);
 }
+.border-neutral {
+    border-color: var(--border-neutral);
+}
+/* ==============================
+   Voucher Page – Unique Theme
+   ============================== */
+
+/* Default (Dark) */
+.voucher-page {
+    background-color: #0d0d0f;
+    color: #ffffff;
+}
+
+/* Light mode override */
+[data-theme="light"] .voucher-page {
+    background-color: #f9fafb;
+    color: #111827;
+}
+
 
 /* ==========================
    Profit Icon
@@ -59,11 +78,13 @@
     --bg-range: #1B2938;
     --grad-1: #0D2C35;
     --grad-2: #112C3A;
+    --border-neutral: #374151;
+
 
     /* Bottom nav */
     --unique-bottom-bg: var(--bg-header);
     --unique-bottom-border: rgba(88,166,255,0.20);
-    --unique-bottom-shadow: rgba(88,166,255,0.30);
+    --unique-bottom-shadow: rgba(189, 202, 217, 0.3);
     --unique-bottom-text: #f0f6fc;
     --unique-bottom-hover-bg: rgba(88,166,255,0.12);
     --unique-bottom-hover-text: #58a6ff;
@@ -100,6 +121,10 @@
     --accent-border: rgba(37,99,235,0.2);
     --shadow-accent: rgba(37,99,235,0.18);
 
+    --payment-card-bg: #121A2F;
+    --payment-card-border: #1C2750;
+    --payment-card-text: #ffffff;
+
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -107,6 +132,30 @@
    LIGHT MODE
    ============================== */
 [data-theme="light"] {
+    /* Add these to your existing light block */
+    --bg-1: #f3f4f6; /* The light version of your main background */
+    --bg-2: #ffffff; /* The light version of your card background */
+    --bg-3: #e5e7eb;
+    --bg-4: #f3f4f6; 
+    --bg-5: #ffffff; 
+    --bg-6: #ffffff; 
+    --bg-7: #e5e7eb;
+
+
+
+
+
+
+
+    --text-1: #1f2937; /* The light version of your main text */
+    --text-2: #4b5563;
+    --text-3: #94A3B8;
+
+    --accent: #2563eb; /* Royal Blue for light mode */
+    --accent-border: rgba(37,99,235,0.2);
+    --shadow-accent: rgba(37,99,235,0.15);
+
+    /* Keep your existing light variables below */
     --unique-bottom-bg: #f3f4f6;
     --unique-bottom-border: rgba(37,99,235,0.2);
     --unique-bottom-shadow: rgba(37,99,235,0.3);
@@ -115,6 +164,11 @@
     --unique-bottom-hover-text: #2563eb;
     --unique-card-bg: #ffffff;
     --unique-card-border: rgba(37,99,235,0.20);
+    --border-neutral: #e5e7eb;
+
+    --payment-card-bg: #ffffff; /* light mode bg */
+    --payment-card-border: #e5e7eb; /* light mode border */
+    --payment-card-text: #111827; /* light mode text */
 }
 
 /* ==============================
@@ -125,6 +179,12 @@
     --bg-1: var(--bg-header);
     --bg-2: #161b22;
     --bg-3: #0f172a;
+    --bg-4: #0d1117;
+    --bg-5: #182430;
+    --bg-6: #141E26;
+    --bg-7: #0B141A;
+
+
 
     --text-1: #f0f6fc;
     --text-2: rgba(240,246,252,0.8);
@@ -134,6 +194,7 @@
     --accent-soft: #58a6ff;
     --accent-border: rgba(88,166,255,0.3);
     --shadow-accent: rgba(88,166,255,0.3);
+    --myaccents:#1F2A33;
 }
 
 /* ==============================
@@ -161,4 +222,12 @@
 .text-accent { color: var(--accent); }
 .bg-accent { background-color: var(--accent); }
 .border-accent { border-color: var(--accent-border); }
+.my-accent { border-color: var(--myaccents); }
 .shadow-accent { box-shadow: 0 0 10px var(--shadow-accent); }
+.bg-card-dark {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--bg-header),
+      var(--bg-alt)
+    );
+}

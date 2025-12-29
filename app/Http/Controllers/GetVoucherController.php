@@ -134,253 +134,197 @@ class GetVoucherController extends Controller
     }
 
     // decrement correct counter (used by scheduled command on expiry)
-    public static function decrementWanCounterByPort(int $resellerId, string $wan)
+        public static function decrementWanCounterByPort(int $resellerId, string $wan)
     {
         $settings = RouterSetting::where('reseller_id', $resellerId)->first();
         if (!$settings) return;
-        if ($wan === 'ether1') {
+
+        if ($wan === 'ether1' && $settings->wan1_current_count > 0) {
             $settings->decrement('wan1_current_count');
-        } else {
+        }
+
+        if ($wan === 'ether2' && $settings->wan2_current_count > 0) {
             $settings->decrement('wan2_current_count');
         }
     }
 
-    /***** FINAL STORE (purchase attempt) *****/
-    public function finalStore(Request $request)
-{
-    $request->validate([
-        'reseller_id' => 'required|exists:resellers,id',
-        'profile_id'  => 'required|exists:voucher_profiles,id',
-        'pin'         => 'required|digits:4',
-    ]);
+     public function finalStore(Request $request)
+    {
+        $request->validate([
+            'reseller_id' => 'required|exists:resellers,id',
+            'profile_id'  => 'required|exists:voucher_profiles,id',
+            'pin'         => 'required|digits:4',
+        ]);
 
-    $user = Auth::user();
-    if (!$user || !$user->pin_code || !Hash::check($request->pin, $user->pin_code)) {
-        return response()->json(['message' => 'Incorrect transaction PIN.'], 401);
-    }
+        $user = Auth::user();
 
-    $reseller = Reseller::with(['user','router'])->findOrFail($request->reseller_id);
-    $profile  = VoucherProfile::findOrFail($request->profile_id);
-    $amount   = $profile->price;
-
-    if (!$reseller->router) {
-        return response()->json(['message' => 'Router not found for this reseller.'], 404);
-    }
-    
-    $buyerWallet = Wallet::firstOrCreate(
-        ['user_id' => $user->id],
-        ['account_number' => User::generateAccountNumber(), 'balance' => 0]
-    );
-
-    if ($buyerWallet->balance < $amount) {
-        return response()->json(['message' => 'Insufficient wallet balance for this purchase.'], 422);
-    }
-
-    // load settings (do NOT force default limits; admin will configure them)
-    $settings = RouterSetting::firstOrCreate(['reseller_id' => $reseller->id]);
-
-    // clear expired manual sold-out if it's passed (backward-compatibility)
-    if ($settings->global_sold_out_until && now()->greaterThan($settings->global_sold_out_until)) {
-        $settings->update(['global_sold_out_until' => null]);
-    }
-
-
-    // determine if both WANs full using admin-set limits
-    $wan1Count = (int)$settings->wan1_current_count;
-    $wan2Count = (int)$settings->wan2_current_count;
-    $wan1Limit = (int)$settings->wan1_limit;
-    $wan2Limit = (int)$settings->wan2_limit;
-
-    $bothFull = ($wan1Count >= $wan1Limit) && ($wan2Count >= $wan2Limit);
-
-    // if ($bothFull) {
-    //     // compute expected available time
-    //     $expected = $this->calculateExpectedAvailableAt($reseller->id, $profile);
-
-    //     $position = Waitlist::where('reseller_id', $reseller->id)
-    //         ->where('status','waiting')->count() + 1;
-
-    //     $wait = Waitlist::create([
-    //         'reseller_id' => $reseller->id,
-    //         'user_id' => $user->id,
-    //         'profile_id' => $profile->id,
-    //         'position' => $position,
-    //         'expected_available_at' => $expected,
-    //         'status' => 'waiting',
-    //     ]);
-
-    //     // notify (in-app only on join)
-    //     $user->notify(new \App\Notifications\WaitlistJoined($wait));
-
-    //     return response()->json([   
-    //         'message' => 'All WAN lines are currently sold out.',
-    //         'position' => $position,
-    //         'expected_available_at' => $expected->toDateTimeString(),
-    //     ], 429);
-    // }
-    if ($bothFull) {
-
-    // 1. Create expiry time based on profile duration
-    $minutes = (int) trim($profile->time_minutes);
-    $expiresAt = now()->addMinutes($minutes);
-
-    // 2. Set the entire system to "sold out"
-    $this->enterSoldOutState($settings, $expiresAt);
-
-    // 3. Add customer to the waitlist
-    $expected = $this->calculateExpectedAvailableAt($reseller->id, $profile);
-
-    $position = Waitlist::where('reseller_id', $reseller->id)
-        ->where('status','waiting')->count() + 1;
-
-    $wait = Waitlist::create([
-        'reseller_id' => $reseller->id,
-        'user_id' => $user->id,
-        'profile_id' => $profile->id,
-        'position' => $position,
-        'expected_available_at' => $expected,
-        'status' => 'waiting',
-    ]);
-
-    $user->notify(new \App\Notifications\WaitlistJoined($wait));
-
-    return response()->json([
-        'message' => 'All WAN lines are currently sold out.',
-        'position' => $position,
-        'expected_available_at' => $expected->toDateTimeString(),
-        'sold_out_until' => $expiresAt->toDateTimeString(),
-    ], 429);
-}
-
-
-    // choose WAN deterministically (wan1 first)
-    $activeWan = ($wan1Count < $wan1Limit) ? 'ether1' : 'ether2';
-
-    // proceed to create voucher within DB transaction
-    $connection = [
-        'host' => $reseller->router->host,
-        'port' => $reseller->router->port ?? 8728,
-        'username' => $reseller->router->username,
-        'password' => $reseller->router->password,
-    ];
-
-    try {
-        DB::transaction(function () use ($connection, $reseller, $profile, $amount, $buyerWallet, $user, &$voucher, $activeWan, $settings) {
-            if (!$this->routerService->connect($connection)) {
-                throw new \Exception('Router connection failed.');
-            }
-
-            $username = 'V' . strtoupper(Str::random(6));
-            $password = Str::random(8);
-
-            $resp = $this->routerService->createVoucher([
-                'username' => $username,
-                'password' => $password,
-                'profile'  => $profile->mikrotik_profile,
-            ]);
-            if (isset($resp['error'])) {
-                throw new \Exception('Router error: ' . $resp['error']);
-            }
-
-            // $expiresAt = now()->addMinutes((int)$profile->time_minutes);
-            $minutes = (int) trim($profile->time_minutes);
-            $expiresAt = now()->addMinutes($minutes);
-
-
-
-            $voucher = Voucher::create([
-                'reseller_id' => $reseller->id,
-                'profile_id'  => $profile->id,
-                'code'        => $username,
-                'password'    => $password,
-                'status'      => 'active',
-                'expires_at'  => $expiresAt,
-            ]);
-
-            // debit buyer
-            $buyerWallet->balance -= $amount;
-            $buyerWallet->save();
-
-            Transaction::create([
-                'user_id' => $user->id,
-                'type' => 'debit',
-                'amount' => $amount,
-                'status' => 'success',
-                'reference' => 'VOUCHER-' . strtoupper(Str::random(10)),
-                'description' => 'voucher_purchase',
-            ]);
-
-            // credit reseller
-            $resellerWallet = Wallet::firstOrCreate(
-                ['user_id' => $reseller->user->id],
-                ['account_number' => User::generateAccountNumber(), 'balance' => 0]
-            );
-            $resellerWallet->balance += $amount;
-            $resellerWallet->save();
-
-            Transaction::create([
-                'user_id' => $reseller->user->id,
-                'type' => 'credit',
-                'amount' => $amount,
-                'status' => 'success',
-                'reference' => 'VOUCHER-' . strtoupper(Str::random(10)),
-                'description' => 'Voucher sale: ' . $profile->name,
-            ]);
-
-            // add to voucher_queue using profile expiry
-            VoucherQueue::create([
-                'voucher_id' => $voucher->id,
-                'reseller_id' => $reseller->id,
-                'wan_port' => $activeWan,
-                'expiry_time' => $expiresAt,
-            ]);
-
-            // increment chosen WAN counter
-            if ($activeWan === 'ether1') {
-                $settings->increment('wan1_current_count');
-            } else {
-                $settings->increment('wan2_current_count');
-            }
-        });
-    } catch (\Throwable $e) {
-        report($e);
-        return response()->json(['message' => 'Purchase failed: ' . $e->getMessage()], 500);
-    }
-
-    return response()->json([
-        'success' => true,
-        'voucher_id' => $voucher->id,
-        'code' => $voucher->code,
-        'password' => $voucher->password,
-        'expires_at' => $voucher->expires_at->toDateTimeString(),
-        'receipt_url' => route('getVoucher.receipt', $voucher->id),
-    ], 200);
-}
-
-
-
-        private function enterSoldOutState(RouterSetting $settings,Carbon $expiresAt)
-        {
-            
-            $settings->update([
-                'global_sold_out_until' => $expiresAt,
-                'wan1_current_count' => 0,
-                'wan2_current_count' => 0,
-            ]);
+        if (!$user || !$user->pin_code || !Hash::check($request->pin, $user->pin_code)) {
+            return response()->json(['message' => 'Incorrect transaction PIN.'], 401);
         }
 
-        private function handleSoldOutResponse(RouterSetting $settings)
-        {
-            $remaining = now()->diffForHumans($settings->global_sold_out_until, true);
+        if ($user->reseller_id != $request->reseller_id) {
+            return response()->json([
+                'message' => 'Your selected reseller does not match your registered reseller.'
+            ], 422);
+        }
+
+        $reseller = Reseller::with(['user','router'])->findOrFail($request->reseller_id);
+        $profile  = VoucherProfile::findOrFail($request->profile_id);
+        $amount   = $profile->price;
+        $useCashback = $request->boolean('use_cashback', false);
+
+        $buyerWallet = Wallet::firstOrCreate(
+            ['user_id' => $user->id],
+            ['account_number' => User::generateAccountNumber(), 'balance' => 0]
+        );
+
+        /* =======================
+           ✅ FIX 1: VALIDATE ONLY
+           ======================= */
+        if ($useCashback) {
+            if ($buyerWallet->cashback_balance < $amount) {
+                return response()->json(['message' => 'Insufficient cashback balance.'], 422);
+            }
+        } else {
+            if ($buyerWallet->balance < $amount) {
+                return response()->json(['message' => 'Insufficient wallet balance.'], 422);
+            }
+        }
+
+        // $settings = RouterSetting::firstOrCreate(['reseller_id' => $reseller->id]);
+         $settings = RouterSetting::where('reseller_id', $reseller->id)
+            ->lockForUpdate()
+            ->firstOrCreate(['reseller_id' => $reseller->id]);
+
+
+        $wan1Full = $settings->wan1_current_count >= $settings->wan1_limit;
+        $wan2Full = $settings->wan2_current_count >= $settings->wan2_limit;
+
+        if ($wan1Full && $wan2Full) {
+
+            // respect manual/global sold-out
+            if ($settings->global_sold_out_until && now()->lessThan($settings->global_sold_out_until)) {
+                return $this->handleSoldOutResponse($settings);
+            }
+
+            $expected = $this->calculateExpectedAvailableAt($reseller->id, $profile);
+
+            $position = Waitlist::where('reseller_id', $reseller->id)
+                ->where('status', 'waiting')
+                ->count() + 1;
+
+            $wait = Waitlist::create([
+                'reseller_id' => $reseller->id,
+                'user_id' => $user->id,
+                'profile_id' => $profile->id,
+                'position' => $position,
+                'expected_available_at' => $expected,
+                'status' => 'waiting',
+            ]);
+
+            $user->notify(new \App\Notifications\WaitlistJoined($wait));
 
             return response()->json([
                 'message' => 'All WAN lines are currently sold out.',
-                'retry_after' => $remaining,
-                'sold_out_until' => $settings->global_sold_out_until->toDateTimeString(),
+                'waitlist' => true,
+                'position' => $position,
+                'expected_available_at' => $expected->toDateTimeString(),
             ], 429);
         }
 
 
+        $activeWan = $wan1Full ? 'ether2' : 'ether1';
+
+        try {
+            DB::transaction(function () use (
+                $reseller,
+                $profile,
+                $amount,
+                $buyerWallet,
+                $user,
+                $useCashback,
+                &$voucher,
+                $activeWan,
+                $settings
+            ) {
+
+                $username = 'V' . strtoupper(Str::random(6));
+                $password = Str::random(8);
+                $expiresAt = now()->addMinutes((int)$profile->time_minutes);
+
+                $voucher = Voucher::create([
+                    'reseller_id' => $reseller->id,
+                    'profile_id'  => $profile->id,
+                    'code'        => $username,
+                    'password'    => $password,
+                    'status'      => 'active',
+                    'expires_at'  => $expiresAt,
+                ]);
+
+                /* =======================
+                   ✅ FIX 2: SINGLE DEBIT
+                   ======================= */
+                if ($useCashback) {
+                    $buyerWallet->debitCashback($amount);
+                } else {
+                    $buyerWallet->debit($amount);
+                }
+
+
+                Transaction::create([
+                    'user_id'      => $user->id,
+                    'type'         => 'debit',
+                    'amount'       => $amount,
+                    'status'       => 'success',
+                    'reference'    => 'VOUCHER-' . strtoupper(Str::random(10)),
+                    'description'  => $useCashback
+                        ? 'voucher_purchase_cashback'
+                        : 'voucher_purchase',
+                    'prev_balance' => $buyerWallet->prev_balance,
+                    'new_balance'  => $buyerWallet->new_balance,
+                ]);
+               
+
+
+                $resellerWallet = Wallet::firstOrCreate(
+                    ['user_id' => $reseller->user->id],
+                    ['account_number' => User::generateAccountNumber(), 'balance' => 0]
+                );
+
+                $resellerWallet->balance += $amount;
+                $resellerWallet->save();
+
+                VoucherQueue::create([
+                    'voucher_id' => $voucher->id,
+                    'reseller_id' => $reseller->id,
+                    'wan_port' => $activeWan,
+                    'expiry_time' => $expiresAt,
+                ]);
+
+                $activeWan === 'ether1'
+                    ? $settings->increment('wan1_current_count')
+                    : $settings->increment('wan2_current_count');
+    });
+
+      
+
+        } catch (\Throwable $e) {
+            report($e);
+            return response()->json(['message' => 'Purchase failed.'], 500);
+        }
+
+        return response()->json([
+            'success' => true,
+            'voucher_id' => $voucher->id,
+            'code' => $voucher->code,
+            'password' => $voucher->password,
+            'expires_at' => $voucher->expires_at->toDateTimeString(),
+        ]);
+    }
+
+
+
+       
         private function getNiceWanName($wan)
         {
             return $wan === 'ether1' ? 'WAN 1' : 'WAN 2';

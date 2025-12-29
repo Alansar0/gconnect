@@ -24,6 +24,10 @@ return new class extends Migration
             ['for' => 'sauraro', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
             ['for' => 'morning', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
             ['for' => 'evening', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
+            ['for' => 'surah', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
+            ['for' => 'salawat', 'cashback_amount' => 50, 'voucher_rate' => 200, 'created_at' => now(), 'updated_at' => now()],
+
+
         ]);
     }
 

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('profile_id');
             $table->enum('status', ['active', 'used', 'expired'])->default('active');
             $table->timestamps();
+            $table->boolean('reminded_90')->default(false);
+            $table->boolean('reminded_40')->default(false);
+            $table->boolean('reminded_20')->default(false);
             $table->timestamp('expires_at')->nullable();
         });
 

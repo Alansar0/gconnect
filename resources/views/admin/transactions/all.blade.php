@@ -1,30 +1,55 @@
+
+
+
 <x-layouts.admin>
-    <div class="p-6 min-h-screen bg-[#0B1620] text-white space-y-10">
-         <div class=" w-full flex justify-start mt-6 mb-4">
-            <a href="{{ url()->previous() }}" class="text-[#58a6ff] hover:underline flex items-center">
-                <i class="material-icons mr-1">arrow_back</i> Back
+    <div class="p-6 min-h-screen bg-bg1 dark:bg-bg1 text-t1 dark:text-t1 space-y-10">
+
+        <div class="w-full flex justify-start mt-6 mb-4">
+            <a href="{{ url()->previous() }}" class="text-accent hover:underline flex items-center">
+                <i class="material-icons mr-1 text-accent">arrow_back</i> Back
             </a>
         </div>
-        {{-- COMPLETED / FAILED TRANSACTIONS --}}
-        <div class="bg-[#101E2B] rounded-2xl mt-15 shadow-[0_0_20px_rgba(0,255,209,0.1)] p-6 border border-[#00FFD1]/20">
-            <h2 class="text-lg font-semibold mb-4 text-[#00FFD1]">Registered Users</h2>
 
-            <div class="flex mb-4">
-                <input type="text" placeholder="Search by Service or Product"
-                    class="bg-[#0B1620] border border-[#00FFD1]/30 rounded-l-lg px-4 py-2 w-full text-gray-200 focus:outline-none focus:ring-1 focus:ring-[#00FFD1]">
-                <button
-                    class="bg-[#00FFD1] text-[#101E2B] px-5 py-2 rounded-r-lg hover:opacity-80 transition shadow-[0_0_10px_#00FFD1]">
-                    Search
-                </button>
-            </div>
+        {{-- TRANSACTIONS TABLE --}}
+        <div class="bg-bg2 dark:bg-bg2 rounded-2xl mt-6 shadow p-6 border border-accent/20">
+
+                    <h2 class="text-lg font-semibold mb-4 text-accent">
+                    Registered Users Transactions
+                    </h2>
+
+                <form method="GET" action="{{ route('T.all') }}" class="flex mb-4">
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Search by phone or description"
+                        class="w-full px-4 py-2 rounded-l-lg
+                            bg-bg2 border border-accent
+                            text-t1 placeholder:text-t3
+                            focus:outline-none focus:ring-2 focus:ring-accent"
+                    >
+
+                    <button
+                        type="submit"
+                        class="px-5 py-2 rounded-r-lg
+                            bg-accent text-bg1 font-semibold
+                            hover:opacity-90 transition
+                            shadow-accent"
+                    >
+                        Search
+                    </button>
+                </form>
+
+        </div>
+
 
             <div class="overflow-x-auto">
-                <table class="min-w-full text-sm text-left rounded-xl overflow-hidden border border-[#00FFD1]/10">
-                    <thead class="bg-[#142434] text-[#00FFD1] uppercase font-semibold">
+                <table class="min-w-full text-sm text-left rounded-xl overflow-hidden border border-accent/10">
+                    <thead class="bg-bg3 dark:bg-bg3 text-accent uppercase font-semibold">
                         <tr>
                             <th class="px-4 py-3">Action</th>
                             <th class="px-4 py-3">Transaction ID</th>
-                            <th class="px-4 py-3">User Pnumber</th>
+                            <th class="px-4 py-3">User Phone</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Amount (₦)</th>
@@ -35,82 +60,56 @@
                     </thead>
 
                     <tbody>
-                    @php
-                        $title = match($txn->description) {
-                            'voucher_purchase' => 'Voucher Purchased',
-                            'manual_deduction' => 'Manually Deducted',
-                            'manual_funding' => 'Manually Funded',
-                            'wallet_funded' => 'Wallet Funded',
-                            default => ucfirst($txn->description)
-                        };
-                    @endphp
-
-
                         @forelse($completed as $txn)
                             @php
-                                // --- Calculate previous and new balances dynamically ---
-                                // (Fallback to user's balance or default 0 if missing)
-                        $userBalance = $txn->user->balance ?? 0;
-                        $amount = $txn->amount ?? 0;
+                                // Map description to readable title
+                                $title = match($txn->description) {
+                                    'voucher_purchase' => 'Voucher Purchased',
+                                    'manual_deduction' => 'Manually Deducted',
+                                    'manual_funding' => 'Manually Funded',
+                                    'wallet_funded' => 'Wallet Funded',
+                                    default => ucfirst($txn->description)
+                                };
 
-                        if ($txn->status === 'completed') {
-                            if (in_array($txn->type, ['Bank funding', 'Manually funded'])) {
-                                        $prevBalance = $userBalance - $amount;
-                                        $newBalance = $userBalance;
-                                    } else {
-                                        $prevBalance = $userBalance + $amount;
-                                        $newBalance = $userBalance;
-                                    }
-                                } else {
-                                    $prevBalance = $userBalance;
-                                    $newBalance = $userBalance;
-                                }
+                                // Status color
+                                $statusColor = $txn->status === 'success' ? 'text-green-500' : 'text-red-500';
+
+                                // Amount color
+                                $amountColor = in_array($txn->description, ['voucher_purchase', 'manual_deduction']) 
+                                    ? 'text-red-500' 
+                                    : (in_array($txn->description, ['wallet_funded', 'manual_funding']) 
+                                        ? 'text-green-500' 
+                                        : 'text-gray-500');
+
+                                // Previous & New balance
+                                $prevBalance = $txn->prev_balance ?? 0;
+                                $newBalance  = $txn->new_balance ?? 0;
+
+                                // User phone
+                                $userPhone = $txn->user->phone_number ?? 'N/A';
                             @endphp
 
-                            <tr class="border-b border-[#00FFD1]/10 hover:bg-[#182b3c] transition">
-                                <!-- Action -->
+                            <tr class="border-b border-accent/10 hover:bg-bg3 dark:hover:bg-bg3/50 transition">
                                 <td class="px-4 py-3">
                                     <button
-                                        class="bg-[#0B1620] text-[#00FFD1] px-4 py-1.5 rounded-lg border border-[#00FFD1]/40 shadow hover:bg-[#00FFD1] hover:text-[#0B1620] transition">
+                                        class="bg-bg1 dark:bg-bg1 text-accent px-4 py-1.5 rounded-lg border border-accent/40 shadow hover:bg-accent hover:text-bg1 dark:hover:text-bg1 transition">
                                         Refund
                                     </button>
                                 </td>
-                                <!-- Transaction ID -->
-                                <td class="px-4 py-3 text-gray-300 font-semibold">{{ $txn->reference }}</td>
-
-                                <!-- User Phone -->
-                                <td class="px-4 py-3 text-gray-300">{{ $txn->user->phone ?? 'N/A' }}</td>
-
-                                <!-- Status -->
-                                <td
-                                    class="px-4 py-3 capitalize font-semibold
-                        @if (in_array($txn->type, ['Bank funding', 'Manual funding'])) text-[#00FFD1]
-                        @elseif(in_array($txn->type, ['Voucher Purchased', 'Manual deducting'])) text-red-400
-                        @elseif($txn->status === 'completed') text-[#00FFD1]
-                        @else text-red-400 @endif">
-                                    {{ $txn->status }}
+                                <td class="px-4 py-3 text-t1 dark:text-t1 font-semibold">{{ $txn->reference }}</td>
+                                <td class="px-4 py-3 text-t1 dark:text-t1">{{ $userPhone }}</td>
+                                <td class="px-4 py-3 capitalize font-semibold {{ $statusColor }}">
+                                    {{ ucfirst($txn->status) }}
                                 </td>
-
-                                <!-- Description -->
-                                {{-- <td class="px-4 py-3 text-gray-400">{{ $txn->description }}</td> --}}
-                                 <td class="px-4 py-3 text-gray-400">{{ $title }}</td>
-                                <!-- Amount -->
-                                <td class="px-4 py-3 text-gray-200">₦{{ number_format($txn->amount, 2) }}</td>
-
-                                <!-- Previous Balance -->
-                                <td class="px-4 py-3 text-gray-400">₦{{ number_format($prevBalance, 2) }}</td>
-
-                                <!-- New Balance -->
-                                <td class="px-4 py-3 text-gray-200 font-semibold text-[#00FFD1]">
-                                    ₦{{ number_format($newBalance, 2) }}
-                                </td>
-
-                                <!-- Date -->
-                                <td class="px-4 py-3 text-gray-400">{{ $txn->created_at->format('d M Y, h:i A') }}</td>
+                                <td class="px-4 py-3 text-t3 dark:text-t3">{{ $title }}</td>
+                                <td class="px-4 py-3 {{ $amountColor }}">₦{{ number_format($txn->amount, 2) }}</td>
+                                <td class="px-4 py-3 text-t3 dark:text-t3">₦{{ number_format($prevBalance, 2) }}</td>
+                                <td class="px-4 py-3 text-t1 dark:text-accent font-semibold">₦{{ number_format($newBalance, 2) }}</td>
+                                <td class="px-4 py-3 text-t3 dark:text-t3">{{ $txn->created_at->format('d M Y, h:i A') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center py-6 text-gray-500">
+                                <td colspan="9" class="text-center py-6 text-t3 dark:text-t3">
                                     No completed or failed transactions found.
                                 </td>
                             </tr>
@@ -118,7 +117,7 @@
                     </tbody>
                 </table>
             </div>
-
-
         </div>
+    </div>
 </x-layouts.admin>
+

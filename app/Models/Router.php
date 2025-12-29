@@ -20,6 +20,12 @@ class Router extends Model {
         return $this->password_encrypted ? Crypt::decryptString($this->password_encrypted) : null;
     }
 
+        protected $casts = [
+        'is_online' => 'boolean',
+        'active' => 'boolean',
+    ];
+
+
     public function reseller(){ return $this->belongsTo(Reseller::class); }
 }
 

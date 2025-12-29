@@ -113,7 +113,7 @@ return [
         "arabic"=> "لا إلهَ إلاّ اللّهُ وحْـدَهُ لا شَـريكَ لهُ، لهُ المُـلْكُ ولهُ الحَمْـد، وهُوَ على كُلّ شَيءٍ قَدير",
         "ajami"=> "Lâ ilâha illa l-lâhu wahdahu lâ sharîka lah(u) lahu-l-mulku walahu-l-hamd(u), wa huwa calâ kulli shay'in qadîr.",
         "hausa"=> "Babu abin bauta sai Allah, Shi kaɗai, ba Shi da abokin tarayya, Mulki na Shi ne, kuma godiya ta tabbata a gare Shi, kuma Shi Mai Iko ne a kan kowane abu.",
-        "count"=> 1,00
+        "count"=> 100
     ],
     [
         "arabic"=> "سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه",

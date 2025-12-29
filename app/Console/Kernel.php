@@ -8,21 +8,22 @@ use App\Models\VoucherQueue;
 
 class Kernel extends ConsoleKernel
 {
+    
     protected function schedule(Schedule $schedule)
-    {
-        // expire vouchers every minute
-        // $schedule->command('vouchers:expire')->everyMinute();
+        {
+            $schedule->command('vouchers:expire')->everyMinute();
 
-        // handle WAN decrement + waitlist notifications
-        $schedule->command('process:expired-voucher-queue')->everyMinute();
+            $schedule->command('voucher:expiry-reminder')->everyMinute();
 
-        // daily stats (optional)
-        $schedule->call(function () {
-            \App\Models\WaitlistDailyStat::create([
-                'count' => \App\Models\Waitlist::whereDate('created_at', today())->count()
-            ]);
-        })->daily();
-    }
+            $schedule->command('waitlist:snapshot')->dailyAt('00:05');
+
+            $schedule->call(function () {
+                \App\Models\WaitlistDailyStat::create([
+                    'count' => \App\Models\Waitlist::whereDate('created_at', today())->count()
+                ]);
+            })->daily();
+        }
+
 
     protected function commands()
     {

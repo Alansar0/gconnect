@@ -42,7 +42,7 @@
 
                     <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
                         <span class="text-t2 font-medium">Location</span>
-                        <span>{{ Auth::user()->location }}</span>
+                        <span>{{ Auth::user()->reseller?->name ?? 'N/A' }}</span>
                     </div>
 
                     <!-- Theme Switch -->

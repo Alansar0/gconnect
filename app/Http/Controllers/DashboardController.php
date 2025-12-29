@@ -5,6 +5,8 @@ use App\Models\Wallet;
 use App\Models\User;
 use App\Models\Transaction;
 use App\Models\VoucherProfile;
+use App\Models\Reseller;
+use App\Models\Router;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +15,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    // public function dashboard()
-    // {
-        
-    //     $wallet = Wallet::where('user_id', auth()->id())->first();
-    //     return view('dashboard', compact('wallet'));
-    // }
+  
     public function dashboard()
 {
     $wallet = auth()->user()->wallet;
@@ -27,6 +24,7 @@ class DashboardController extends Controller
         ->latest()
         ->take(5)
         ->get();
+
 
     return view('dashboard', compact('wallet', 'transactions'));
 }

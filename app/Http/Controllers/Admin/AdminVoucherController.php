@@ -8,6 +8,8 @@ use App\Models\Reseller;
 use App\Models\RouterSetting;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class AdminVoucherController extends Controller
 {
@@ -43,7 +45,12 @@ class AdminVoucherController extends Controller
         $profile = VoucherProfile::findOrFail($id);
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('voucher_profiles', 'name')->ignore($profile->id),
+            ],
             'mikrotik_profile' => 'required|string|max:255',
             'time_minutes' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
@@ -123,6 +130,31 @@ class AdminVoucherController extends Controller
         return redirect()->route('VoucherSettings.addWanPort', $reseller->id)
             ->with('success', 'WAN counters reset.');
     }
+
+//     public function online()
+// {
+    
+//     $resellers = Reseller::where('router_online', true)
+//         ->orderBy('name')
+//         ->get();
+
+//     return view('admin.routers_status', compact('resellers'));
+// }
+public function online()
+{
+    $resellers = Reseller::whereHas('router', function ($q) {
+        $q->where('is_online', true);
+    })
+    ->with(['routers' => function ($q) {
+        $q->where('is_online', true);
+    }])
+    ->orderBy('name')
+    ->get();
+
+    return view('admin.VoucherSettings.routers_status', compact('resellers'));
+}
+
+
 
 
 }

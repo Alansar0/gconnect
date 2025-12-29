@@ -11,6 +11,10 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+        protected $middleware = [
+        \App\Http\Middleware\CheckEmergencyMode::class,
+    ];
+
     protected $routeMiddleware = [
          'applock'  =>    \App\Http\Middleware\AppLockedMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,

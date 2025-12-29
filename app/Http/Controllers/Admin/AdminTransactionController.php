@@ -5,28 +5,33 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\User;
 
 class AdminTransactionController extends Controller
 {
+    
     public function all(Request $request)
-{
-    $search = $request->input('search');
+    {
+        $search = $request->input('search');
 
-    $completed = Transaction::with('user')
-        ->whereIn('status', ['success', 'failed'])
-        ->when($search, function ($query, $search) {
-            // Search user phone number
-            $query->whereHas('user', function ($q) use ($search) {
-                $q->where('phone', 'like', "%{$search}%");
+        $completed = Transaction::with('user')
+            ->whereIn('status', ['success', 'failed'])
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->whereHas('user', function ($u) use ($search) {
+                        $u->where('phone_number', 'like', "%{$search}%");
+                    })
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('reference', 'like', "%{$search}%");
+                });
             })
-            // Or search the phone number within description
-            ->orWhere('description', 'like', "%{$search}%");
-        })
-        ->latest()
-        ->paginate(15);
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
 
-    return view('admin.transactions.all', compact('completed', 'search'));
-}
+        return view('admin.transactions.all', compact('completed', 'search'));
+    }
+
 
 
 
