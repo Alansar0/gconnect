@@ -51,6 +51,8 @@ public function store(Request $request)
     // Login
     Auth::login($user, $request->boolean('remember'));
     $request->session()->regenerate();
+    // 🔑 STEP 1: unlock app on login
+    $request->session()->put('app_unlocked', true);
 
     return redirect()->intended('/dashboard');
 }
@@ -70,7 +72,7 @@ public function store(Request $request)
 
     
     // IMPORTANT
-    $request->session()->forget(['app_unlocked', 'pin_verified']);
+    $request->session()->forget(['pin_verified']);
 
     return redirect('/login');
 }

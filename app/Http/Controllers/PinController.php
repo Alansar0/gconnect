@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laragear\WebAuthn\WebAuthn;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Models\Transaction;
@@ -79,7 +80,11 @@ class PinController extends Controller
         }
 
         // authorize and redirect to intended
-        $request->session()->put('app_unlocked', true);
+       session([
+        'app_unlocked' => true,
+        'last_activity' => now()->timestamp,
+    ]);
+
 
         return redirect()->intended('/dashboard');
     }
@@ -110,18 +115,25 @@ class PinController extends Controller
 
         return response()->json(['verified' => true], 200);
     }
-
-
-    // Placeholder for WebAuthn registration (biometric). Implement using a proper package.
-    public function webauthnRegister(Request $request)
+        public function showBiometricRegister()
     {
-        // TODO: integrate webauthn server library to register credential and save to DB.
-        return response()->json(['ok' => true, 'message' => 'WebAuthn register placeholder.']);
+        return view('profile.biometric-register');
     }
 
-    public function webauthnAuthenticate(Request $request)
+
+        public function toggleBiometric(Request $request)
     {
-        // TODO: integrate webauthn server library to verify assertion.
-        return response()->json(['ok' => true, 'message' => 'WebAuthn auth placeholder.']);
+        $user = auth()->user();
+
+        if (! $user->has_biometric) {
+            return redirect()->route('biometric.register.view');
+        }
+
+        $user->update([
+            'has_biometric' => false,
+        ]);
+
+        return back()->with('success', 'Biometric disabled');
     }
+
 }

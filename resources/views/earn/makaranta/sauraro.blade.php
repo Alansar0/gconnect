@@ -15,6 +15,7 @@
             </div>
 
             <!-- Circular Artwork with Progress -->
+            
             <div
                 class="relative w-64 h-64 rounded-full bg-gradient-to-br from-bg2 to-bg3 flex items-center justify-center shadow-[0_0_40px_var(--accent-glow)]">
                 <img src="{{ Vite::asset('resources/images/kurakurai100.png') }}"
@@ -40,9 +41,9 @@
 
             <!-- Track Info -->
             <div class="text-center mt-6">
-                <p class="text-lg font-medium text-text">kura kuari 100 Acikin Sallarmu</p>
-                <p class="text-text-soft text-sm mt-1">Zakusamu Grabasa Voucher kyauta</p>
-                <p class="text-text-soft text-sm mt-1">Idan ka Saurari karatu</p>
+                <p class="text-lg font-medium text-text">Saurari Karatun {{ $displayName }}</p>
+                <p class="text-text-soft text-sm mt-1">Domin Samun Garabasa Voucher kyauta</p>
+                <p class="text-text-soft text-sm mt-1">Dan Amafanar Duniya dakuma Lahirarka</p>
             </div>
 
             <!-- Progress Bar -->

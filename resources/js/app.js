@@ -1,21 +1,22 @@
 import './bootstrap';
 import Echo from "laravel-echo";
-import Pusher from "pusher-js";
 
-window.Pusher = Pusher;
+if (import.meta.env.VITE_PUSHER_APP_KEY) {
+    import("pusher-js").then(({ default: Pusher }) => {
+        window.Pusher = Pusher;
 
-window.Echo = new Echo({
-  broadcaster: "pusher",
-  key: import.meta.env.VITE_PUSHER_APP_KEY,
-  cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
-  forceTLS: true,
-});
+        window.Echo = new Echo({
+            broadcaster: "pusher",
+            key: import.meta.env.VITE_PUSHER_APP_KEY,
+            cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? "mt1",
+            forceTLS: true,
+        });
 
-window.Echo.private(`App.Models.User.${userId}`)
-  .notification((notification) => {
-    console.log("🔔 New Notification:", notification);
-});
-
-
-
-
+        if (window.userId) {
+            window.Echo.private(`App.Models.User.${window.userId}`)
+                .notification((notification) => {
+                    console.log("🔔 New Notification:", notification);
+                });
+        }
+    });
+}

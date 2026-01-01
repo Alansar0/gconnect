@@ -68,7 +68,7 @@
 
             <div class="flex justify-center mt-6">
                 <div class="w-12 h-12 rounded-full border border-accent flex items-center justify-center hover:bg-bg2 transition"
-                    id="webauthn-btn">
+                    id="biometric-auth">
                     <i class="material-icons text-accent">fingerprint</i>
                 </div>
             </div>
@@ -274,6 +274,20 @@
     </script>
     
     <script>
+        document.getElementById('biometric-auth')?.addEventListener('click', async () => {
+            const options = await fetch('/biometric/auth/options', {method:'POST'}).then(r=>r.json());
+            const assertion = await navigator.credentials.get({ publicKey: options });
+
+            const res = await fetch('/biometric/auth/verify', {
+                method:'POST',
+                headers:{'Content-Type':'application/json','X-CSRF-TOKEN':'{{ csrf_token() }}'},
+                body: JSON.stringify(assertion)
+            });
+
+            const data = await res.json();
+            if (data.success) window.location.href = '/dashboard';
+        });
+
         function openSuccessPopup(username, pin, receiptUrl) {
             document.getElementById('voucher-username').textContent = username;
             document.getElementById('voucher-pin').textContent = pin;

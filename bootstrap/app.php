@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AppLocked;
+use App\Http\Middleware\TrackActivity;
 use App\Http\Middleware\EmergencyModeMiddleware;
 
 
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AdminMiddleware::class,
             'applock'  =>  AppLocked::class,
             'emergency' => EmergencyModeMiddleware::class,
+            'trackactivity' => TrackActivity::class,
 
         ]);
 

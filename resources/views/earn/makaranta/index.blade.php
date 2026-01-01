@@ -34,10 +34,10 @@
             {{-- Main Section --}}
             <main class="flex-grow px-6 py-8 grid grid-cols-2 gap-5 overflow-y-auto mt-[390px]">
                 @foreach ([ 
-                    ['title' => 'kurakurai100', 'image' => 'kurakurai100.png', 'folder' => 'kurakurai100'],
+                    ['title' => 'kure100 Acikin Sallah', 'image' => 'kurakurai100.png', 'folder' => 'kurakurai100'],
                     ['title' => 'Sharrin Dajjal', 'image' => 'sharrindajjal.png', 'folder' => 'sharrindajjal'],
                     ['title' => 'Mu\'amalar Auratayya', 'image' => 'auretayya.png', 'folder' => 'auretayya'],
-                    ['title' => 'KIMIYYA DA ALQUR\'ANI', 'image' => 'kimiyya.png', 'folder' => 'kimiyya'],
+                    ['title' => 'KIMIYYAR ALQUR\'ANI', 'image' => 'kimiyya.png', 'folder' => 'kimiyya'],
                     ['title' => 'FATAWOWI 30', 'image' => 'fatawowi30.png', 'folder' => 'fatawowi30'],
                     ['title' => 'Hukunci Jinin Mata', 'image' => 'hukunci.png', 'folder' => 'hukunci']
                 ] as $item)

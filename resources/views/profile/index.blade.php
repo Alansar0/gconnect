@@ -2,7 +2,7 @@
 
     <div class="bg-bg1 text-t1 font-sans flex flex-col w-full h-[100vh]">
 
-        <div class="bg-bg2 rounded-xl shadow-accent w-[95%] h-[82vh] p-4 sm:p-6 md:p-8 mt-10 mx-auto">
+        <div class="bg-bg2 rounded-xl shadow-accent w-[95%] h-[90vh] p-4 sm:p-6 md:p-8 mt-10 mx-auto">
 
             <!-- Header -->
             <h2 class="text-lg font-semibold mb-6 text-left text-accent">User Details</h2>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
-                        <span class="text-t2 font-medium">Location</span>
+                        <span class="text-t2 font-medium">Gconnect Area</span>
                         <span>{{ Auth::user()->reseller?->name ?? 'N/A' }}</span>
                     </div>
 
@@ -53,6 +53,18 @@
                             Toggle Theme
                         </button>
                     </div>
+
+                    <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
+                        <span class="text-t2 font-medium">Biometric Unlock</span>
+
+                        <form method="POST" action="{{ route('biometric.toggle') }}">
+                            @csrf
+                            <button class="px-4 py-2 rounded border border-accent text-accent">
+                                {{ Auth::user()->has_biometric ? 'Disable' : 'Enable' }}
+                            </button>
+                        </form>
+                    </div>
+
 
                     <div class="flex justify-between py-4 px-2 border-b border-accent text-sm">
                         <span class="text-t2 font-medium">Date Joined</span>

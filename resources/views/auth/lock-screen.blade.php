@@ -119,5 +119,19 @@
 
       updateDots();
     });
+
+        document.getElementById('biometric-auth')?.addEventListener('click', async () => {
+        const options = await fetch('/biometric/auth/options', {method:'POST'}).then(r=>r.json());
+        const assertion = await navigator.credentials.get({ publicKey: options });
+
+        const res = await fetch('/biometric/auth/verify', {
+            method:'POST',
+            headers:{'Content-Type':'application/json','X-CSRF-TOKEN':'{{ csrf_token() }}'},
+            body: JSON.stringify(assertion)
+        });
+
+        const data = await res.json();
+        if (data.success) window.location.href = '/dashboard';
+    });
   </script>
 </x-layouts.app>

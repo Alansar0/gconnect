@@ -25,53 +25,48 @@ use App\Http\Controllers\Admin\MakarantaController;
 use App\Http\Controllers\Admin\AdminVoucherController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
+use Laragear\WebAuthn\WebAuthn;
+use App\Http\Controllers\WebAuthn\WebAuthnRegisterController;
+use App\Http\Controllers\WebAuthn\WebAuthnLoginController;
 use Illuminate\Support\Facades\Log;
 
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
 Route::view('/test', 'test');
 Route::get('/healthz', function(){ return response('ok', 200); });
 Route::post('/webhook/paymentpoint', [PaymentController::class, 'webhook'])->name('payment.webhook');
-Route::post('/payment/initialize', [PaymentController::class, 'initialize'])->name('payment.initialize'); // if you call PaymentPoint to initialize
+Route::post('/payment/initialize', [PaymentController::class, 'initialize'])->name('payment.initialize'); // if you call PaymentPoint to initializ
 
-Route::match(['get', 'post'], '/simulate-webhook', function () {
-    $fakeData = [
-        "notification_status" => "payment_successful",
-        "transaction_id" => "TEST123456",
-        "amount_paid" => 1000,
-        "settlement_amount" => 995,
-        "settlement_fee" => 5,
-        "transaction_status" => "success",
-        "sender" => [
-            "name" => "John Doe",
-            "account_number" => "****1234",
-            "bank" => "PalmPay"
-        ],
-        "receiver" => [
-            "name" => "FAHAX WALLET",
-            "account_number" => "6679854996",
-            "bank" => "PalmPay"
-        ],
-        "customer" => [
-            "name" => "Ahmad Saadu",
-            "email" => "test@example.com",
-            "phone" => "07012345678",
-            "customer_id" => "U123456"
-        ],
-        "description" => "Simulated test payment.",
-        "timestamp" => now()->toISOString()
-    ];
 
-    // Send it to your webhook route
-    // $response = Http::post(url('/webhook/paymentpoint'), $fakeData);
-    $response = Http::post('https://http://127.0.0.1:8000/webhook/paymentpoint', $fakeData);
+Route::middleware(['auth'])->group(function () {
 
-    return $response->json();
+    // WebAuthn Registration (biometric)
+    Route::post('/biometric/register/options', [WebAuthnRegisterController::class, 'options'])
+        ->name('biometric.register.options');
+
+    Route::post('/biometric/register', [WebAuthnRegisterController::class, 'register'])
+        ->name('biometric.register');
+
+    // WebAuthn Login (optional)
+    Route::post('/biometric/login/options', [WebAuthnLoginController::class, 'options'])
+        ->name('biometric.login.options');
+
+    Route::post('/biometric/login', [WebAuthnLoginController::class, 'login'])
+        ->name('biometric.login');
+
+    // Toggle biometric feature (custom, just flips the DB flag)
+   Route::post('/profile/biometric/toggle', [PinController::class, 'toggleBiometric'])
+        ->name('biometric.toggle');
+
+        Route::get('/biometric/register', [PinController::class, 'showBiometricRegister'])
+        ->name('biometric.register.view');
+
 });
 
-Route::middleware('auth','applock','emergency')->group(function () {
+Route::middleware('auth','emergency','applock','trackactivity')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
 
      // PIN creation / confirmation (after registration)
@@ -82,9 +77,14 @@ Route::middleware('auth','applock','emergency')->group(function () {
     Route::get('/authorize', [PinController::class, 'showLockScreen'])->name('pin.authorize');
     Route::post('/authorize', [PinController::class, 'showLockScreenCheck'])->name('pin.authorize.check');
 
-          // WebAuthn / Biometric placeholders (optional)
-    Route::post('/webauthn/register', [PinController::class, 'webauthnRegister'])->name('webauthn.register');
-    Route::post('/webauthn/authenticate', [PinController::class, 'webauthnAuthenticate'])->name('webauthn.authenticate');
+    // WebAuthn / Biometric placeholders (optional)
+       // Toggle biometric
+    // Route::post('/profile/biometric/toggle', [PinController::class, 'toggleBiometric'])
+    //     ->name('biometric.toggle');
+
+    // // Register biometric
+    // Route::get('/biometric/register', [PinController::class, 'showBiometricRegister'])
+    //     ->name('biometric.register.view');
 
     Route::view('/profile/index', 'profile.index')->name('profile');
     //getVocher route
@@ -159,7 +159,7 @@ Route::middleware('guest')->group(function (){
     Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin','applock','trackactivity'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     // Admin User Management - View All Users
