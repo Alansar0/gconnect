@@ -319,6 +319,7 @@ class GetVoucherController extends Controller
             'code' => $voucher->code,
             'password' => $voucher->password,
             'expires_at' => $voucher->expires_at->toDateTimeString(),
+            'receipt_url' => route('getVoucher.receipt', $voucher->id),
         ]);
     }
 

@@ -161,7 +161,7 @@
             animation: shakeAnim 0.45s ease;
         }
     </style>
-    <script>
+   <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const MAX = 4;
                 let pin = '';
@@ -274,20 +274,6 @@
     </script>
     
     <script>
-        document.getElementById('biometric-auth')?.addEventListener('click', async () => {
-            const options = await fetch('/biometric/auth/options', {method:'POST'}).then(r=>r.json());
-            const assertion = await navigator.credentials.get({ publicKey: options });
-
-            const res = await fetch('/biometric/auth/verify', {
-                method:'POST',
-                headers:{'Content-Type':'application/json','X-CSRF-TOKEN':'{{ csrf_token() }}'},
-                body: JSON.stringify(assertion)
-            });
-
-            const data = await res.json();
-            if (data.success) window.location.href = '/dashboard';
-        });
-
         function openSuccessPopup(username, pin, receiptUrl) {
             document.getElementById('voucher-username').textContent = username;
             document.getElementById('voucher-pin').textContent = pin;
@@ -313,6 +299,148 @@
                 f.value = pin[i] ? '*' : '';
             });
         }
+
+
+           document.addEventListener('DOMContentLoaded', () => {
+
+        /* ===============================
+            HELPERS
+        =============================== */
+
+        function base64urlToBuffer(base64url) {
+            const padding = '='.repeat((4 - base64url.length % 4) % 4);
+            const base64 = (base64url + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+
+            const raw = atob(base64);
+            const buffer = new ArrayBuffer(raw.length);
+            const view = new Uint8Array(buffer);
+
+            for (let i = 0; i < raw.length; i++) {
+            view[i] = raw.charCodeAt(i);
+            }
+
+            return buffer;
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('error-message');
+            if (!errorEl) return;
+            errorEl.textContent = message;
+            errorEl.classList.remove('hidden');
+        }
+
+        function hideError() {
+            const errorEl = document.getElementById('error-message');
+            if (!errorEl) return;
+            errorEl.classList.add('hidden');
+        }
+
+        /* ===============================
+            BIOMETRIC SUPPORT CHECK
+        =============================== */
+
+      const biometricBtn = document.getElementById('biometric-auth');
+
+        if (
+            biometricBtn &&
+            window.isSecureContext &&
+            'PublicKeyCredential' in window
+        ) {
+            biometricBtn.classList.remove('hidden');
+        } else {
+            return; // WebAuthn not supported
+        }
+
+        /* ===============================
+            BIOMETRIC LOGIN FLOW
+        =============================== */
+
+        biometricBtn.addEventListener('click', async () => {
+            try {
+            hideError();
+
+            /* -------------------------------
+                STEP 1: FETCH ASSERTION OPTIONS
+            -------------------------------- */
+            const optionsRes = await fetch(
+                "{{ route('biometric.login.options') }}",
+                {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+                }
+            );
+
+            if (!optionsRes.ok) {
+                throw new Error('Unable to start biometric authentication');
+            }
+
+            const publicKey = await optionsRes.json();
+
+            /* -------------------------------
+                STEP 2: REQUIRED BINARY FIXES
+                (THIS FIXES YOUR ERROR)
+            -------------------------------- */
+            publicKey.challenge = base64urlToBuffer(publicKey.challenge);
+
+            if (publicKey.allowCredentials) {
+                publicKey.allowCredentials = publicKey.allowCredentials.map(cred => ({
+                ...cred,
+                id: base64urlToBuffer(cred.id)
+                }));
+            }
+
+            // Hardening
+            publicKey.timeout = 60000; // 60s
+            publicKey.userVerification = 'preferred';
+
+            /* -------------------------------
+                STEP 3: CALL AUTHENTICATOR
+            -------------------------------- */
+            const assertion = await navigator.credentials.get({
+                publicKey
+            });
+
+            if (!assertion) {
+                throw new Error('Biometric authentication cancelled');
+            }
+
+            /* -------------------------------
+                STEP 4: VERIFY ASSERTION
+            -------------------------------- */
+            const verifyRes = await fetch(
+                "{{ route('biometric.login') }}",
+                {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(assertion)
+                }
+            );
+
+            if (!verifyRes.ok) {
+                throw new Error('Fingerprint verification failed');
+            }
+
+            /* -------------------------------
+                SUCCESS → UNLOCK APP
+            -------------------------------- */
+            window.location.href = "{{ route('dashboard') }}";
+
+            } catch (err) {
+            console.error('WebAuthn error:', err);
+            showError(err.message || 'Biometric failed. Use PIN.');
+            }
+        });
+
+    });
     </script>
 
 
