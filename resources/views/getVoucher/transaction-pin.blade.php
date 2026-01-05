@@ -111,7 +111,7 @@
                     <span class="text-t2">Username</span>
                     <span class="flex items-center">
                         <span id="voucher-username" class="text-accent font-semibold mr-2"></span>
-                        <button onclick="copyText('voucher-username')">
+                            <button onclick="copyText('voucher-username', 'Username')">
                             <i class="material-icons text-sm text-t2">content_copy</i>
                         </button>
                     </span>
@@ -120,7 +120,7 @@
                     <span class="text-t2">PIN</span>
                     <span class="flex items-center">
                         <span id="voucher-pin" class="text-t1 font-semibold mr-2"></span>
-                        <button onclick="copyText('voucher-pin')">
+                            <button onclick="copyText('voucher-pin', 'PIN')">
                             <i class="material-icons text-sm text-t2">content_copy</i>
                         </button>
                     </span>
@@ -131,7 +131,16 @@
             </a>
         </div>
     </div>
-
+      <!-- Toast -->
+        <div id="copy-toast"
+             class="fixed bottom-50 left-1/2 -translate-x-1/2
+                    bg-bg2 border border-accent/40 text-t1
+                    px-4 py-2 rounded-xl shadow-lg
+                    text-sm font-medium
+                    opacity-0 pointer-events-none
+                    transition-all duration-300
+                    z-50">
+        </div>
     <!-- Shake Animation -->
       <style>
         /* Add the Tailwind shake utility classes */
@@ -441,8 +450,59 @@
         });
 
     });
-    </script>
+            // <!-- Copy JS -->
 
+      function copyText(id, label = 'Text') {
+            const el = document.getElementById(id);
+            if (!el) {
+                showCopyToast('Nothing to copy');
+                return;
+            }
+
+            const text = el.textContent.trim();
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showCopyToast(`${label} copied: ${text}`))
+                    .catch(() => fallbackCopy(text, label));
+            } else {
+                fallbackCopy(text, label);
+            }
+        }
+
+        function fallbackCopy(text, label) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                document.execCommand('copy');
+                showCopyToast(`${label} copied: ${text}`);
+            } catch {
+                showCopyToast('Failed to copy');
+            }
+
+            document.body.removeChild(textarea);
+        }
+
+        function showCopyToast(message) {
+            const toast = document.getElementById('copy-toast');
+            toast.textContent = message;
+
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            clearTimeout(window.__copyToastTimer);
+            window.__copyToastTimer = setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 2200);
+        }
+    </script>
+    
 
 </x-layouts.app>
 

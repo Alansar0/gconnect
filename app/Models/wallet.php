@@ -23,6 +23,10 @@ class Wallet extends Model
         return $this->belongsTo(User::class);
     }
 
+     public function virtualAccounts()
+    {
+        return $this->hasMany(VirtualAccount::class);
+    }
 
 
     public function credit($amount, $description = 'Manual Credit')

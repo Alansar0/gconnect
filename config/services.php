@@ -13,6 +13,14 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'paymentpoint' => [
+        'base_url' => env('PAYMENTPOINT_BASE_URL'),
+        'api_key' => env('PAYMENTPOINT_API_KEY'),
+        'secret' => env('PAYMENTPOINT_SECRET'),
+        'webhook_secret' => env('PAYMENTPOINT_WEBHOOK_SECRET'),
+        'business_id' => env('PAYMENTPOINT_BUSINESS_ID'),
+    ],
+
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

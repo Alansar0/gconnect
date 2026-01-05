@@ -12,3 +12,6 @@ git add .
 git commit -m "Merge updates"
 git push origin main
 --}}
+
+php artisan process:voucher-expiry
+

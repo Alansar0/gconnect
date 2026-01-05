@@ -62,7 +62,8 @@ class ExpireVouchers extends Command
          =============================== */
         Waitlist::where('status', 'notified')
             ->where('expected_available_at', '<=', $now)
-            ->update(['status' => 'expired']);
+            ->update(['status' => 'skipped']);
+
 
         /* ===============================
          | 3. Promote next waiting user

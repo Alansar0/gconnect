@@ -5,6 +5,7 @@ use App\Models\Wallet;
 use App\Models\User;
 use App\Models\Transaction;
 use App\Models\VoucherProfile;
+use App\Models\VirtualAccount;
 use App\Models\Reseller;
 use App\Models\Router;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,8 @@ class DashboardController extends Controller
     public function dashboard()
 {
     $wallet = auth()->user()->wallet;
+    $virtualAccount = $wallet->virtualAccounts()->first();
+
 
     $transactions = \App\Models\Transaction::where('user_id', auth()->id())
         ->latest()
@@ -26,13 +29,8 @@ class DashboardController extends Controller
         ->get();
 
 
-    return view('dashboard', compact('wallet', 'transactions'));
+    return view('dashboard', compact('wallet', 'transactions','virtualAccount'));
 }
 
 
-        public function acc()
-    {
-         $wallet = Wallet::where('user_id', auth()->id())->first();
-        return view('wallet.accno', compact('wallet'));
-    }
 }

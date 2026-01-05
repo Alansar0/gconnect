@@ -168,45 +168,80 @@ public function updatePin(Request $request)
         $wallet = null;
         $transactions = collect();
 
-        if ($q = $request->query('query')) {
-            $wallet = Wallet::where('account_number', $q)
-                ->orWhereHas('user', function ($query) use ($q) {
-                    $query->where('email', 'LIKE', "%$q%")
-                        ->orWhere('phone_number', 'LIKE', "%$q%");
-                })->first();
+        // if ($q = $request->query('query')) {
+        //     $wallet = Wallet::where('account_number', $q)
+        //         ->orWhereHas('user', function ($query) use ($q) {
+        //             $query->where('email', 'LIKE', "%$q%")
+        //                 ->orWhere('phone_number', 'LIKE', "%$q%");
+        //         })->first();
 
-            if ($wallet) {
-                $transactions = Transaction::where('user_id', $wallet->user_id)
-                    ->latest()
-                    ->take(10)
-                    ->get();
-            }
+        //     if ($wallet) {
+        //         $transactions = Transaction::where('user_id', $wallet->user_id)
+        //             ->latest()
+        //             ->take(10)
+        //             ->get();
+        //     }
+        // }
+         if ($q = $request->query('query')) {
+        $wallet = Wallet::whereHas('user', function ($query) use ($q) {
+            $query->where('email', 'LIKE', "%$q%")
+                  ->orWhere('phone_number', 'LIKE', "%$q%");
+        })->first();
+
+        if ($wallet) {
+            $transactions = Transaction::where('user_id', $wallet->user_id)
+                ->latest()
+                ->take(20)
+                ->get();
         }
-
+    }
         return view('admin.user.walletManage', compact('wallet', 'transactions'));
     }
 
 
 
+    // public function updateWallet(Request $request, Wallet $wallet)
+    // {
+    //     // $wallet = Wallet::findOrFail($wallet);
+    //     $request->validate([
+    //         'type' => 'required|in:credit,debit',
+    //         'amount' => 'required|numeric|min:0.01',
+    //         'description' => 'nullable|string|max:255',
+    //     ]);
+
+    //     $desc = $request->description ?? 'Manual adjustment';
+
+    //     if ($request->type === 'credit') {
+    //         $wallet->credit($request->amount, $desc);
+    //     } else {
+    //         $wallet->debit($request->amount, $desc);
+    //     }
+
+    //     return back()->with('success', 'Wallet updated successfully.');
+    // }
     public function updateWallet(Request $request, Wallet $wallet)
-    {
-        // $wallet = Wallet::findOrFail($wallet);
-        $request->validate([
-            'type' => 'required|in:credit,debit',
-            'amount' => 'required|numeric|min:0.01',
-            'description' => 'nullable|string|max:255',
-        ]);
+{
+    $request->validate([
+        'type'        => 'required|in:credit,debit',
+        'amount'      => 'required|numeric|min:0.01',
+        'description' => 'nullable|string|max:255',
+    ]);
 
-        $desc = $request->description ?? 'Manual adjustment';
+    $reference = strtoupper(uniqid('ADMIN_'));
+    $desc = $request->description ?? 'Admin wallet adjustment';
 
+    try {
         if ($request->type === 'credit') {
-            $wallet->credit($request->amount, $desc);
+            $wallet->credit($request->amount, $reference, $desc);
         } else {
-            $wallet->debit($request->amount, $desc);
+            $wallet->debit($request->amount, $reference, $desc);
         }
-
-        return back()->with('success', 'Wallet updated successfully.');
+    } catch (\Exception $e) {
+        return back()->with('error', $e->getMessage());
     }
+
+    return back()->with('success', 'Wallet updated successfully.');
+}
 
 
     /**

@@ -13,6 +13,7 @@ use App\Http\Controllers\EarnController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\PaymentWebhookController;
 use App\Http\Controllers\PinController;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -88,7 +89,6 @@ Route::middleware('auth','emergency','applock','trackactivity')->group(function 
 
     Route::view('/profile/index', 'profile.index')->name('profile');
     //getVocher route
-    Route::get('/wallet/accno', [DashboardController::class, 'acc'])->name('user.accno');
     Route::get('/getVoucher/buy', [GetVoucherController::class, 'create'])->name('getVoucher.buy');
     Route::get('/getVoucher/receipt/{id}', [GetVoucherController::class, 'receipt'])->name('getVoucher.receipt');
 
@@ -134,9 +134,10 @@ Route::middleware('auth','emergency','applock','trackactivity')->group(function 
 
 
     //PaymentPoint Routes
-    // Route::post('/api/payment/webhook', [PaymentWebhookController::class, 'handleWebhook']);
-    // Route::post('/webhook/paymentpoint', [PaymentController::class, 'webhook'])->name('payment.webhook');
-    // Route::post('/pay/initiate', [PaymentController::class, 'initialize'])->name('payment.initialize');
+    Route::post('/wallet/create-virtual-account', [WalletController::class, 'createVirtualAccount'])->name('wallet.createVirtualAccount');
+    Route::post('/paymentpoint/webhook', [PaymentController::class, 'handle']);
+    Route::get('/wallet/accno', [WalletController::class, 'acc'])->name('user.accno');
+
 
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 });
@@ -246,36 +247,3 @@ Route::middleware(['auth', 'admin','applock','trackactivity'])->group(function (
 
      
 });
-
-
-// Route::post('/webhook/paymentpoint', function (Request $request) {
-//     Log::info('Webhook received:', $request->all());
-
-//     return response()->json(['status' => 'Webhook received successfully']);
-// });
-
-
-
-// Route::post('/webhook/paymentpoint', function (Request $request) {
-//     $secret = env('PAYMENTPOINT_SECRET'); // Your secret key from dashboard
-
-//     $signature = $request->header('Paymentpoint-Signature');
-//     $payload = $request->getContent();
-
-//     // Compute signature
-//     $calculated = hash_hmac('sha256', $payload, $secret);
-
-//     if (!hash_equals($calculated, $signature)) {
-//         Log::warning('Invalid PaymentPoint signature', ['payload' => $payload]);
-//         return response('Invalid signature', 400);
-//     }
-
-//     // Decode JSON
-//     $data = json_decode($payload, true);
-//     Log::info('Webhook received', $data);
-
-//     // Example: update transaction record in DB here
-//     // Transaction::where('transaction_id', $data['transaction_id'])->update([...]);
-
-//     return response('Webhook received successfully', 200);
-// });

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->foreignid('user_id')->constrained()->onDelete('cascade');
-            $table->string('account_number')->unique();
             $table->decimal('balance', 15, 2)->default(0);
             $table->decimal('prev_balance', 16, 2)->nullable();
             $table->decimal('new_balance', 16, 2)->nullable();

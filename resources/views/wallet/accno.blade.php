@@ -10,36 +10,90 @@
 
         <!-- Header -->
         <div class="flex items-center justify-center mb-6">
-            <h1 class="text-lg font-semibold text-t1 dark:text-t1">Bank Transfer</h1>
+            <h1 class="text-lg font-semibold">Wallet Funding</h1>
         </div>
 
-        {{-- @if ($bank->isEmpty())
-            <div class="text-center py-10">
-                <p class="text-t2 dark:text-t2 text-sm">No bank account added yet.</p>
-            </div>
-        @endif --}}
+        {{-- IF NO VIRTUAL ACCOUNT --}}
+        @if ($virtualAccounts->isEmpty())
+            <div class="bg-bg2 border border-accent-border rounded-xl p-6 text-center">
+                <p class="text-sm text-t2 mb-4">
+                    You don’t have a bank account for wallet funding yet.
+                </p>
 
-        <!-- Bank Cards -->
-        <div class="space-y-4">
-            {{-- @foreach ($banks as $bank) --}}
-            <div class="border border-accent-border rounded-xl p-4 bg-bg2 text-t1 dark:bg-bg2 dark:text-t1">
-                <p class="text-t2 dark:text-t2 mb-2 font-medium">Bank Palmpay</p>
-                
-                <div class="flex items-center mb-2">
-                    <div class="flex items-center bg-accent-soft/10 text-accent px-3 py-1 rounded-lg text-sm font-semibold">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 16h8M8 12h8m-6 8h6a2 2 0 002-2V6a2 2 0 00-2-2h-6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        {{ $wallet->account_number }}
+                <form method="POST" action="{{ route('wallet.createVirtualAccount') }}">
+                    @csrf
+                    <button
+                        type="submit"
+                        class="px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:opacity-90 transition">
+                        Generate Bank Account
+                    </button>
+                </form>
+            </div>
+        @else
+            <!-- Bank Cards -->
+            <div class="space-y-4">
+                @foreach ($virtualAccounts as $bank)
+                    <div class="border border-accent-border rounded-xl p-4 bg-bg2">
+                        <p class="text-t2 mb-2 font-medium">
+                            Bank {{ $bank->bank_name }}
+                        </p>
+
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="flex items-center bg-accent-soft/10 text-accent px-3 py-1 rounded-lg text-sm font-semibold">
+                                <span id="acc-{{ $bank->id }}">{{ $bank->account_number }}</span>
+
+                                <button
+                                    onclick="copyText('acc-{{ $bank->id }}', 'Account Number')"
+                                    class="ml-2">
+                                    <i class="material-icons !text-[17px] text-t3">content_copy</i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="text-t3 text-sm">
+                            {{ $bank->account_name }}
+                        </p>
                     </div>
-                </div>
-
-                <p class="text-t3 dark:text-t3 text-sm">Cool Data - AHMAD SAADU NUHU</p>
+                @endforeach
             </div>
-            {{-- @endforeach --}}
+        @endif
+
+        <!-- Toast -->
+        <div id="copy-toast"
+             class="fixed bottom-20 left-1/2 -translate-x-1/2
+                    bg-bg2 border border-accent/40 text-t1
+                    px-4 py-2 rounded-xl shadow-lg
+                    text-sm font-medium
+                    opacity-0 pointer-events-none
+                    transition-all duration-300
+                    z-50">
         </div>
-        {{-- @endif --}}
     </div>
+
+    <!-- Copy JS -->
+    <script>
+        function copyText(id, label = 'Text') {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            const text = el.textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                showCopyToast(`${label} copied`);
+            });
+        }
+
+        function showCopyToast(message) {
+            const toast = document.getElementById('copy-toast');
+            toast.textContent = message;
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            clearTimeout(window.__toast);
+            window.__toast = setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 2000);
+        }
+    </script>
 </x-layouts.app>
