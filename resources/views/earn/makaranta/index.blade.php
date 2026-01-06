@@ -38,8 +38,10 @@
                     ['title' => 'Sharrin Dajjal', 'image' => 'sharrindajjal.png', 'folder' => 'sharrindajjal'],
                     ['title' => 'Mu\'amalar Auratayya', 'image' => 'auretayya.png', 'folder' => 'auretayya'],
                     ['title' => 'KIMIYYAR ALQUR\'ANI', 'image' => 'kimiyya.png', 'folder' => 'kimiyya'],
+                    ['title' => 'Hukunci Jinin Mata', 'image' => 'hukunci.png', 'folder' => 'hukunci'],
                     ['title' => 'FATAWOWI 30', 'image' => 'fatawowi30.png', 'folder' => 'fatawowi30'],
-                    ['title' => 'Hukunci Jinin Mata', 'image' => 'hukunci.png', 'folder' => 'hukunci']
+                    ['title' => 'Sharrin kallon batsa', 'image' => 'batsa.png', 'folder' => 'batsa'],
+                    ['title' => 'Sauro Abun Al\'jabi', 'image' => 'sauro.png', 'folder' => 'sauro']
                 ] as $item)
                     <div class="flex flex-col items-center">
                         <a href="{{ route('makaranta.darasi', ['course' => $item['folder']]) }}"

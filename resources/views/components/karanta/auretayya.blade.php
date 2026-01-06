@@ -1,15 +1,10 @@
 <?php
 return [
     [
-        "page" => 1,//for tezting purpose
+        "page" => 1,
         "header" => "MU'AMALAR AURATAYYA A MUSULUNCI",
         "content" => "MU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_U'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciAssalafy) [cite: 759]"
     ],
-    // [
-    //     "page" => 1,
-    //     "header" => "MU'AMALAR AURATAYYA A MUSULUNCI",
-    //     "content" => "MU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_U'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciU'AMALAR AURATAYYA A MUSULUNCI [cite: 757, 758] Usman Danliti Mato (Usmannoor_Assalafy) [ciAssalafy) [cite: 759]"
-    // ],
     [
         "page" => 2,
         "header" => "USMANNOOR ONLINE ACADEMY",
