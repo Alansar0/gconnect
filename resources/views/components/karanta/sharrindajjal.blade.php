@@ -704,7 +704,7 @@ return [
     [
         "page" => 71,
         "header" => "HADA-HADAR KASUWANCI TA DUNIYA",
-        [cite_start]"content" => "Bayanai sun nuna cewa kasar Amurka tana bin kanta bashin da ya kai dala triliyan 33. Wannan maƙudan kuɗaɗe ne waɗanda ba za a iya misaltawa ba. Kuma mafi yawancin waɗannan kuɗaɗe ana biyan su ne tare da kuɗin ruwa (interest). Wannan yana nuna mana yadda tsarin tattalin arziƙin duniya yake tafiya a halin yanzu. [cite: 55]",
+        "content" => "Bayanai sun nuna cewa kasar Amurka tana bin kanta bashin da ya kai dala triliyan 33. Wannan maƙudan kuɗaɗe ne waɗanda ba za a iya misaltawa ba. Kuma mafi yawancin waɗannan kuɗaɗe ana biyan su ne tare da kuɗin ruwa (interest). Wannan yana nuna mana yadda tsarin tattalin arziƙin duniya yake tafiya a halin yanzu. [cite: 55]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -714,7 +714,7 @@ return [
     [
         "page" => 72,
         "header" => "TSARIN TATTALIN ARZIKI NA DUNIYA",
-        "content" => "Idan muka duba yadda ake gudanar da harkokin banki a yau, za mu ga cewa kusan komai yana komawa zuwa ga tsarin dijital (digital). Wannan yana bawa manyan masu madafun iko damar sarrafa dukiyar mutane daga nesa. [cite_start]Idan Dajjal ya bayyana, zai yi amfani da wannan damar wajen tursasawa mutane su bi shi domin su samu abincin da za su ci. [cite: 63]",
+        "content" => "Idan muka duba yadda ake gudanar da harkokin banki a yau, za mu ga cewa kusan komai yana komawa zuwa ga tsarin dijital (digital). Wannan yana bawa manyan masu madafun iko damar sarrafa dukiyar mutane daga nesa. Idan Dajjal ya bayyana, zai yi amfani da wannan damar wajen tursasawa mutane su bi shi domin su samu abincin da za su ci. [cite: 63]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -724,7 +724,7 @@ return [
     [
         "page" => 73,
         "header" => "HATTARA GA MUSULMAI",
-        "content" => "Ya zama wajibi ga musulmai su yi hattara da irin waɗannan tsare-tsare na riba. Domin kuwa Annabi (Sallallahu alaihi wasallam) ya yi gargadi mai tsanani akan cin riba. Riba tana shafar imani kuma tana janyo fushin Allah Madaukakin Sarki. [cite_start]Allah ya kiyaye mu daga fadawa tarkon masu son ruguza imaninmu ta hanyar dukiya. [cite: 45, 46]",
+        "content" => "Ya zama wajibi ga musulmai su yi hattara da irin waɗannan tsare-tsare na riba. Domin kuwa Annabi (Sallallahu alaihi wasallam) ya yi gargadi mai tsanani akan cin riba. Riba tana shafar imani kuma tana janyo fushin Allah Madaukakin Sarki. Allah ya kiyaye mu daga fadawa tarkon masu son ruguza imaninmu ta hanyar dukiya. [cite: 45, 46]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -734,7 +734,7 @@ return [
     [
         "page" => 74,
         "header" => "ALAMOMIN TASHIN ALQIYAMA",
-        "content" => "Daga cikin alamomin tashin alƙiyama har da yawaitar fasadi da kuma rashin kula da inda mutum ya samo dukiyarsa. Mutane za su riƙa neman dukiya ta kowace hanyan, ko ta halal ne ko ta haram. [cite_start]Wannan yana share fage ne ga bayyanar Dajjal, domin zai zo da dukiyar duniya a hannunsa don ya yaudari mutane. [cite: 61, 64]",
+        "content" => "Daga cikin alamomin tashin alƙiyama har da yawaitar fasadi da kuma rashin kula da inda mutum ya samo dukiyarsa. Mutane za su riƙa neman dukiya ta kowace hanyan, ko ta halal ne ko ta haram. Wannan yana share fage ne ga bayyanar Dajjal, domin zai zo da dukiyar duniya a hannunsa don ya yaudari mutane. [cite: 61, 64]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -744,7 +744,7 @@ return [
     [
         "page" => 75,
         "header" => "ILLAR RIBA A CIKIN AL'UMMA",
-        "content" => "Riba tana haifar da talauci da kuma rarraba kawunan al'umma. Tana sa masu kuɗi su ci gaba da arziki yayin da matalauta suke ci gaba da talauci. [cite_start]Wannan rashin daidaito na tattalin arziƙi yana sa mutane su zama cikin matsin rayuwa, wanda hakan zai sa su zama masu saurin karɓar kiran Dajjal idan ya zo musu da mafita ta ƙarya. [cite: 55, 56]",
+        "content" => "Riba tana haifar da talauci da kuma rarraba kawunan al'umma. Tana sa masu kuɗi su ci gaba da arziki yayin da matalauta suke ci gaba da talauci. Wannan rashin daidaito na tattalin arziƙi yana sa mutane su zama cikin matsin rayuwa, wanda hakan zai sa su zama masu saurin karɓar kiran Dajjal idan ya zo musu da mafita ta ƙarya. [cite: 55, 56]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -754,7 +754,7 @@ return [
     [
         "page" => 76,
         "header" => "MANUFAR YAHUDAWA",
-        "content" => "Yahudawa suna da hannu dumu-dumu wajen ƙirƙirar tsarin banki na duniya wanda yake ginu akan riba. Manufarsu ita ce su mallaki arziƙin duniya ta yadda kowa zai zama bawa a ƙarƙashinsu. [cite_start]Wannan yana cikin shirye-shiryen da suke yi na jiran jagoransu, wato Almasihu Dajjal. [cite: 54, 61]",
+        "content" => "Yahudawa suna da hannu dumu-dumu wajen ƙirƙirar tsarin banki na duniya wanda yake ginu akan riba. Manufarsu ita ce su mallaki arziƙin duniya ta yadda kowa zai zama bawa a ƙarƙashinsu. Wannan yana cikin shirye-shiryen da suke yi na jiran jagoransu, wato Almasihu Dajjal. [cite: 54, 61]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -764,7 +764,7 @@ return [
     [
         "page" => 77,
         "header" => "TASIRIN KAFASHEN YAƊA LABARAI",
-        "content" => "Manyan kafafen yaɗa labarai na duniya suna ƙarƙashin ikon waɗanda suke son tabbatar da sabuwar dokar duniya (New World Order). [cite_start]Suna amfani da fina-finai, waƙoƙi, da labarai wajen canza tunanin mutane da kuma sa su saba da alamomin Dajjal ba tare da sun sani ba. [cite: 58, 65]",
+        "content" => "Manyan kafafen yaɗa labarai na duniya suna ƙarƙashin ikon waɗanda suke son tabbatar da sabuwar dokar duniya (New World Order). Suna amfani da fina-finai, waƙoƙi, da labarai wajen canza tunanin mutane da kuma sa su saba da alamomin Dajjal ba tare da sun sani ba. [cite: 58, 65]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -774,7 +774,7 @@ return [
     [
         "page" => 78,
         "header" => "AMFANI DA FASAHAR ZAMANI",
-        "content" => "Fasahar zamani kamar su Internet da kuma Social Media suna da amfani, amma kuma ana amfani da su wajen yaɗa alfasha da kuma rudar da mutane. Dajjal zai yi amfani da irin wannan fasaha wajen isa ga kowane gida a duniya a lokaci guda. [cite_start]Saboda haka, dole ne mu yi amfani da waɗannan abubuwa cikin hikima da tsoron Allah. [cite: 61, 64]",
+        "content" => "Fasahar zamani kamar su Internet da kuma Social Media suna da amfani, amma kuma ana amfani da su wajen yaɗa alfasha da kuma rudar da mutane. Dajjal zai yi amfani da irin wannan fasaha wajen isa ga kowane gida a duniya a lokaci guda. Saboda haka, dole ne mu yi amfani da waɗannan abubuwa cikin hikima da tsoron Allah. [cite: 61, 64]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -784,7 +784,7 @@ return [
     [
         "page" => 79,
         "header" => "KARATUN SURATUL KAHFI",
-        "content" => "Daga cikin hanyoyin samun tsari daga sharrin Dajjal akwai karatun Suratul Kahfi, musamman ayoyi guda goma na farko da kuma guda goma na ƙarshe. [cite_start]Annabi (Sallallahu alaihi wasallam) ya koyar da mu cewa duk wanda ya hadace waɗannan ayoyi, Allah zai kiyaye shi daga fitinar Dajjal. [cite: 21, 67]",
+        "content" => "Daga cikin hanyoyin samun tsari daga sharrin Dajjal akwai karatun Suratul Kahfi, musamman ayoyi guda goma na farko da kuma guda goma na ƙarshe. Annabi (Sallallahu alaihi wasallam) ya koyar da mu cewa duk wanda ya hadace waɗannan ayoyi, Allah zai kiyaye shi daga fitinar Dajjal. [cite: 21, 67]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -794,7 +794,7 @@ return [
     [
         "page" => 80,
         "header" => "NEMAN TSARI DAGA FITINAR DAJJAL",
-        "content" => "Haka kuma, an umarce mu da mu riƙa neman tsari daga fitinar Dajjal a kowane sallah, bayan mun yi tahiya kafin mu yi sallama. [cite_start]Addu'ar ita ce: \"Allaahumma innee a'oodhu bika min 'adhaabi jahannam, wa min 'adhaabil-qabr, wa min fitnatil-mahyaa wal-mamaat, wa min sharri fitnatil-maseehid-dajjaal.\" [cite: 209]",
+        "content" => "Haka kuma, an umarce mu da mu riƙa neman tsari daga fitinar Dajjal a kowane sallah, bayan mun yi tahiya kafin mu yi sallama. Addu'ar ita ce: \"Allaahumma innee a'oodhu bika min 'adhaabi jahannam, wa min 'adhaabil-qabr, wa min fitnatil-mahyaa wal-mamaat, wa min sharri fitnatil-maseehid-dajjaal.\" [cite: 209]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -904,7 +904,7 @@ return [
     [
         "page" => 91,
         "header" => "BURIN DAJJAL",
-        [cite_start]"content" => "Burin Dajjal kawai ka bi shi, ya ba ka duk abin da kake so (Aljannar duniya). Idan muka kuskura muka biye wa son zuciyarmu to tabbas za mu faɗa halaka, halakar da yahudawa suke son su ja mu ciki, mu bi wanda suka daɗe suna jiran bayyanarsa wato Dajjal[cite: 61]. [cite_start]Daga cikin ikon da Allaah Azzawajallah zai ba shi, shine zai warkar da mara lafiya nan take, zai ce wa sama ta zubo da ruwa[cite: 61].",
+        "content" => "Burin Dajjal kawai ka bi shi, ya ba ka duk abin da kake so (Aljannar duniya). Idan muka kuskura muka biye wa son zuciyarmu to tabbas za mu faɗa halaka, halakar da yahudawa suke son su ja mu ciki, mu bi wanda suka daɗe suna jiran bayyanarsa wato Dajjal[cite: 61]. Daga cikin ikon da Allaah Azzawajallah zai ba shi, shine zai warkar da mara lafiya nan take, zai ce wa sama ta zubo da ruwa[cite: 61].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -914,7 +914,7 @@ return [
     [
         "page" => 92,
         "header" => "FASAHAR ZAMANI DA DAJJAL",
-        [cite_start]"content" => "A yanzu haka ma ƙasashe irin su China da Amurka sun fara wannan tsarin wanda ake kira da Cloud Seeding ko kuma Artificial Rain (Ƙirƙirarren ruwan sama)[cite: 61]. [cite_start]Dajjal zai raba mutum gida biyu kuma ya umarce shi ya haɗe (Yanzu an ɗauko hanyar wannan ta amfani da laser a yi wa mutum CS ba tare da jini ya fito ba)[cite: 61]. [cite_start]Zai tada na kabari a zahiri, sai dai a baɗini aljani ne zai shiga gawarsu sai ya ruɗi mutane[cite: 61].",
+        "content" => "A yanzu haka ma ƙasashe irin su China da Amurka sun fara wannan tsarin wanda ake kira da Cloud Seeding ko kuma Artificial Rain (Ƙirƙirarren ruwan sama)[cite: 61]. Dajjal zai raba mutum gida biyu kuma ya umarce shi ya haɗe (Yanzu an ɗauko hanyar wannan ta amfani da laser a yi wa mutum CS ba tare da jini ya fito ba)[cite: 61]. Zai tada na kabari a zahiri, sai dai a baɗini aljani ne zai shiga gawarsu sai ya ruɗi mutane[cite: 61].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -924,7 +924,7 @@ return [
     [
         "page" => 93,
         "header" => "MABIYAN DAJJAL",
-        [cite_start]"content" => "Yahudawa 70,000 za su fara bin sa riƙe da baƙar tutarsu daga yankin Isbahan dake Iran[cite: 61]. [cite_start]Zai ƙwace tattalin arziƙin mutane, bankunansu, kasuwanninsu, abincinsu da abin shansu[cite: 61]. [cite_start]Wanda ya bi shi ya samu duniya, wanda ya bijire masa zai sha wahala, sai dai hakan jarabawa ce ga muminai waɗanda basu bi shi ba, makomarsu Aljannah silar haƙurinsu[cite: 61].",
+        "content" => "Yahudawa 70,000 za su fara bin sa riƙe da baƙar tutarsu daga yankin Isbahan dake Iran[cite: 61]. Zai ƙwace tattalin arziƙin mutane, bankunansu, kasuwanninsu, abincinsu da abin shansu[cite: 61]. Wanda ya bi shi ya samu duniya, wanda ya bijire masa zai sha wahala, sai dai hakan jarabawa ce ga muminai waɗanda basu bi shi ba, makomarsu Aljannah silar haƙurinsu[cite: 61].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -934,7 +934,7 @@ return [
     [
         "page" => 94,
         "header" => "ALAMOMIN SHAIƊAN A KIMIYYA",
-        [cite_start]"content" => "A ɓangaren bayyana ɓoyayyun aƙidunsu, suna da alamu da yawa a kusan kowanne abin da ake amfani da shi a wannan zamanin, tun daga ɓangaren kimiyya har na fasaha[cite: 64]. [cite_start]Saka satellite a sararin samaniya a matakin 22,000 meters yana da alaƙa da lambar shaiɗan domin kuwa yana son multiple ɗin 11 (irin su 22, 33, 44, 55, 66 da sauransu)[cite: 64].",
+        "content" => "A ɓangaren bayyana ɓoyayyun aƙidunsu, suna da alamu da yawa a kusan kowanne abin da ake amfani da shi a wannan zamanin, tun daga ɓangaren kimiyya har na fasaha[cite: 64]. Saka satellite a sararin samaniya a matakin 22,000 meters yana da alaƙa da lambar shaiɗan domin kuwa yana son multiple ɗin 11 (irin su 22, 33, 44, 55, 66 da sauransu)[cite: 64].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -944,7 +944,7 @@ return [
     [
         "page" => 95,
         "header" => "LABARIN NEIL ARMSTRONG",
-        [cite_start]"content" => "Neil Armstrong shine ya fara zuwa duniyar wata a shekarar 1969. A can ya ji kiran sallah, saura ƙiris ya karɓi musulunci musamman ma da ya ƙara jin kiran sallah a ƙasar Egypt[cite: 64]. [cite_start]Amma ƙungiyar NASA suka ce masa idan ya sake ya ƙara fitar da wannan sirrin to za su janye masa tallafi kuma za su cire sunansa daga tarihin mutum na farko da ya fara taka kafa a wata[cite: 64]. [cite_start]Ƙarshe dai bai musulunta ba saboda rashin rabo da tsoron talauci[cite: 64].",
+        "content" => "Neil Armstrong shine ya fara zuwa duniyar wata a shekarar 1969. A can ya ji kiran sallah, saura ƙiris ya karɓi musulunci musamman ma da ya ƙara jin kiran sallah a ƙasar Egypt[cite: 64]. Amma ƙungiyar NASA suka ce masa idan ya sake ya ƙara fitar da wannan sirrin to za su janye masa tallafi kuma za su cire sunansa daga tarihin mutum na farko da ya fara taka kafa a wata[cite: 64]. Ƙarshe dai bai musulunta ba saboda rashin rabo da tsoron talauci[cite: 64].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -954,7 +954,7 @@ return [
     [
         "page" => 96,
         "header" => "SURATUL QAMAR DA SHEKARAR 1969",
-        [cite_start]"content" => "Malaman mu'ujizar Qur'ani sun yi bincike akan Suratul Qamar, aka gano tana da alaƙa da cewar wani mutum zai je duniyar wata a 1969[cite: 65]. [cite_start]Idan ka irga ayoyi tun daga Suratul Qamar har zuwa Suratun Nas za ka ga ayoyi 1,389 ne wanda ya yi daidai da Gregorian calendar na lokacin saukar aya[cite: 65].",
+        "content" => "Malaman mu'ujizar Qur'ani sun yi bincike akan Suratul Qamar, aka gano tana da alaƙa da cewar wani mutum zai je duniyar wata a 1969[cite: 65]. Idan ka irga ayoyi tun daga Suratul Qamar har zuwa Suratun Nas za ka ga ayoyi 1,389 ne wanda ya yi daidai da Gregorian calendar na lokacin saukar aya[cite: 65].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -964,7 +964,7 @@ return [
     [
         "page" => 97,
         "header" => "SIRRIN LAMBOBI (NUMEROLOGY)",
-        [cite_start]"content" => "Wannan ilimin ne mai zaman kansa da ake kira da Numerology wato ilimin sanin sirrin lambobi[cite: 66]. [cite_start]Akwai wata waƙa da Eminem ya yi mai suna \"My Darling\" inda ya fito da ma'anar 666[cite: 65]. [cite_start]Masu ɗaukar selfies suna ɗaga yatsunsu guda 2 ma'ana 11 (ɗaya a cikin ɗaya), wanda mu musulmai mun san Allaah Azzawajallah shine ɗaya kacal, amma shaiɗan ya yi musu wahayin fitar da yatsu biyu don nuna alamun kishiya ga Allaah wato shirka[cite: 65].",
+        "content" => "Wannan ilimin ne mai zaman kansa da ake kira da Numerology wato ilimin sanin sirrin lambobi[cite: 66]. Akwai wata waƙa da Eminem ya yi mai suna \"My Darling\" inda ya fito da ma'anar 666[cite: 65]. Masu ɗaukar selfies suna ɗaga yatsunsu guda 2 ma'ana 11 (ɗaya a cikin ɗaya), wanda mu musulmai mun san Allaah Azzawajallah shine ɗaya kacal, amma shaiɗan ya yi musu wahayin fitar da yatsu biyu don nuna alamun kishiya ga Allaah wato shirka[cite: 65].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -974,7 +974,7 @@ return [
     [
         "page" => 98,
         "header" => "SIHIRIN LABID IBN AL-A'SAM",
-        [cite_start]"content" => "Idan ba mu manta ba ya zo a sahihan hadisai cewar Labid Ibn al-A'sam ya yi wa Annabi (Sallallahu alaihi wasallam) sihiri, inda ya yi amfani da ƙulli 11 aka tofe aka wulla rijiya[cite: 66]. [cite_start]A ƙarshe Allaah Azzawajallah ya saukar da Surorin kariya wato Falaƙi da Nasi[cite: 67]. [cite_start]Idan mun irga ayoyinsu gabaɗaya za mu ga guda 11 ne, silar hakan sai sihirin ya warware, ma'ana kowacce aya ɗaya ta warware ƙulli ɗaya[cite: 67].",
+        "content" => "Idan ba mu manta ba ya zo a sahihan hadisai cewar Labid Ibn al-A'sam ya yi wa Annabi (Sallallahu alaihi wasallam) sihiri, inda ya yi amfani da ƙulli 11 aka tofe aka wulla rijiya[cite: 66]. A ƙarshe Allaah Azzawajallah ya saukar da Surorin kariya wato Falaƙi da Nasi[cite: 67]. Idan mun irga ayoyinsu gabaɗaya za mu ga guda 11 ne, silar hakan sai sihirin ya warware, ma'ana kowacce aya ɗaya ta warware ƙulli ɗaya[cite: 67].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -984,7 +984,7 @@ return [
     [
         "page" => 99,
         "header" => "LAMBAR SHAIƊAN (11 DA 13)",
-        [cite_start]"content" => "Tasirin wancan tofin da aka yi sau 11 ne ya sa ake kiran lambar da Devil's Number, bima'ana Lambar Shaiɗan[cite: 67]. [cite_start]Haka kuma ba sa son lamba ta 13 saboda \"unlucky number\" ce[cite: 68]. [cite_start]Idan mun lura, ganye (leaf) guda 13 ne a ƙafar dama ta angulun dake bayan American dollar[cite: 68]. [cite_start]Haka kuma masu (arrows) guda 13 ne a ƙafar hagu, kuma taurari (stars) 13 ne a saman angulun[cite: 68].",
+        "content" => "Tasirin wancan tofin da aka yi sau 11 ne ya sa ake kiran lambar da Devil's Number, bima'ana Lambar Shaiɗan[cite: 67]. Haka kuma ba sa son lamba ta 13 saboda \"unlucky number\" ce[cite: 68]. Idan mun lura, ganye (leaf) guda 13 ne a ƙafar dama ta angulun dake bayan American dollar[cite: 68]. Haka kuma masu (arrows) guda 13 ne a ƙafar hagu, kuma taurari (stars) 13 ne a saman angulun[cite: 68].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -994,7 +994,7 @@ return [
     [
         "page" => 100,
         "header" => "ALAKAR DOLLAR DA DAJJAL",
-        [cite_start]"content" => "Wannan yana da alaƙa da Original 13 British Colonies[cite: 68]. [cite_start]Saboda suna da alaƙa da Mithrah da Deciples ɗinsu su 13, wannan dalilin ya sa yawancin benayen Amurka babu hawa na 13 sai dai na 12 na samansa kuma sai su rubuta 14[cite: 68]. [cite_start]Ido 1 da yake asaman pyramid na dolar Amurka basu sauko da shi ba saboda har yanzu babban Dajjal ɗin bai bayyana ba[cite: 69].",
+        "content" => "Wannan yana da alaƙa da Original 13 British Colonies[cite: 68]. Saboda suna da alaƙa da Mithrah da Deciples ɗinsu su 13, wannan dalilin ya sa yawancin benayen Amurka babu hawa na 13 sai dai na 12 na samansa kuma sai su rubuta 14[cite: 68]. Ido 1 da yake asaman pyramid na dolar Amurka basu sauko da shi ba saboda har yanzu babban Dajjal ɗin bai bayyana ba[cite: 69].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",

@@ -1097,7 +1097,7 @@ AppStore.",
         ]
 ],
 
-[
+
     [
         "page" => 51,
         "header" => "GARGAƊI:",
