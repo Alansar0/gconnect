@@ -4,17 +4,6 @@ return [
 
     [
         "page" => 1,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 2,
         "header" => "USMANNOOR ONLINE ACADEMY",
         "content" => "USMANNOORONLINEACADEMY
 
@@ -33,7 +22,7 @@ Usman Ɗanliti Mato
     ],
 
     [
-        "page" => 3,
+        "page" => 4,
         "header" => "GODIYA",
         "content" => "GODIYA:
 
@@ -62,7 +51,7 @@ innaka hamidun majeed.",
     ],
 
     [
-        "page" => 4,
+        "page" => 5,
         "header" => "SADAUKARWA / GABATARWA",
         "content" => "SADAUKARWA:
 
@@ -91,7 +80,7 @@ matsalolin.",
     ],
 
     [
-        "page" => 5,
+        "page" => 6,
         "header" => "",
         "content" => "Ina mai jan hankalin saurayi da
 budurwa, tuzuru da tuzuruwa, gwauro
@@ -110,7 +99,7 @@ Haƙƙin Mallaka (M) 2025",
     ],
 
     [
-        "page" => 6,
+        "page" => 7,
         "header" => "ABIN DA KE CIKI",
         "content" => "ABINDA KE CIKI:
 
@@ -144,7 +133,7 @@ SILAR TUNANIN SAURAYI?
     ],
 
     [
-        "page" => 7,
+        "page" => 8,
         "header" => "",
         "content" => "10) MAMANA ƊAYA YA FI ƊAYA GIRMA -
 YA HALATTA NA FAƊA WA WANDA ZAN
@@ -178,7 +167,7 @@ IDAN ZAN YI WANKAN JANABA?
     ],
 
     [
-        "page" => 8,
+        "page" => 9,
         "header" => "",
         "content" => "Al-hamdu Lillaah, nahmaduhu, wa
 nastaeenuhu wa nastaghfiruhu, wa
@@ -200,7 +189,7 @@ wabarakatuhu",
     ],
 
     [
-        "page" => 9,
+        "page" => 10,
         "header" => "",
         "content" => "1) MENENE AURE?",
         "layout" => [
@@ -211,7 +200,7 @@ wabarakatuhu",
     ],
 
     [
-        "page" => 10,
+        "page" => 11,
         "header" => "",
         "content" => "Allaah (Subhanahu wa ta'ala) yace:
 
@@ -235,19 +224,8 @@ masu yin tunani.",
    
 
     [
-        "page" => 11,
-        "header" => "",
-        "content" => "2) WAYA KAMATA NA AURA?",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
         "page" => 12,
-        "header" => "",
+        "header" => "WAYA KAMATA NA AURA?",
         "content" => "An karɓo daga Abu Hurairah
 (Radiyallahu anhu), yace: Annabi
 (Sallallahu alaihi wasallam) yace: \"Ana
@@ -504,98 +482,18 @@ faruwar hakan tattare da wasu jaruman
             "html_tag" => ""
         ]
     ],
-
-    [
-        "page" => 25,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
     [
         "page" => 26,
-        "header" => "",
-        "content" => "",
+        "header" => "5) SAURAYIN TA YACE TA DINGA KISSING ƊINSA",
+        "content" => "be kamata yace tarungume shi ko kuma matayi kissing ɗin sa ba, domin kuwa a matsayinmu na bani Adam, Allaah Azzawajallah ya halicce mu kuma ya saka sinadarin adrenaline (hormones) a jikin mu wanda a duk san da jinsin ɗayan mu ya haɗu da na ɗaya to hakan zai janyo sha'awa har ya kai ga faɗawa tarkon zina (inda ibada ga aurat ba masu raya sunnar Annabi (Sallallahu alaihi wasallam), shiyasa yace kada mu kusanci zina.",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
             "html_tag" => ""
         ]
     ],
-
     [
         "page" => 27,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 28,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 29,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 30,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-   
-
-    [
-        "page" => 31,
-        "header" => "",
-        "content" => "5) SAURAYIN TA YACE TA DINGA KISSING ƊINSA",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 32,
-        "header" => "",
-        "content" => "Matayace tarungume shi ko kuma matayi kissing ɗin sa ba, domin kuwa a matsayinmu na bani Adam, Allaah Azzawajallah ya halicce mu kuma ya saka sinadarin adrenaline (hormones) a jikin mu wanda a duk san da jinsin ɗayan mu ya haɗu da na ɗaya to hakan zai janyo sha'awa har ya kai ga faɗawa tarkon zina (inda ibada ga aurat ba masu raya sunnar Annabi (Sallallahu alaihi wasallam), shiyasa yace kada mu kusanci zina.",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 33,
         "header" => "",
         "content" => "Ma'anar kissing shine: goga leɓe akan leɓen wani domin tabbatar da tsantsar soyayya ko kuma ƙauna, a nan shi saurayin nata bayan ya bayyana matayayi ba wai tabbatawa ba kuskuren kenan, kamata yayi ya tabbatar da yana sonta yayi kissing ɗin idan ya aureta amma sai ya bayyanar muradinsa, ma'ana: yana son ta da zina ba wai da aure ba.",
         "layout" => [
@@ -606,7 +504,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 34,
+        "page" => 28,
         "header" => "",
         "content" => "Ma'anar hugging kuma shine rungume mace ko namiji. Idan mata da miji suka yi hugging, za su samu lada (wanda ba muharrami ba kuma zunubi zai kwasa) shi wannan ƙanin zina ne domin in da za'akira kissing daga gambu to zina da hugging 'yan biyune. Kuma akwai sahihin hadisi a cikin Bukhari da Annabi (Sallallahu alaihi wasallam) yace: Da ɗayanku ya haɗa hannun da mace (gaisuwa) gara ya zauna akan garwashin wuta.",
         "layout" => [
@@ -617,7 +515,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 35,
+        "page" => 29,
         "header" => "",
         "content" => "Dangane da batun kissing kuma, ya tabbata a cikin Sahihul Bukhari, Nana Aisha (Radiyallahu Anha) tace: \"Manzon Allah (Sallallahu alaihi wasallam) ya kasance yana sumbatar iyalansa a duk sanda ya shiga gidansa\".",
         "layout" => [
@@ -628,7 +526,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 36,
+        "page" => 30,
         "header" => "",
         "content" => "Haka kuma Urwah (Radiyallahuanhu), ya rawaito daga Nana Aisha (Radiyallahuanha) tace masa: \"Annabi (Sallallahu alaihi wasallam) ya sumbaci ɗaya daga cikin matansa\". Sai Urwah ya tambayi Nana Aisha: \"Ko dai kece wadda ya sumbata (kissing)?\" Sai Nana Aisha tayi murmushi (wanda haka ke nuna da ita yayi wakiss ɗin).",
         "layout" => [
@@ -639,7 +537,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 37,
+        "page" => 31,
         "header" => "",
         "content" => "(Hadisin yana cikin Sunan al-Tirmidhi 79, Abu Daawood 178, An-Nasaa’i 170 da kuma Ibn Maajah 502).",
         "layout" => [
@@ -650,7 +548,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 38,
+        "page" => 32,
         "header" => "",
         "content" => "Wannan shine abinda yawancin mazajen yanzu suka kasa koya shiyasa ake samun rashin fahimta da kuma yawaitar sakin aure akai-akai, kissing matarka yana nufin tabbatar da so da ƙaunar da kake mata, da ba ka sonta ai da ba zaka biya sadakinta ba, amma duk anyi watsi da Sunnar Annabi (Sallallahu alaihi wasallam) shiyasa muke shan wahala a rayuwarmu.",
         "layout" => [
@@ -661,7 +559,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 39,
+        "page" => 33,
         "header" => "",
         "content" => "Idan wani magidanci yace akwai kunya fa na yin kissing matata kuma raini zai shiga tsakaninmu, to sai mu ce masa ai ba wanda yakai Annabi (Sallallahu alaihi wasallam) kunya (kamar yanda ya tabbata a cikin Seerah da Shama'ilil Muhammadiyya) kuma maimakon zubewar ƙima saidai hakan ya ƙara janyo so da ƙauna a tsakanku.",
         "layout" => [
@@ -672,7 +570,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 40,
+        "page" => 34,
         "header" => "",
         "content" => "Kuma Nana Aisha (Radiyallahu Anha) tana zubar ruwa a bakinta, sai ta sumbaci Annabi (Sallallahu alaihi wasallam) sannan ta zuba masa ruwan a baki kuma ya haɗiye. Kuma suna wanka a baho ɗaya. Fatan magidanta za su dinga dabbaƙa wannan Sunnar.",
         "layout" => [
@@ -684,9 +582,9 @@ faruwar hakan tattare da wasu jaruman
    
 
     [
-        "page" => 41,
+        "page" => 35,
         "header" => "",
-        "content" => "41koyawasahabbaiIstikharanekamar\nyandayakekoyardasuayoyin...lkhairinearayuwarta.Wannanduk\nruɗinshaidanne.Allaahyabamuikon",
+        "content" => "41koyawasahabbaiIstikharanekamar\nyandayakekoyardasu ayoyin alkhairi ne a rayuwarta.Wannanduk\nruɗinshaidanne.Allaahyabamuikon",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -695,7 +593,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 42,
+        "page" => 36,
         "header" => "",
         "content" => "42kiyayewa.\nWallahuta'alaa'alam.\nMatadaiyayenmatakudinga...ancisukesonsu\nkamaryandawatayaruwatataɓa\ntambayatakamarhaka:",
         "layout" => [
@@ -706,9 +604,9 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 43,
-        "header" => "",
-        "content" => "435)SAURAYINTAYACETADINGA\nKISSINGƊINSA\nTAMBAYA\nFatankat...abatashawararabuwazataidashi\nkokumameyakamatatayimasayadaina.",
+        "page" => 37,
+        "header" => " 5) SAURAYINTA YA CETA DINGA KISSING ƊINSA",
+        "content" => "TAMBAYA\nFatankat...abatashawara rabuwazatai dashi\nkokuma meyakamatatayima sayadaina.",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -717,7 +615,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 44,
+        "page" => 38,
         "header" => "",
         "content" => "44AMSA\nLahaulawalaƙuwwataillabillah.\nTodafarkodaimunaadd...ajallah,watoISTIKHARA,kamar\nyandaJabirBinAbdullah(Radiyallahu",
         "layout" => [
@@ -728,7 +626,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 45,
+        "page" => 39,
         "header" => "",
         "content" => "45anhu)yarawaitohadisindaisnadimai\nkyau(Addu'artazoacikin...\nkagamutumyabirgekaammankana\nwucesasaikamantashi.Nabiyushine",
         "layout" => [
@@ -739,9 +637,9 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 46,
+        "page" => 40,
         "header" => "",
-        "content" => "46wandaidankahaɗudashihalinsaya\nburgekasaikajikanasonshik...ajunansualhalinitasaurayinta\nnekawai,shiyasatakeshakkarrabuwa",
+        "content" => "46wandai dankahaɗudashi halinsaya\n burgekasaikaji  kanasonshi kajunansu alhalin ita saurayinta \nnekawai,shiyasatakeshakkarrabuwa",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -750,7 +648,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 47,
+        "page" => 41,
         "header" => "",
         "content" => "47dashi.Ananyakamatatasanardashi\ncewarbazaniyakissingkohu...ntafãcemazinãcikõmushiriki.\nKumaanharamtawannanakan\nmũminai.",
         "layout" => [
@@ -763,7 +661,7 @@ faruwar hakan tattare da wasu jaruman
     [
         "page" => 48,
         "header" => "",
-        "content" => "48SannankumaAllahyaceacikinSuratul\nIsraayata32:\nﺎَﻟَﻭﺍﻮُ...ahimtafabawaikadamuaikataba,\nsabodagirmanlaifinsaiyace:KADAMU",
+        "content" => "48SannankumaAllahyaceacikinSuratul\nIsraayata32:\nﺎوَلَا تَقْرَبُوا الزِّنَا ۖ إِنَّهُ كَانَ فَاحِشَةً وَسَاءَ سَبِيلًاahimtafabawaikadamuaikataba,\nsabodagirmanlaifinsaiyace:KADAMU",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -772,7 +670,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 49,
+        "page" => 42,
         "header" => "",
         "content" => "49KUSANCETA,tokingaananbaimaka\nmatayacetarungumeshikokuma...\nsoyayyakokumaƙauna,ananshi\nsaurayinnatabayyanamatayayibawai",
         "layout" => [
@@ -783,7 +681,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 50,
+        "page" => 43,
         "header" => "",
         "content" => "50tabbatarwabakuskurenkenan,kamata\nyayiyatabbatardayanaso...nkuya\nhaɗahannudamace(gaisuwa)garaya\nzaunaakangarwashinwuta.",
         "layout" => [
@@ -795,7 +693,7 @@ faruwar hakan tattare da wasu jaruman
    
 
     [
-        "page" => 51,
+        "page" => 44,
         "header" => "",
         "content" => "51Danganedabatunkissingkuma,ya\ntabbataacikinsahihulBukhar...iNana\nAishatayimurmushi(Wandahakake\nnunidaitayayiwakissɗin).",
         "layout" => [
@@ -806,7 +704,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 52,
+        "page" => 45,
         "header" => "",
         "content" => "52(HadisinyanacikinSunanal-Tirmidhi\n79,AbuDaawood178,An-N...shigatsakaninmu,tosaimucemasaai\nbawandayakaiAnnabi(Sallallahu",
         "layout" => [
@@ -817,7 +715,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 53,
+        "page" => 46,
         "header" => "",
         "content" => "53alaihiwasallam)kunya(Kamaryandaya\ntabbataacikinSeerahda....\nMafitagashiwancansaurayinnata\nananshineyakamataasanardashi",
         "layout" => [
@@ -828,7 +726,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 54,
+        "page" => 47,
         "header" => "",
         "content" => "54dalilindayasamaharyakebuƙatartayi\nmasahakan(kissingɗin)...ahakan,cewar\nƙwaƙwalwarmutumtarabukaso4:\nNa1:Temporal-lobe",
         "layout" => [
@@ -839,7 +737,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 55,
+        "page" => 48,
         "header" => "",
         "content" => "55Wandashinewajendayake:tattara\nsaƙonhaddaceabu,koyonabu,...sunatasirikumasunakaimutumga\naikataZina.\nNa2:Parietal-lobe",
         "layout" => [
@@ -850,7 +748,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 56,
+        "page" => 49,
         "header" => "",
         "content" => "56Wajendayake:tattarataɓawa,karatu,\nshauƙi,ganefuska,gane...ndayasayayibatuntayihugging\nɗinsakenan.\nNa3:occipital-lobe",
         "layout" => [
@@ -861,7 +759,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 57,
+        "page" => 50,
         "header" => "",
         "content" => "57Wandayakegane:kalarabu,girmako\nƙanƙanta,ganenisakotazar...irantudaya\nrungumetakokumakissingdinnata.\nNa4:frontal-lobe",
         "layout" => [
@@ -872,7 +770,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 58,
+        "page" => 51,
         "header" => "",
         "content" => "58Wandaakafisanidaforelockshine\ngabangoshinmutumwajendaAl...inSuratulAlaq:\nْﻢَﻟَﺃﻢَﻠْﻌَﻳَّﻥَﺄِﺑَﻪَّﻠﻟﺍٰﻯَﺮَﻳ)\n14)Al-Alaq",
         "layout" => [
@@ -883,9 +781,9 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 59,
+        "page" => 52,
         "header" => "",
-        "content" => "59Ashe,baisanibacewaAllahYanãgani?\nﺎَّﻠَﻛﻦِﺌَﻟْﻢَّﻟِﻪَﺘﻨَ...kwaɗa.\n(fore-lock)\nٍﺔَﻴِﺻﺎَﻧٍﺔَﺑِﺫﺎَﻛٍﺔَﺌِﻃﺎَﺧ )\n16)Al-Alaq",
+        "content" => "59Ashe,baisanibacewaAllahYanãgani?\nﺎَّﻠَﻛﻦِﺌَﻟْﻢَّﻟِﻪَﺘﻨَ...kwaɗa.\n(fore-lock)\nنَاصِيَةٍ كَاذِبَةٍ خَاطِئَةٍ)\n16)Al-Alaq",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -894,7 +792,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 60,
+        "page" => 53,
         "header" => "",
         "content" => "60Makwarkwaɗamaƙaryaciya,mailaifi\n(Frontal-lobe)\nToanans...babutsufaballantanamutuwa,idan\nyaɗaukaAlhamdulillahhakamukeso",
         "layout" => [
@@ -906,7 +804,7 @@ faruwar hakan tattare da wasu jaruman
    
 
     [
-        "page" => 61,
+        "page" => 54,
         "header" => "",
         "content" => "61ammanidanyanunabazaiɗau\nshawararbasaikawaitarabudashi,\n...insu.Wannan\nbalaifibanebakamaryandanabawa\nwatashawararhakan:",
         "layout" => [
@@ -917,30 +815,8 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 62,
-        "header" => "",
-        "content" => "626)KOZANIYACEMASAILOVEYOU?",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 63,
-        "header" => "",
-        "content" => "636)KOZANIYACEMASAILOVEYOU?\n",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-
-    [
-        "page" => 64,
-        "header" => "",
+        "page" => 57,
+        "header" => "6)KOZANIYACEMASAILOVEYOU?",
         "content" => "64TAMBAYA\nAslm.Barkadadare.Zanyitambaya.\nIdannaganamijii...lhamdulillah.Toyaruwabamatsala\nbaneaimacetacetanasonnamijisai",
         "layout" => [
             "has_image" => false,
@@ -950,7 +826,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 65,
+        "page" => 58,
         "header" => "",
         "content" => "65daiabindaakesoshine,sonyazamo\ndonAllaahnebadonwatamanuf...\nRA\"(TarihinNanaKhadija),wallafar\nRashidAhmadChaudry),zakiga",
         "layout" => [
@@ -961,7 +837,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 66,
+        "page" => 59,
         "header" => "",
         "content" => "66bayanaidaki-dakiakantarinmiliyoyin\nkuɗintabaisatajikuny...akkyawabaneba(watoJulaibeeb\nRadiyallahuanhu),sabodatatabbatar",
         "layout" => [
@@ -972,7 +848,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 67,
+        "page" => 60,
         "header" => "",
         "content" => "67dacewarAnnabiSallallahualaihi\nwasallamdayacetaaureshiba...'alaa'alam.\nAbuɗayaneyasamukeshanwahalaa\ngamedarayuwaraure:",
         "layout" => [
@@ -983,7 +859,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 68,
+        "page" => 61,
         "header" => "",
         "content" => "687)RASHINKOYIDAMA'AIKIA\nZAMANTAKEWARAURATAYYA\n",
         "layout" => [
@@ -994,7 +870,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 69,
+        "page" => 62,
         "header" => "",
         "content" => "69TAMBAYA\nAssalamualaikummalamzamanaure\nyaishenimalammij...bayaGani.\nAMSA\nWaalaikumusSalamWarahmatullahi\nWabarakatuhu.",
         "layout" => [
@@ -1005,7 +881,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 70,
+        "page" => 63,
         "header" => "",
         "content" => "70Kicigabadaaddu'a.\nWasuMazanhakasukekumadukrashin\nkoyid...,NanaAishatanaɗagataakanta\nMa'aiki(Sallallahualaihiwasallam).",
         "layout" => [
@@ -1017,7 +893,7 @@ faruwar hakan tattare da wasu jaruman
    
 
     [
-        "page" => 71,
+        "page" => 64,
         "header" => "",
         "content" => "71SabodahakanshikawaiAnnabi\n(Sallallahualaihiwasallam)yake\nsumbatariyalansaaikowane\nlokacindaya shigagida.",
         "layout" => [
@@ -1027,7 +903,7 @@ faruwar hakan tattare da wasu jaruman
         ]
     ],
     [
-        "page" => 72,
+        "page" => 65,
         "header" => "",
         "content" => "72Wasumazanbasusanwannan\nsunnarshiyasasukeshiga\nmatsalolirazaman aure,kuma\nhakan yana janyo sabani\natsakaninma'aurata.",
         "layout" => [
@@ -1038,7 +914,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 73,
+        "page" => 66,
         "header" => "",
         "content" => "73Idanmijiyazamasanadiyar\nmatarsashi kansa,tohakazai\nrageyawaitarsaurayakuma\nkareaurensadagarushewa.",
         "layout" => [
@@ -1049,7 +925,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 74,
+        "page" => 67,
         "header" => "",
         "content" => "74Wannanabushinetsantsar\nsoyayyaakullumkamar\nyandayakeacikinsunnar\nManzonAllah(Sallallahualaihi\nwasallam).",
         "layout" => [
@@ -1060,7 +936,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 75,
+        "page" => 68,
         "header" => "",
         "content" => "75Kumadukwandayasaukar\nwannanabualkada,tohakika\nzaisamunrayuwarmai\ncikindadi dakwanciyar\nhankali.",
         "layout" => [
@@ -1071,7 +947,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 76,
+        "page" => 69,
         "header" => "",
         "content" => "76Wannanitacehikimardasa\nAllaahyabawaAnnabi\n(Sallallahualaihiwasallam)\ndominrayuwarma'aurata.",
         "layout" => [
@@ -1082,7 +958,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 77,
+        "page" => 70,
         "header" => "",
         "content" => "77Donhakadukma'aurataya\nkamatasumaimaitawannan\nsunnar dominsamusaukida\nalherirayarwarsu.",
         "layout" => [
@@ -1093,7 +969,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 78,
+        "page" => 71,
         "header" => "",
         "content" => "78KumaAllahayasaalbarka\natsakaninsu,sabodayin\nkoyidasunnarAnnabi\n(Sallallahualaihiwasallam).",
         "layout" => [
@@ -1104,7 +980,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 79,
+        "page" => 72,
         "header" => "",
         "content" => "79Wannanshinekarshenkashi\nnabayaniakanrayuwarma'aurata\ndadacewajuna bisaaddini.",
         "layout" => [
@@ -1115,7 +991,7 @@ faruwar hakan tattare da wasu jaruman
     ],
 
     [
-        "page" => 80,
+        "page" => 73,
         "header" => "",
         "content" => "80Alhamdulillahirabbil'alamin.",
         "layout" => [

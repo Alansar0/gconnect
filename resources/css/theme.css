@@ -21,8 +21,52 @@
     background-color: var(--unique-bottom-bg);
     border: 1px solid var(--unique-bottom-border);
     box-shadow: 0 0 20px var(--unique-bottom-shadow);
-    backdrop-blur: 8px;
+    /* backdrop-blur: 8px; */
 }
+
+/* Base image reset */
+.page-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem auto;
+}
+
+/* FULL PAGE IMAGE */
+.full-page {
+    width: 100%;
+    max-height: 100vh;
+    object-fit: contain;
+}
+
+/* HALF PAGE IMAGE */
+.half-page {
+    width: 100%;
+    max-height: 50vh;
+    object-fit: contain;
+}
+
+/* QUARTER PAGE IMAGE */
+.quarter-page {
+    width: 100%;
+    max-height: 25vh;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .full-page {
+        max-height: 70vh;
+    }
+
+    .half-page {
+        max-height: 40vh;
+    }
+
+    .quarter-page {
+        max-height: 30vh;
+    }
+}
+
 
 .unique-bottom-nav a {
     border-radius: 40px;

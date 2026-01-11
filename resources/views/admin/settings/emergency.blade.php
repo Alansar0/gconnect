@@ -12,29 +12,6 @@
         <h1 class="text-2xl font-bold text-accent mb-6">Emergency Mode Settings</h1>
 
         <!-- Current State -->
-        {{-- <div class="mb-6 p-4 rounded-xl bg-bg2 border border-accent-border">
-            <div class="flex justify-between items-center">
-                <div>
-                    <span class="font-semibold text-t1">Current App State:</span>
-                    @if(cache('emergency_mode'))
-
-                        <span class="text-red-500 font-bold">EMERGENCY ACTIVE</span>
-                    @else
-                        <span class="text-green-500 font-bold">Normal</span>
-                    @endif
-                </div>
-                <form method="POST" action="{{ route('admin.settings.toggleEmergency') }}">
-                    @csrf
-                    <button type="submit"
-                        class="px-4 py-2 rounded-xl font-semibold 
-                               {{ config('app.emergency_mode') ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700' }}
-                               text-bg1 transition">
-                        {{ config('app.emergency_mode') ? 'Deactivate Emergency' : 'Activate Emergency' }}
-                    </button>
-                </form>
-            </div>
-        </div> --}}
-        <!-- Current State -->
 <div class="mb-6 p-4 rounded-xl bg-bg2 border border-accent-border">
     <div class="flex justify-between items-center">
 

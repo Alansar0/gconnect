@@ -147,36 +147,6 @@ class AdminSettingsController extends Controller
 }
 
 
-// Toggle Emergency Mode
-    // public function toggleEmergency(Request $request)
-    // {
-    //     $current = Cache::get('emergency_mode', false);
-
-    //     Cache::put('emergency_mode', !$current);
-
-    //     return back()->with(
-    //         'success',
-    //         !$current ? 'Emergency mode activated' : 'Emergency mode deactivated'
-    //     );
-    // }
-    
-
-    // Log Emergency Note
-    // public function logEmergency(Request $request)
-    // {
-    //     $request->validate([
-    //         'note' => 'nullable|string|max:500'
-    //     ]);
-
-    //     // Save note to DB or log table
-    //     \App\Models\EmergencyLog::create([
-    //         'note' => $request->note,
-    //         'activated_by' => auth()->id(),
-    //         'status' => config('app.emergency_mode', false) ? 'active' : 'inactive',
-    //     ]);
-
-    //     return redirect()->back()->with('success', 'Emergency note saved successfully.');
-    // }
 
      public function toggleEmergency()
     {

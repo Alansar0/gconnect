@@ -273,8 +273,8 @@ return [
     ],
     [
         "page" => 28,
-        "header" => "ME YASA AKE KIRAN SA DA DAJJAL?",
-        "content" => "2)MEYASAAKEKIRANSADADAJJAL?",
+        "header" => "2)ME YASA AKE KIRAN SA DA DAJJAL?",
+        "content" => "Idan ya bayyana ne za a tura sauran pyramid ɗin ya zauna daram. Wannan yana nuna mana yadda suke shiryawa zuwa wannan lokacin. Su a gurin su, Dajjal shine Almasihun da suke jira wanda zai mallaka musu duniya baki ɗaya. Amma mu musulmai mun san cewa wannan fitina ce babba, kuma Almasihu na gaskiya shine Annabi Isah (Alaihis Salam) wanda shine zai kashe Dajjal.",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",

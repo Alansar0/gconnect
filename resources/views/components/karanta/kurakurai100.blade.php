@@ -1498,7 +1498,7 @@ return [
     [
         "page" => 150,
         "header" => "FALALAR SAHUN FARKO",
-        "content" => "FALALAR SAHUN FARKO\n\nTambaya: Malam menene ladan mutumin da yake tsayawa a sahun farko?\n\nAmsa: Annabi (Sallallahu alaihi wasallam) yace: 'Idan mutane sun san abinda yake cikin kiran salla da sahun farko, kuma ba su da hanyar samun sa sai ta hanyar kuri'a, to da sun yi kuri'a a kansa'. Allah da mala'ikunSa suna yin salati ga masu sahun farko.\n\n150",
+        "content" => "Tambaya: Malam menene ladan mutumin da yake tsayawa a sahun farko?\n\nAmsa: Annabi (Sallallahu alaihi wasallam) yace: 'Idan mutane sun san abinda yake cikin kiran salla da sahun farko, kuma ba su da hanyar samun sa sai ta hanyar kuri'a, to da sun yi kuri'a a kansa'. Allah da mala'ikunSa suna yin salati ga masu sahun farko.\n\n150",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -1806,26 +1806,6 @@ return [
         ]
     ],
     [
-        "page" => 181,
-        "header" => "HUKUNCIN SALLAR NAFILA A ZAUNE GA MARA LAFIYA",
-        "content" => "HUKUNCIN SALLAR NAFILA A ZAUNE GA MARA LAFIYA\n\nTambaya: Malam mutum ne ba shi da lafiyar tsayuwa, shin zai samu cikakken lada idan ya yi nafila a zaune?\n\nAmsa: Na'am, duk wanda yake da larura (rashin lafiya) wadda ta hana shi tsayuwa, idan ya yi sallah a zaune (ko farilla ko nafila), Allah zai rubuta masa cikakken ladansa kamar yadda yake yi a lokacin yana da lafiya. Domin 'Ayyuka ana yin su ne bisa niyya' kuma 'Allah baya dora wa rai abinda ba zata iya ba'.\n\n181",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 182,
-        "header" => "MATSAYIN MAI SALLAH DA RIGAR DA TA KE DA HOTON GIDAN SAURO",
-        "content" => "MATSAYIN MAI SALLAH DA RIGAR DA TA KE DA HOTON GIDAN SAURO\n\nTambaya: Malam meye hukuncin mutum ya yi sallah da riga mai zanen gidan sauro ko tambarin maganin sauro?\n\nAmsa: Idan hoton ba na mai rai ba ne (kamar yadda aka bayyana a baya), sallar tana yin. Sai dai idan hoton yana da girma ko launi mai daukar hankali wanda zai shagaltar da masu sallah a bayanka, to yin hakan makruhi ne. Musulunci yana kwadaitar da sanya tufafi masu sauki da natsuwa a sallah.\n\n182",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
         "page" => 183,
         "header" => "SHIN ANA IYA SALLAH DA MAYAFI (LULLUƁI)",
         "content" => "SHIN ANA IYA SALLAH DA MAYAFI (LULLUƁI)\n\nTambaya: Malam mace za ta iya sallah da mayafi kawai ba tare da ta sanya hijabi ba?\n\nAmsa: Idan mayafin yana da kauri kuma ya rufe dukkan jikinta (ban da fuska da tafukan hannu), kuma baya faduwa yana nuna gashinta ko wuyanta yayin ruku'u da sujjada, to sallar tana yin. Amma hijabi ya fi zama tabbatacce wajen rufe al'aura a lokacin sallah.\n\n183",
@@ -1846,26 +1826,6 @@ return [
         ]
     ],
     [
-        "page" => 185,
-        "header" => "MATSAYIN MAI SALLAH DA JINI A TUFAFI",
-        "content" => "MATSAYIN MAI SALLAH DA JINI A TUFAFI\n\nTambaya: Malam idan na yi sallah sai na ga akwai digon jini a rigata, shin sallar ta yi?\n\nAmsa: Idan jinin kadan ne (kamar girman dinari ko kasa da haka), sallar tana yin a wajen wasu malaman saboda sauki. Amma idan jinin yana da yawa, to wajibi ne a wanke shi ko a canza rigar a sake sallah domin jini najasa ne. Tsafta tana daga cikin sharuddan sallah.\n\n185",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 186,
-        "header" => "SHIN ANA IYA SALLAH DA ALWALAR TAIMAMA IDAN AN SAMU RUWA",
-        "content" => "SHIN ANA IYA SALLAH DA ALWALAR TAIMAMA IDAN AN SAMU RUWA?\n\nTambaya: Malam mutum ne ya yi taimama ya yi sallah, kafin lokacin salla ya fita sai aka kawo ruwa, shin zai sake sallar ne?\n\nAmsa: A'a, ba zai sake sallar ba muddin ya yi ta a lokacin da babu ruwan. Wannan shine hukuncin da Annabi (SAW) ya bayar ga wasu sahabbai guda biyu; daya ya sake daya bai sake ba, sai ya ce wa wanda bai sake din ba: 'Ka dace da sunnah'.\n\n186",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
         "page" => 187,
         "header" => "MATSAYIN MAI SALLAH DA RIGAR DA TA KE DA RUBUTU A BAYA",
         "content" => "MATSAYIN MAI SALLAH DA RIGAR DA TA KE DA RUBUTU A BAYA\n\nTambaya: Malam meye hukuncin sallah da riga mai rubutu kamar na kamfen ko tallan kaya?\n\nAmsa: Kamar yadda muka bayyana, yin sallah da tufafi masu zane-zane ko rubutu makruhi ne (abin ƙyama). Dalili kuwa shine rubutun zai shagaltar da masallata dake bayanka, maimakon su maida hankali ga Allah sai su dinga karanta abinda ke bayan rigarka. Ya kamata a kiyaye hakan.\n\n187",
@@ -1875,50 +1835,11 @@ return [
             "html_tag" => null
         ]
     ],
-    [
-        "page" => 188,
-        "header" => "HUKUNCIN SALLAR NAFILA A ZAUNE GA MAI LAFIYA",
-        "content" => "HUKUNCIN SALLAR NAFILA A ZAUNE GA MAI LAFIYA\n\nTambaya: Malam mutum ne yana da lafiya amma yana jin kasala, zai iya yin sallar taraweeh a zaune?\n\nAmsa: Na'am, ya halatta a yi sallar nafila (kamar taraweeh) a zaune koda mutum yana da lafiya. Sai dai kudin ladansa zai kasance rabi ne idan aka kwatanta da wanda ya yi a tsaye. Farilla ce kawai ba a yin ta a zaune sai ga mara lafiya.\n\n188",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 189,
-        "header" => "HUKUNCIN TOFI A CIKIN SALLAH",
-        "content" => "HUKUNCIN TOFI A CIKIN SALLAH\n\nTambaya: Malam idan ina sallah sai naji waswasi, zan iya yin tofi a gefen hagu na?\n\nAmsa: Na'am, zaka iya yin tofi (ba tare da fito da miyau ba) sau uku a gefen hagu bayan ka nemi tsarin Allah daga Shaidan (Khanzab). Wannan sunnah ce don korar waswasi kuma baya bata sallah.\n\n189",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 190,
-        "header" => "HUKUNCIN KIRA DA IƘAMA GA MUTUM ƊAYA",
-        "content" => "HUKUNCIN KIRA DA IƘAMA GA MUTUM ƊAYA\n\nTambaya: Malam idan mutum zai yi sallah shi kadai, shin zai yi kiran salla da iƙama?\n\nAmsa: Na'am, sunnah ce koda mutum shi kadai ne ya yi kiran salla da iƙama. Annabi (Sallallahu alaihi wasallam) ya fada a cikin hadisi cewa Allah yana jin dadin kiran sallar da bawa yake yi shi kadai a saman dutse ko a jeji, kuma hakan yana sanya masa samun gafarar Allah.\n\n190",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
+   
     [
         "page" => 191,
         "header" => "HUKUNCIN SALLAR NAFILA GA MATAFIYI",
         "content" => "HUKUNCIN SALLAR NAFILA GA MATAFIYI\n\nTambaya: Malam idan mutum yana tafiya kuma yana kasaru, shin zai iya yin nafiloli kamar rawa'atib?\n\nAmsa: Annabi (Sallallahu alaihi wasallam) ya kasance baya yin nafilolin rawa'atib (nafilolin da ake biye da sallar farilla) yayin da yake tafiya, in ban da nafilar Asuba (Raka'atanil Fajr) da kuma sallar Wutiri. Wadannan guda biyun ko ana tafiya Annabi baya barinsu. Amma nafila zalla (Mutlaq) mutum zai iya yin ta a kowane lokaci.\n\n191",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 192,
-        "header" => "SHIN ANA IYA SALLAH DA RIGAR DA TAKE DA HOTON GIDAN SAURO (CI GABA)",
-        "content" => "SHIN ANA IYA SALLAH DA RIGAR DA TAKE DA HOTON GIDAN SAURO (CI GABA)\n\nTambaya: Malam idan rigar tana da tambarin 'ITN' ko hoton gidan sauro karara, shin hakan na bata salla?\n\nAmsa: Kamar yadda muka bayyana, sallar tana yin muddin hoton ba na mai rai ba ne (mutum ko dabba). Amma idan zanen yana da yawa sosai wanda zai sanya mutane su dinga kallo maimakon maida hankali ga sallah, to gara a canza rigar don kiyaye natsuwar masallaci.\n\n192",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -1955,100 +1876,13 @@ return [
             "html_tag" => null
         ]
     ],
-    [
-        "page" => 196,
-        "header" => "SHIN ANA SAKE SALLAH IDAN AN SAMU RUWA (CI GABA)",
-        "content" => "SHIN ANA SAKE SALLAH IDAN AN SAMU RUWA (CI GABA)\n\nTambaya: Malam idan na yi taimama na yi sallah, kafin na idar aka kawo ruwa, ya zan yi?\n\nAmsa: Idan har kana cikin sallar aka kawo ruwa, to taimamar ka ta ɓaci nan take domin 'Idan ruwa ya zo, taimama ta tashi'. Dole ka yanke sallar ka je ka yi alwala da ruwa sannan ka sake sallar. Amma idan ka riga ka idar ne aka kawo ruwan, to sallarka ta inganta.\n\n196",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 197,
-        "header" => "HUKUNCIN SALLAH DA RIGAR KWALLO MAI SUNAN DAN WASA",
-        "content" => "HUKUNCIN SALLAH DA RIGAR KWALLO MAI SUNAN DAN WASA\n\nTambaya: Malam zan iya sallah da riga mai rubutun 'Messi' ko 'Ronaldo' a baya?\n\nAmsa: Yin hakan makruhi ne kwarai, domin yana shagaltar da wanda yake sallah a bayanka. Zai dinga karanta sunan dan wasan maimakon tunanin Allah. Gara a sanya riga mara rubutu idan za a tafi masallaci.\n\n197",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 198,
-        "header" => "HUKUNCIN SALLAR NAFILA A ZAUNE GA MAI LAFIYA (RABI)",
-        "content" => "HUKUNCIN SALLAR NAFILA A ZAUNE GA MAI LAFIYA (RABI)\n\nTambaya: Malam meye dalilin samun rabin lada ga mai nafila a zaune alhalin yana da lafiya?\n\nAmsa: Domin mutum ya bar rukunin tsayuwa ne ba tare da wata larura ba. Tsayuwa tana da daraja a gaban Allah, don haka idan mutum ya zabi ya zauna don jin dadi ko kasala, ba zai samu lada daya da wanda ya jure tsayuwa ba. Wannan yana karfafa mutane su yi kokari wajen tsayuwa a sallah.\n\n198",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 199,
-        "header" => "HUKUNCIN TOFI A HAGU SABODA WASWASI",
-        "content" => "HUKUNCIN TOFI A HAGU SABODA WASWASI\n\nTambaya: Malam idan mutum yana gefen hagu na a masallaci, zan iya yi masa tofi idan ina sallah?\n\nAmsa: A'a, ba za ka yi tofi ga mutum ba. Idan kana cikin jam'i kuma akwai mutum a gefenka, zaka yi tofin ne a gefen hagu kadan ba tare da ya taba mutum ba, ko kuma ka yi shi a cikin rigarka ko kyalle. Kar ka cutar da dan uwanka masallaci da sunan bin sunnah.\n\n199",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 200,
-        "header" => "FALALAR KIRA DA IƘAMA GA MUTUM DAYA A JEJI",
-        "content" => "FALALAR KIRA DA IƘAMA GA MUTUM DAYA A JEJI\n\nTambaya: Malam idan na yi kiran salla a inda ba kowa, shin akwai ladan da zan samu?\n\nAmsa: Na'am, Annabi (Sallallahu alaihi wasallam) yace: 'Duk abinda ya ji kiran sallar mai kiran salla, ko dutse, ko bishiya, ko mutum, to zai shaida masa a ranar kiyama'. Wannan falala ce mai girma ga wanda yake rayuwa a inda babu masallaci kusa.\n\n200",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 201,
-        "header" => "HUKUNCIN SALLAR NAFILA GA MATAFIYI (CI GABA)",
-        "content" => "HUKUNCIN SALLAR NAFILA GA MATAFIYI\n\nTambaya: Malam me yasa Annabi (SAW) yake barin nafilolin rawa'atib idan yana tafiya?\n\nAmsa: Wannan rangwame ne daga Allah (Subhanahu wa Ta'ala) domin saukaka wa matafiyi wahalar tafiya. Tunda ma har sallar farilla an rage ta (An yi kasaru), to barin nafilolin rawa'atib ya fi dacewa da wannan sauki. Amma sallar Wutiri da Nafilar Asuba ba a barinsu domin mahimmancinsu na musamman.\n\n201",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 202,
-        "header" => "MATSAYIN MAI SALLAH DA ABIN RUFE FUSKA (MASK) - LARURA",
-        "content" => "MATSAYIN MAI SALLAH DA ABIN RUFE FUSKA (FACE MASK)\n\nTambaya: Malam idan mutum yana rashin lafiya mai yaduwa, zai iya sanya mask a cikin salla?\n\nAmsa: Na'am, idan akwai bukatar hakan don kare lafiya ko kariya daga cuta, ya halatta. Shari'a tana tafiya ne da maslaha. Idan har akwai cutar da take yaduwa, sanya mask ya zama kariya ga sauran masallata, kuma hakan baya bata salla.\n\n202",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 203,
-        "header" => "HUKUNCIN SALLAR MATAFIYI A BAYAN LIMAN MAI CIKAWA (TSOKACI)",
-        "content" => "HUKUNCIN SALLAR MATAFIYI A BAYAN LIMAN MAI CIKAWA\n\nTambaya: Malam idan na samu raka'a biyu na karshe a bayan liman mazaunin gari, zan sallama ne tunda ni matafiyi ne?\n\nAmsa: A'a, dole ne ka tashi ka cika sauran raka'o'in guda biyu su zama hudu. Dalili kuwa shine, duk lokacin da matafiyi ya bi liman mazaunin gari, hukuncin liman ya hau kansa na cika salla. Wannan shine hadisin Abdullahi bin Abbas (RA) ya bayyana.\n\n203",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 204,
-        "header" => "HUKUNCIN SALLAH DA RIGAR KWALLO (CI GABA)",
-        "content" => "HUKUNCIN SALLAH DA RIGAR KWALLO MAI SUNAN DAN WASA\n\nTambaya: Malam idan mutum bashi da wata rigar sai rigar kwallo, shin zai bar sallar ne?\n\nAmsa: A'a, ba zai bar sallah ba. Zai yi sallar sa da ita, sannan ya yi kokarin neman wata rigar ta gaba. Amma idan yana da wata rigar, sanya rigar kwallo mai zane da sunayen mutane a masallaci kuskure ne babba saboda shagaltar da masallata.\n\n204",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
+   
+   
+   
     [
         "page" => 205,
-        "header" => "MATSAYIN MAI SALLAH DA FARATA MASU TSAWO (TSOKACI)",
-        "content" => "MATSAYIN MAI SALLAH DA FARATA (NAILS) MASU TSAWO\n\nTambaya: Malam menene hikumar yanke farce a Musulunci?\n\nAmsa: Yanke farce yana daga cikin 'Sunanul Fitra' (dabi'un da aka halicci mutum akai na tsabta). Barin farce yana tara kazanta da kwayoyin cuta, kuma hakan yana iya hana ruwan alwala isar wa inda ya kamata. Don haka, tsabtar jiki tana daya daga cikin cikar imani.\n\n205",
+        "header" => "MATSAYIN MAI SALLAH DA FARATA MASU TSAWO ",
+        "content" => "(TSOKACI)MATSAYIN MAI SALLAH DA FARATA (NAILS) MASU TSAWO\n\nTambaya: Malam menene hikumar yanke farce a Musulunci?\n\nAmsa: Yanke farce yana daga cikin 'Sunanul Fitra' (dabi'un da aka halicci mutum akai na tsabta). Barin farce yana tara kazanta da kwayoyin cuta, kuma hakan yana iya hana ruwan alwala isar wa inda ya kamata. Don haka, tsabtar jiki tana daya daga cikin cikar imani.\n\n205",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -2088,7 +1922,7 @@ return [
     [
         "page" => 209,
         "header" => "SHIN ANA YIN SALATIN ANNABI A TAHIYYA TA FARKO (BAYANI)",
-        "content" => "SHIN ANA YIN SALATIN ANNABI A TAHIYYA TA FARKO?\n\nTambaya: Malam shin idan mutum ya bar salatin Annabi a tahiyya ta farko sallarsa ta baci?\n\nAmsa: A'a, sallarsa bata baci ba domin tahiyya ta farko duka malamai sun yarda cewa matsayinta bashi da nauyi kamar tahiyya ta karshe. Amma yin salatin ga Annabi a wannan matsayi yana da kyau domin dacewa da fadin hadisai gaba daya.\n\n209",
+        "content" => "(TSOKACI)SHIN ANA YIN SALATIN ANNABI A TAHIYYA TA FARKO?\n\nTambaya: Malam shin idan mutum ya bar salatin Annabi a tahiyya ta farko sallarsa ta baci?\n\nAmsa: A'a, sallarsa bata baci ba domin tahiyya ta farko duka malamai sun yarda cewa matsayinta bashi da nauyi kamar tahiyya ta karshe. Amma yin salatin ga Annabi a wannan matsayi yana da kyau domin dacewa da fadin hadisai gaba daya.\n\n209",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -2106,56 +1940,6 @@ return [
         ]
     ],
     [
-        "page" => 211,
-        "header" => "HUKUNCIN SALLA DA RIGAR DA KE DA HOTON GIDAN SAURO (KAMMALAWA)",
-        "content" => "HUKUNCIN SALLA DA RIGAR DA KE DA HOTON GIDAN SAURO\n\nTambaya: Malam shin zanen gidan sauro yana cikin hotunan da aka hana ne a Musulunci?\n\nAmsa: A'a, hotunan da aka hana sune na abubuwan da suke da rai (mutum, tsuntsu, dabba). Zanen gidan sauro ko bishiya ko gida ba sa cikin wannan hani. Sai dai idan hoton zai shagaltar da masallata, to sanya shi a salla ya zama makruhi domin yana cin karo da natsuwar salla.\n\n211",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 212,
-        "header" => "MATSAYIN MAI SALLAH DA TAKUNKUMI (MASK) - TSOKACI",
-        "content" => "MATSAYIN MAI SALLAH DA TAKUNKUMI (FACE MASK)\n\nTambaya: Malam idan mutum yana sallah da mask, shin hanci da bakinsa dole su taba kasa a sujjada?\n\nAmsa: A lokacin sujjada, goshinka ne yake da muhimmanci ya taba kasa. Idan kana sanye da mask, goshinka zai taba kasa kamar yadda aka saba. Mask din ba zai hana ingancin sujjadar ba matukar goshin ya tabbata a kasa tare da hancin (koda akwai mask din a tsakanin hancin da kasar).\n\n212",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 213,
-        "header" => "MATSAYIN MAI SALLAH DA JINI A TUFAFI (BAYANI)",
-        "content" => "MATSAYIN MAI SALLAH DA JINI A TUFAFI\n\nTambaya: Malam idan mutum ya idar da salla sai ya ga jini a jikinsa wanda bai sani ba a baya, shin sallar sa ta baci?\n\nAmsa: A magana mafi inganci, idan mutum bai sani ba har ya idar, sallar sa tana nan daram. Allah yana gafarta wa bawa abinda ya yi cikin rashin sani ko kuskure. Amma idan ka sani a tsakiyar salla, to wajibi ne ka tsayar da sallar ka je ka gyara.\n\n213",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 214,
-        "header" => "SHIN ANA IYA SALLAH DA ALWALAR TAIMAMA (TSOKACI)",
-        "content" => "SHIN ANA IYA SALLAH DA ALWALAR TAIMAMA IDAN AN SAMU RUWA\n\nTambaya: Malam idan nayi taimama na yi salla guda daya, zan iya yin wata sallar da ita idan har yanzu babu ruwa?\n\nAmsa: Na'am, taimama tana matsayin alwala ce matukar ruwa bai samu ba kuma baka karya taimamar ba (da abubuwan da suke karya alwala). Don haka zaka iya yin salloli da yawa da taimama guda daya muddin sharuddan suna nan.\n\n214",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 215,
-        "header" => "HUKUNCIN SALLAR NAFILA A ZAUNE (CI GABA)",
-        "content" => "HUKUNCIN SALLAR NAFILA A ZAUNE GA MAI LAFIYA\n\nTambaya: Malam shin zan iya yin rabin salla a tsaye rabi a zaune a nafila?\n\nAmsa: Na'am, hakan ya halatta. Annabi (Sallallahu alaihi wasallam) ya taba yin sallar nafila a zaune, idan karatunsa ya kusa karewa sai ya tashi ya karasa a tsaye sannan ya yi ruku'u. Wannan yana nuna halaccin sauyawa tsakanin tsayuwa da zama a nafila.\n\n215",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
         "page" => 216,
         "header" => "MATSAYIN MAI SALLAH DA MAYAFI (BAYANI)",
         "content" => "MATSAYIN MAI SALLAH DA MAYAFI (LULLUƁI)\n\nTambaya: Malam shin namiji zai iya lullube kansa da hula ko rawani a salla?\n\nAmsa: Na'am, sanya hula ko rawani ado ne wanda Musulunci ya kwadaitar. Amma abinda aka hana shine namiji ya rufe fuskarsa (baki da hanci) ba tare da wata larura ba, ko kuma ya lullube dukkan jikinsa ta yadda ba zai iya motsa hannuwansa ba.\n\n216",
@@ -2165,36 +1949,9 @@ return [
             "html_tag" => null
         ]
     ],
-    [
-        "page" => 217,
-        "header" => "HUKUNCIN TOFI A CIKIN SALLA (TIDDARWA)",
-        "content" => "HUKUNCIN TOFI A CIKIN SALLA\n\nTambaya: Malam idan mutum ya yi tofi har da miyau a salla ya za a yi?\n\nAmsa: Tofi a salla saboda korar waswasi busawa ce kawai (Tafal) ba tare da zubar da miyau ba. Idan mutum ya zubar da miyau da gangan, hakan zai iya ɓata salla domin ya zama kamar wani aiki ne daban. Ya kamata a bi yadda sunnah ta bayyana.\n\n217",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 218,
-        "header" => "HUKUNCIN KIRA DA IƘAMA GA MUTUM DAYA (TSOKACI)",
-        "content" => "HUKUNCIN KIRA DA IƘAMA GA MUTUM ƊAYA\n\nTambaya: Malam shin iƙama ta wajaba akan mutum daya?\n\nAmsa: Iƙama da kiran salla ga mutum daya sunnah ne da ake kwadaitarwa (Sunnah Mu'akkada), amma ba su kai matsayin rukunin da idan babu su salla ba za ta yi ba. Idan mutum ya manta ya yi sallarsa ba tare da su ba, sallarsa ta yi, amma ya rasa ladan wannan sunnah mai girma.\n\n218",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
-    [
-        "page" => 219,
-        "header" => "HUKUNCIN SALLAR NAFILA GA MATAFIYI (TSOKACI)",
-        "content" => "HUKUNCIN SALLAR NAFILA GA MATAFIYI\n\nTambaya: Malam shin matafiyi zai iya yin nafilolin dare (Tahajjud)?\n\nAmsa: Na'am, matafiyi zai iya yin sallar dare da wutiri. Wadannan salloli Annabi (Sallallahu alaihi wasallam) ya kasance yana yin su koda yana kan rakumi a lokacin tafiya. Abinda ya fi barwa sune nafilolin da ake biye da sallolin Azahar, La'asar, da Isha'i.\n\n219",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
+    
+    
+   
     [
         "page" => 220,
         "header" => "KAMMALAWA DA ADDU'A",

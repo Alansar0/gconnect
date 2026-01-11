@@ -84,7 +84,7 @@ return [
     [
         "page" => 9,
         "header" => "SASHE NA 1: AL - HAIDH (JININ AL'ADA)",
-        "content" => "1) SASHE NA 1: AL - HAIDH (JININ AL'ADA) Allaah Azzawajallah yace: وَيَسلُونَكَ عَن المَحِيضِ قُلْ هُوَ أَدَّى فَاعْتَزِلُوا النِّسَاءَ في المحيض وَلَا تَقْرَبُوهُنَّ حَتَّى يَطْهُرْنَ فَإِذَا تطهرن فأتوهُنَّ مِنْ حَيْثُ أَمَرَكُمُ اللهُ إِنَّ اللهَ يُحِبُّ التوابين وَيُحِبُّ الْمُتَطَهِّرِينَ Baqara Kuma suna tambayar ka game da jinin haila. Ka ce: \"Shi cuta ne, don haka ku kaurace wa mata a (kwanakin) haila, kuma kada ku kusance su har sai sun 9",
+        "content" => "1) SASHE NA 1: AL - HAIDH (JININ AL'ADA) Allaah Azzawajallah yace: وَيَسۡـَٔلُونَكَ عَنِ ٱلۡمَحِيضِۖ قُلۡ هُوَ أَذٗى فَٱعۡتَزِلُواْ ٱلنِّسَآءَ فِي ٱلۡمَحِيضِۖ وَلَا تَقۡرَبُوهُنَّ حَتَّىٰ يَطۡهُرۡنَۖ فَإِذَا تَطَهَّرۡنَ فَأۡتُوهُنَّ مِنۡ حَيۡثُ أَمَرَكُمُ ٱللَّهُۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلتَّوَّٰبِينَ وَيُحِبُّ ٱلۡمُتَطَهِّرِينَ Baqara Kuma suna tambayar ka game da jinin haila. Ka ce: \"Shi cuta ne, don haka ku kaurace wa mata a (kwanakin) haila, kuma kada ku kusance su har sai sun 9",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -204,7 +204,7 @@ return [
     [
         "page" => 21,
         "header" => "AL'ADA DA CIKI",
-        [cite_start]"content" => "6.Shinal’adanaiyadawowafiyedasau ɗayaacikinwata,kumameyakamata macetayiidanhakanyafaru? Eh,hakanyanayiwuwa[cite: 66]. [cite_start]Baaaunahaila dasaitawanilokacinamusammanba, saidaianaganetanetasiffofinta[cite: 66]. [cite_start]Sabodahaka,duklokacin dasiffofin jininhailasukabayyana,todokarhaila zatatabbata,watomacezatadakatar dayinsalladasauranibaduharsaita saketsarkaka[cite: 66]. [cite_start]7.Shinmacemaijunabiyutanayin haila? [cite: 66]",
+       "content" => "6.Shinal’adanaiyadawowafiyedasau ɗayaacikinwata,kumameyakamata macetayiidanhakanyafaru? Eh,hakanyanayiwuwa.Baaaunahaila dasaitawanilokacinamusammanba, saidaianaganetanetasiffofinta.Sabodahaka,duklokacin dasiffofin jininhailasukabayyana,todokarhaila zatatabbata,watomacezatadakatar dayinsalladasauranibaduharsaita saketsarkaka.7.Shinmacemaijunabiyutanayin haila? ",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -214,7 +214,7 @@ return [
     [
         "page" => 22,
         "header" => "HAILA DA MASALLACI",
-        [cite_start]"content" => "Yawancin malamaisun cemacemai junabiyubatayinhaila;ammara’ayi mafi inganci shi ne wannan yana danganta ne da irin jinin da kuma lokacindayafito[cite: 67]. [cite_start]Idanjininyayikama da jinin haila kuma yana bin tsarin zagayowarwata,to wannan jinizai ɗaukihukuncinjininhaila[cite: 67]. [cite_start]Ammaidan bainunasiffofinjininhailaba,tobazaa ɗaukeshiamatsayinhailaba[cite: 67]. 8.Shin mace maial’ada za ta iya halartardarussaacikinmasallaci? [cite_start]Yanahalattamacemaial’adatashiga masallacimuddinjininnatabazaiɓata masallacindadattiba[cite: 68].",
+       "content" => "Yawancin malamaisun cemacemai junabiyubatayinhaila;ammara’ayi mafi inganci shi ne wannan yana danganta ne da irin jinin da kuma lokacindayafito[cite: 67].Idanjininyayikama da jinin haila kuma yana bin tsarin zagayowarwata,to wannan jinizai ɗaukihukuncinjininhaila[cite: 67].Ammaidan bainunasiffofinjininhailaba,tobazaa ɗaukeshiamatsayinhailaba[cite: 67]. 8.Shin mace maial’ada za ta iya halartardarussaacikinmasallaci?Yanahalattamacemaial’adatashiga masallacimuddinjininnatabazaiɓata masallacindadattiba[cite: 68].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -224,7 +224,7 @@ return [
     [
         "page" => 23,
         "header" => "I'TIKAFI DA MASALLACIN HARAMI",
-        "content" => "9.ShinyahalattamacetayiIʿtikafa cikin masallacia lokacin Ramadan alhalitanacikinal’ada? [cite_start]YahalattatayiIʿtikafdasharaɗinkada jininnatayaɓatamasallaci[cite: 69]. [cite_start]Hakakuma, idantanadaaure,doletanemiizinin mijintakafintayiIʿtikaf[cite: 69]. 10.Shinyahalattamacemaial’adata shigaMasallacinHaramiaMakka? [cite_start]AnhalattamacetashigaMasallacin Haramikumataaikatadukabin da mahajjatadamasuumrahkeaikatawa[cite: 69],",
+        "content" => "9.ShinyahalattamacetayiIʿtikafa cikin masallacia lokacin Ramadan alhalitanacikinal’ada?YahalattatayiIʿtikafdasharaɗinkada jininnatayaɓatamasallaci[cite: 69].Hakakuma, idantanadaaure,doletanemiizinin mijintakafintayiIʿtikaf[cite: 69]. 10.Shinyahalattamacemaial’adata shigaMasallacinHaramiaMakka?AnhalattamacetashigaMasallacin Haramikumataaikatadukabin da mahajjatadamasuumrahkeaikatawa[cite: 69],",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -234,7 +234,7 @@ return [
     [
         "page" => 24,
         "header" => "AYYUKAN HAJJI GA MAI HAILA",
-        [cite_start]"content" => "kamar karanta Al-Qur’anida tafiya tsakaninSafadaMarwa[cite: 70]. [cite_start]Abinkaɗaida akaharamtamatashineyinɗawafia kusadaKa’aba[cite: 70]. [cite_start]Wannanyatabbatane bisahadisindaA’isha(AllahYayardada ita)taruwaito,indatace: \"Nakasanceinahailalokacindamuka isaMakkah,donhakabanyiɗawafin Ka’abahba,kumabanyitafiyatsakanin Safa da Marwa ba[cite: 70]. [cite_start]Saina gaya wa ManzonAllahصلى الله عليه وسلم ,saiyace:‘Kiyidukkan ayyukanhajjikamarsauranmahajjata, ammakadakiyiɗawafinKa’abahhar saikintsarkakadagahaila.’\" [cite: 70]",
+       "content" => "kamar karanta Al-Qur’anida tafiya tsakaninSafadaMarwa.Abinkaɗaida akaharamtamatashineyinɗawafia kusadaKa’aba.Wannanyatabbatane bisahadisindaA’isha(AllahYayardada ita)taruwaito,indatace: \"Nakasanceinahailalokacindamuka isaMakkah,donhakabanyiɗawafin Ka’abahba,kumabanyitafiyatsakanin Safa da Marwa ba.Saina gaya wa ManzonAllahصلى الله عليه وسلم ,saiyace:‘Kiyidukkan ayyukanhajjikamarsauranmahajjata, ammakadakiyiɗawafinKa’abahhar saikintsarkakadagahaila.’\" ",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -244,7 +244,7 @@ return [
     [
         "page" => 25,
         "header" => "KARATUN AL-QUR'ANI",
-        "content" => "11.Shinmacemaial’adazataiyakoyar daAl-Qur’anikotagabatardawa’azi (gamatakaɗai)acikinmasallacikoa waniwuri? [cite_start]Eh,anahalattatayihakandasharaɗin cewajininnatabazaiɓatamasallacin dadattiba[cite: 71]. 12.Shin mace maial’ada za ta iya karantaAl-Qur’anidabaki? [cite_start]Eh,yahalatta[cite: 71, 72]. [cite_start]Hujja:LokacindaAnnabi صلى الله عليه وسلم yacewaA’isha(AllahYayardadaita) yayindatakehailaalokacinhajji:\"Kiyi dukkan ayyukan hajjikamarsauran [cite: 72]",
+        "content" => "11.Shinmacemaial’adazataiyakoyar daAl-Qur’anikotagabatardawa’azi (gamatakaɗai)acikinmasallacikoa waniwuri?Eh,anahalattatayihakandasharaɗin cewajininnatabazaiɓatamasallacin dadattiba[cite: 71]. 12.Shin mace maial’ada za ta iya karantaAl-Qur’anidabaki?Eh,yahalatta[cite: 71, 72].Hujja:LokacindaAnnabi صلى الله عليه وسلم yacewaA’isha(AllahYayardadaita) yayindatakehailaalokacinhajji:\"Kiyi dukkan ayyukan hajjikamarsauran [cite: 72]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -254,7 +254,7 @@ return [
     [
         "page" => 26,
         "header" => "RIKE MUSHAF",
-        [cite_start]"content" => "mahajjata,ammakadakiyiɗawafin Ka’abahharsaikintsarkakadagahaila.\" [cite: 73] 13.Shin mace maial’ada za ta iya karantaAl-Qur’anitanariƙedamushaf? [cite_start]Eh,ammadasharaɗigudaɗaya:kadata riƙemushafɗindahannuntakaitsaye[cite: 73]. [cite_start]Zaiyiwutariƙeshidawaniabukamar zani,safarhannu,kowaniabudaya rabahannuntadamushaf[cite: 73].",
+       "content" => "mahajjata,ammakadakiyiɗawafin Ka’abahharsaikintsarkakadagahaila.\" [cite: 73] 13.Shin mace maial’ada za ta iya karantaAl-Qur’anitanariƙedamushaf?Eh,ammadasharaɗigudaɗaya:kadata riƙemushafɗindahannuntakaitsaye[cite: 73].Zaiyiwutariƙeshidawaniabukamar zani,safarhannu,kowaniabudaya rabahannuntadamushaf[cite: 73].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -264,7 +264,7 @@ return [
     [
         "page" => 27,
         "header" => "ISTIKHARA DA SUJUDA",
-        "content" => "14.Shinyahalattamacemaial’adatayi sallarIstikhara? [cite_start]Bayahalattamacemaial’adatayi sallarIstikhara[cite: 74]. [cite_start]Ammayahalattatayi addu’arIstikharabataredayinsallaba[cite: 74]. [cite_start]Hakakuma,yahalattatayiistighfarida dukwaninau’inambatonAllahmuddin batayisallaba[cite: 74]. 15.Shinyahalattamacemaial’adatayi sujudat-tilawahyayindatakekaratun Al-Qur’ani? [cite_start]Malamaisunyisaɓaniakanwannan batun[cite: 74]. [cite_start]Ammara’ayimafiingancishine [cite: 74]",
+        "content" => "14.Shinyahalattamacemaial’adatayi sallarIstikhara?Bayahalattamacemaial’adatayi sallarIstikhara[cite: 74].Ammayahalattatayi addu’arIstikharabataredayinsallaba[cite: 74].Hakakuma,yahalattatayiistighfarida dukwaninau’inambatonAllahmuddin batayisallaba[cite: 74]. 15.Shinyahalattamacemaial’adatayi sujudat-tilawahyayindatakekaratun Al-Qur’ani?Malamaisunyisaɓaniakanwannan batun[cite: 74].Ammara’ayimafiingancishine [cite: 74]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -274,7 +274,7 @@ return [
     [
         "page" => 28,
         "header" => "NAJASA DA MUSULMI",
-        [cite_start]"content" => "cewaanahalattatayisujudat-tilawah, domin wannan sujuda ba ta da irin sharuɗɗandaakebuƙataasallah[cite: 75]. 16.Shinmacemaial’adaanaɗaukarta najasanealokacinhaila? [cite_start]A’a,dominmusulmibayazamanajasa takowacehanya[cite: 75, 76]. [cite_start]Sabodahakabazaa cemacemaial’adaitacenajasaba;abin dayakenajasashinejininhailakona nifaas[cite: 76]. [cite_start]Wannanyanakamadayadda maza da mata duka suke fitar da abubuwannajasa(kamarfitsari),amma hakanbayasamutum yazamanajasa[cite: 76]. [cite_start]Hujja:HadisindaAbuHuraira(RA)ya ruwaitolokacindayakecikinjanabaya [cite: 76]",
+       "content" => "cewaanahalattatayisujudat-tilawah, domin wannan sujuda ba ta da irin sharuɗɗandaakebuƙataasallah[cite: 75]. 16.Shinmacemaial’adaanaɗaukarta najasanealokacinhaila?A’a,dominmusulmibayazamanajasa takowacehanya[cite: 75, 76].Sabodahakabazaa cemacemaial’adaitacenajasaba;abin dayakenajasashinejininhailakona nifaas[cite: 76].Wannanyanakamadayadda maza da mata duka suke fitar da abubuwannajasa(kamarfitsari),amma hakanbayasamutum yazamanajasa[cite: 76].Hujja:HadisindaAbuHuraira(RA)ya ruwaitolokacindayakecikinjanabaya [cite: 76]",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -284,7 +284,7 @@ return [
     [
         "page" => 29,
         "header" => "MU'AMALAR MA'AURATA",
-        [cite_start]"content" => "ce:“Ninajasane.”SaiAnnabiصلى الله عليه وسلم yace masa:“Musulmibayazamanajasa.” [cite: 77] 17.Meakahalattama’aurataMusulmi suyiidanmatartanacikinhaila?Kuma yayahakanyabambantadaKiristocida Yahudawa? [cite_start]Kiristoci,bisa ga abin da ke cikin littafinsu (Bai-bul), suna ganin ya halattama’auratasuyijima’iawannan lokaci[cite: 78]. [cite_start]Yahudawa kuwa suna ɗaukar matarsuamatsayinnajasaidantana cikinhaila,donhakabasazamatareda matansu,kocinabincitaredasu,ko kwanciyaagadoɗaya,kumabasayin jima’i da su yayin da suke haila[cite: 78].",
+       "content" => "ce:“Ninajasane.”SaiAnnabiصلى الله عليه وسلم yace masa:“Musulmibayazamanajasa.” [cite: 77] 17.Meakahalattama’aurataMusulmi suyiidanmatartanacikinhaila?Kuma yayahakanyabambantadaKiristocida Yahudawa?Kiristoci,bisa ga abin da ke cikin littafinsu (Bai-bul), suna ganin ya halattama’auratasuyijima’iawannan lokaci[cite: 78].Yahudawa kuwa suna ɗaukar matarsuamatsayinnajasaidantana cikinhaila,donhakabasazamatareda matansu,kocinabincitaredasu,ko kwanciyaagadoɗaya,kumabasayin jima’i da su yayin da suke haila[cite: 78].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -294,7 +294,7 @@ return [
     [
         "page" => 30,
         "header" => "SHEKARUN HAILA",
-        [cite_start]"content" => "Musulmikuwasunɗaukihanyartsaka tsaki:sunaiyazamadamatansu,cin abincitaredasu,kwanciyataredasua gado ɗaya,da kuma yin abubuwan kusancidasuammabataredajima’iba idanmatartanacikinhaila[cite: 79]. 18. Shin akwai wani taƙamaiman shekarudamacezatafarayinhailako zatadainayinta? [cite_start]Babuwanitaƙamaimanshekarudaaka ɗauradafarakodainahaila[cite: 80]. [cite_start]Hukunci yanabinbayyanarsiffofinjininhailada kumaɓacewarsu[cite: 80].",
+       "content" => "Musulmikuwasunɗaukihanyartsaka tsaki:sunaiyazamadamatansu,cin abincitaredasu,kwanciyataredasua gado ɗaya,da kuma yin abubuwan kusancidasuammabataredajima’iba idanmatartanacikinhaila[cite: 79]. 18. Shin akwai wani taƙamaiman shekarudamacezatafarayinhailako zatadainayinta?Babuwanitaƙamaimanshekarudaaka ɗauradafarakodainahaila[cite: 80].Hukunci yanabinbayyanarsiffofinjininhailada kumaɓacewarsu[cite: 80].",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -314,7 +314,9 @@ return [
     [
         "page" => 32,
         "header" => "RAMA AZUMI DA SALLA",
-        "content" => "A’a, amma dole ne su rama azumin farilla da suka rasa yayin haila. Amma salloli ba a samarce su da rama su ba. Hujja: Hadisin A’isha (Allah Ya yarda da ita) inda tace: “An umurce mu da mu rama azumin da muka rasa, amma ba a umurce mu da mu rama salloli ba.” SASHE NA 2: JININ ISTIHAADAH (CUTA) 21. Menene istihaadah? Istihaadah jini ne daban da jinin al’ada (haila), wanda yake fitowa ba bisa ƙa’ida ba, yana iya cigaba duk cikin wata ko wani ɓangarensa.",
+        "content" => "A’a, amma dole ne su rama azumin farilla da suka rasa yayin haila. Amma salloli ba a samarce su da rama su ba. Hujja: Hadisin A’isha (Allah Ya yarda da ita) inda tace: “An umurce mu da mu rama azumin da muka rasa, amma ba a umurce mu da mu rama salloli ba.
+        ” SASHE NA 2: JININ ISTIHAADAH (CUTA) 21. 
+        Menene istihaadah? Istihaadah jini ne daban da jinin al’ada (haila), wanda yake fitowa ba bisa ƙa’ida ba, yana iya cigaba duk cikin wata ko wani ɓangarensa.",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",
@@ -404,7 +406,7 @@ return [
     [
         "page" => 41,
         "header" => "JININ DA YA CIGABA BAYAN ARBA'IN",
-        "content" => "Idanwannanjiniyacigabakumaya haɗudakwanakindatakesamunal’ada akai,towannanjininhaidhne.Domin yanayiwuwajininal’adayabiyobayan jininnifaaskaitsaye.Ammaidanjinin yacigabadafitabayankwanakiarba’in sun cika, kuma bai zo daidai da kwanakin al’adartanakullum ba,to wannanjininnadagacikinistihaadah, banifaasbanekumabahaidhbane. Hujjojidaga: 1.Al-majmouanaImamAl-Nawawi 2.Al-mughninaibnQudamah",
+        "content" => "Idanwannanjiniyacigabakumaya haɗudakwanakindatakesamunal’ada akai,towannanjininhaidhne.Domin yanayiwuwajininal’adayabiyobayan jinin nifaaskaitsaye.Ammaidanjinin yacigabadafitabayankwanakiarba’in sun cika, kuma bai zo daidai da kwanakin al’adartanakullum ba,to wannanjininnadagacikin istihaadah, banifaai bane kuma ba haidhbane. Hujjojidaga: 1.Al-majmouanaImamAl-Nawawi 2.Al-mughninaibnQudamah",
         "layout" => [
             "has_image" => false,
             "image_size" => "none",

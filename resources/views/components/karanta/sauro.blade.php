@@ -1,17 +1,8 @@
 <?php
 return [
+    
     [
         "page" => 1,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-    [
-        "page" => 2,
         "header" => "",
         "content" => "USMANNOORONLINEACADEMY
 
@@ -428,17 +419,7 @@ AllaahuAkbar!",
             "html_tag" => ""
         ]
     ],
-    [
-        "page" => 20,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
-    
+
     [
         "page" => 21,
         "header" => "",
@@ -671,8 +652,7 @@ allurardatakeɗaukedajininmaicutar,",
             "image_size" => "none",
             "html_tag" => ""
         ]
-],
-
+    ],
 
     [
         "page" => 31,
@@ -740,16 +720,7 @@ MUKEFITARWA(Co2)",
             "html_tag" => ""
         ]
     ],
-    [
-        "page" => 34,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
+
     [
         "page" => 35,
         "header" => "",
@@ -1123,16 +1094,7 @@ marubucin",
             "html_tag" => ""
         ]
     ],
-    [
-        "page" => 53,
-        "header" => "",
-        "content" => "",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => ""
-        ]
-    ],
+   
     [
         "page" => 54,
         "header" => "",

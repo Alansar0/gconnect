@@ -12,14 +12,7 @@ class NotificationController extends Controller
         return view('notifications.index', compact('notifications'));
     }
 
-    // public function show($id)
-    // {
-    //     $notification = auth()->user()->notifications()->where('id', $id)->first();
-    //     if ($notification) {
-    //         return view('notifications.show', compact('notifications'));
-    //     }
-    //     return back()->with('error','Notification not found.');
-    // }
+   
       public function show($id)
     {
         $notification = auth()->user()->notifications()->where('id', $id)->firstOrFail();

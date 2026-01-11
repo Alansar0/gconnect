@@ -198,27 +198,6 @@ public function updatePin(Request $request)
         return view('admin.user.walletManage', compact('wallet', 'transactions'));
     }
 
-
-
-    // public function updateWallet(Request $request, Wallet $wallet)
-    // {
-    //     // $wallet = Wallet::findOrFail($wallet);
-    //     $request->validate([
-    //         'type' => 'required|in:credit,debit',
-    //         'amount' => 'required|numeric|min:0.01',
-    //         'description' => 'nullable|string|max:255',
-    //     ]);
-
-    //     $desc = $request->description ?? 'Manual adjustment';
-
-    //     if ($request->type === 'credit') {
-    //         $wallet->credit($request->amount, $desc);
-    //     } else {
-    //         $wallet->debit($request->amount, $desc);
-    //     }
-
-    //     return back()->with('success', 'Wallet updated successfully.');
-    // }
     public function updateWallet(Request $request, Wallet $wallet)
 {
     $request->validate([
