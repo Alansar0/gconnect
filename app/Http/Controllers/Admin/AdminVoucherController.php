@@ -131,28 +131,49 @@ class AdminVoucherController extends Controller
             ->with('success', 'WAN counters reset.');
     }
 
-//     public function online()
-// {
+    public function online()
+    {
+        $resellers = Reseller::whereHas('router', function ($q) {
+            $q->where('is_online', true);
+        })
+        ->with(['routers' => function ($q) {
+            $q->where('is_online', true);
+        }])
+        ->orderBy('name')
+        ->get();
+
+        return view('admin.VoucherSettings.routers_status', compact('resellers'));
+    }
+
     
-//     $resellers = Reseller::where('router_online', true)
-//         ->orderBy('name')
-//         ->get();
+    // List all resellers
+    public function CommissionIndex()
+    {
+        $resellers = Reseller::with('user')->get();
+        return view('admin.VoucherSettings.commissionIndex', compact('resellers'));
+    }
 
-//     return view('admin.routers_status', compact('resellers'));
-// }
-public function online()
-{
-    $resellers = Reseller::whereHas('router', function ($q) {
-        $q->where('is_online', true);
-    })
-    ->with(['routers' => function ($q) {
-        $q->where('is_online', true);
-    }])
-    ->orderBy('name')
-    ->get();
+    // Show edit form
+    public function CommissionEdit(Reseller $reseller)
+    {
+        return view('admin.VoucherSettings.commissionEdit', compact('reseller'));
+    }
 
-    return view('admin.VoucherSettings.routers_status', compact('resellers'));
-}
+    // Update reseller
+    public function CommissionUpdate(Request $request, Reseller $reseller)
+    {
+        $request->validate([
+            'commission_percent' => ['required', 'numeric', 'min:0', 'max:100'],
+        ]);
+
+        $reseller->commission_percent = $request->commission_percent;
+        $reseller->save();
+
+        return redirect()
+            ->route('admin.Commission.index')
+            ->with('success', 'Reseller commission updated.');
+    }
+
 
 
 

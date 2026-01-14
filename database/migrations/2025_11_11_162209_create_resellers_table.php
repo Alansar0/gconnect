@@ -15,6 +15,7 @@ return new class extends Migration
                     $table->id();
                     $table->foreignId('user_id')->constrained()->onDelete('cascade'); // owner
                     $table->string('name')->unique(); // visible hotspot name
+                    $table->decimal('commission_percent', 5, 2)->default(0);
                     $table->enum('status', ['pending','active','suspended'])->default('pending');
                     $table->timestamps();
             });

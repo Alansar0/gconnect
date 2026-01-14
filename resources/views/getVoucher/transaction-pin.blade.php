@@ -172,114 +172,114 @@
     </style>
    <script>
             document.addEventListener('DOMContentLoaded', () => {
-                const MAX = 4;
-                let pin = '';
+                        const MAX = 4;
+                        let pin = '';
 
-                const pinFields = document.querySelectorAll('.pin-field');
-                const keypad = document.querySelectorAll('[data-value]');
-                const clearBtn = document.getElementById('clear-btn');
-                const backspaceBtn = document.getElementById('backspace-btn');
+                        const pinFields = document.querySelectorAll('.pin-field');
+                        const keypad = document.querySelectorAll('[data-value]');
+                        const clearBtn = document.getElementById('clear-btn');
+                        const backspaceBtn = document.getElementById('backspace-btn');
 
-                // --- UI Update ---
-                function renderFields() {
-                    pinFields.forEach((f, i) => {
-                        f.value = pin[i] ? '*' : '';
-                    });
-                }
+                        // --- UI Update ---
+                        function renderFields() {
+                            pinFields.forEach((f, i) => {
+                                f.value = pin[i] ? '*' : '';
+                            });
+                        }
 
-                // --- Error Shake ---
+                        // --- Error Shake ---
 
-                function shakeError(msg = 'Incorrect PIN') {
-                    const box = document.getElementById('payment-card');
-                    if (box) {
-                        box.classList.add('animate-shake');
-                        setTimeout(() => box.classList.remove('animate-shake'), 500);
-                    }
-                    // Show error
-                    const errorBox = document.getElementById('error-message');
-                    if (errorBox) {
-                        errorBox.textContent = msg;
-                        errorBox.classList.remove('hidden');
-                    }
-                    // reset PIN fields
-                    pin = '';
-                    renderFields();
-                }
-                
+                        function shakeError(msg = 'Incorrect PIN') {
+                            const box = document.getElementById('payment-card');
+                            if (box) {
+                                box.classList.add('animate-shake');
+                                setTimeout(() => box.classList.remove('animate-shake'), 500);
+                            }
+                            // Show error
+                            const errorBox = document.getElementById('error-message');
+                            if (errorBox) {
+                                errorBox.textContent = msg;
+                                errorBox.classList.remove('hidden');
+                            }
+                            // reset PIN fields
+                            pin = '';
+                            renderFields();
+                        }
+                        
                 function verifyPin() {
-        if (pin.length !== MAX) return;
+                if (pin.length !== MAX) return;
 
-        const useCashback = document.getElementById('use-cashback-toggle').checked;
-        fetch("{{ route('voucher.store') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                reseller_id: "{{ session('purchase_data.reseller_id') }}",
-                profile_id: "{{ session('purchase_data.profile_id') }}",
-                pin: pin,
-                use_cashback: useCashback
-            })
-        })
-        .then(r => r.json().then(body => ({
-            status: r.status,
-            body
-        })))
-        .then(({status, body}) => {
-            if (status === 200 && body.success) {
-                openSuccessPopup(body.code, body.password, body.receipt_url);
-            } else {
-                shakeError(body.message || "Incorrect PIN");
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            shakeError("Network error");
-        });
-        }
-
-
-                // --- Handle Keypad Click ---
-                keypad.forEach(k => {
-                    k.addEventListener('click', () => {
-                        const v = k.dataset.value;
-                        if (pin.length < MAX) {
-                            pin += v;
-                            renderFields();
-                            if (pin.length === MAX) verifyPin();
-                        }
-                    });
-                });
-
-                // --- Backspace ---
-                backspaceBtn.addEventListener('click', () => {
-                    pin = pin.slice(0, -1);
-                    renderFields();
-                });
-
-                // --- Clear ---
-                clearBtn.addEventListener('click', () => {
-                    pin = '';
-                    renderFields();
-                });
-
-                // --- Keyboard Support ---
-                document.addEventListener('keydown', e => {
-                    if (e.key >= '0' && e.key <= '9') {
-                        if (pin.length < MAX) {
-                            pin += e.key;
-                            renderFields();
-                            if (pin.length === MAX) verifyPin();
-                        }
-                    } else if (e.key === 'Backspace') {
-                        pin = pin.slice(0, -1);
-                        renderFields();
+                const useCashback = document.getElementById('use-cashback-toggle').checked;
+                fetch("{{ route('voucher.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        reseller_id: "{{ session('purchase_data.reseller_id') }}",
+                        profile_id: "{{ session('purchase_data.profile_id') }}",
+                        pin: pin,
+                        use_cashback: useCashback
+                    })
+                })
+                .then(r => r.json().then(body => ({
+                    status: r.status,
+                    body
+                })))
+                .then(({status, body}) => {
+                    if (status === 200 && body.success) {
+                        openSuccessPopup(body.code, body.password, body.receipt_url);
+                    } else {
+                        shakeError(body.message || "Incorrect PIN");
                     }
+                })
+                .catch(err => {
+                    console.error(err);
+                    shakeError("Network error");
                 });
-            });
+                }
+
+
+                        // --- Handle Keypad Click ---
+                        keypad.forEach(k => {
+                            k.addEventListener('click', () => {
+                                const v = k.dataset.value;
+                                if (pin.length < MAX) {
+                                    pin += v;
+                                    renderFields();
+                                    if (pin.length === MAX) verifyPin();
+                                }
+                            });
+                        });
+
+                        // --- Backspace ---
+                        backspaceBtn.addEventListener('click', () => {
+                            pin = pin.slice(0, -1);
+                            renderFields();
+                        });
+
+                        // --- Clear ---
+                        clearBtn.addEventListener('click', () => {
+                            pin = '';
+                            renderFields();
+                        });
+
+                        // --- Keyboard Support ---
+                        document.addEventListener('keydown', e => {
+                            if (e.key >= '0' && e.key <= '9') {
+                                if (pin.length < MAX) {
+                                    pin += e.key;
+                                    renderFields();
+                                    if (pin.length === MAX) verifyPin();
+                                }
+                            } else if (e.key === 'Backspace') {
+                                pin = pin.slice(0, -1);
+                                renderFields();
+                            }
+                        });
+         });
     </script>
     
     <script>

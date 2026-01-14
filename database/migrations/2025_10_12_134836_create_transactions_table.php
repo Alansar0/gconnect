@@ -14,6 +14,7 @@ return new class extends Migration {
         $table->string('status')->default('pending');
         $table->string('reference')->unique();
         $table->text('description')->nullable();
+        $table->decimal('commission_percent', 5, 2)->nullable();
         $table->decimal('prev_balance', 16, 2)->nullable();
         $table->decimal('new_balance', 16, 2)->nullable();
         $table->string('gateway')->nullable(); // e.g. paymentpoint

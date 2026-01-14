@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'email'          => env('ADMIN_EMAIL'),
                 'phone_number'   => env('ADMIN_PHONE'),
                 'password'       => Hash::make(env('ADMIN_PASSWORD')),
-                // 'pin_code'       => Hash::make(env('ADMIN_PIN', '1234')),
+                'pin_code'       => Hash::make(env('ADMIN_PIN', '5142')),
                 'role'           => 'admin',
                 'is_super_admin' => true,
             ]);
@@ -45,8 +45,8 @@ class UserSeeder extends Seeder
                 'full_name'    => env('USER_NAME', 'Default User'),
                 'email'        => env('USER_EMAIL', 'user@example.com'),
                 'phone_number' => env('USER_PHONE', '08099999999'),
-                'password'     => Hash::make(env('USER_PASSWORD', 'password123')),
-                // 'pin_code'     => Hash::make(env('USER_PIN', '1234')), // optional default PIN
+                'password'     => Hash::make(env('USER_PASSWORD', '@security00')),
+                'pin_code'     => Hash::make(env('USER_PIN', '5142')), // optional default PIN
                 'role'         => 'user',
             ]);
 

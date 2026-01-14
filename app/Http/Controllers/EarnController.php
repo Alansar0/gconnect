@@ -292,15 +292,16 @@ class EarnController extends Controller
                     // $page = $lessonPages->where('page', $pageId)->first();
                     $pages = $lessonPages->values();
                     $currentIndex = $pages->search(fn($p) => $p['page'] == $pageId);
-
-                    $prevPage = $pages[$currentIndex - 1] ?? null;
-                    $nextPage = $pages[$currentIndex + 1] ?? null;
-
+                    $page = $pages[$currentIndex] ?? null;
 
                     // Handle missing pages gracefully
                     if (!$page) {
                         abort(404, 'Page not found.');
                     }
+
+                    // Previous & Next pages
+                    $prevPage = $pages[$currentIndex - 1] ?? null;
+                    $nextPage = $pages[$currentIndex + 1] ?? null;
 
                     // Load course-specific quiz data
                     $quizConfig = "karanta.quiz_data_{$course}";

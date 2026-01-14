@@ -78,15 +78,7 @@ Route::middleware('auth','emergency','applock','trackactivity')->group(function 
     Route::get('/authorize', [PinController::class, 'showLockScreen'])->name('pin.authorize');
     Route::post('/authorize', [PinController::class, 'showLockScreenCheck'])->name('pin.authorize.check');
 
-    // WebAuthn / Biometric placeholders (optional)
-       // Toggle biometric
-    // Route::post('/profile/biometric/toggle', [PinController::class, 'toggleBiometric'])
-    //     ->name('biometric.toggle');
-
-    // // Register biometric
-    // Route::get('/biometric/register', [PinController::class, 'showBiometricRegister'])
-    //     ->name('biometric.register.view');
-
+  
     Route::view('/profile/index', 'profile.index')->name('profile');
     //getVocher route
     Route::get('/getVoucher/buy', [GetVoucherController::class, 'create'])->name('getVoucher.buy');
@@ -210,10 +202,7 @@ Route::middleware(['auth', 'admin','applock','trackactivity'])->group(function (
     Route::post('toggle', [AdminSettingsController::class, 'toggle'])->name('toggleE');
     Route::post('log-emergency', [AdminSettingsController::class, 'logEmergency'])->name('admin.settings.logEmergency');
 
-    // Route::get('emergency', function() {
-    //     return view('admin.settings.emergency');
-    // })->name('admin.settings.emergency');
-
+  
     // Admin transactions
     Route::get('/admin/transactions/all', [AdminTransactionController::class, 'all'])->name('T.all');
     Route::get('/admin/transactions/processings', [AdminTransactionController::class, 'processings'])->name('T.processings');
@@ -243,6 +232,17 @@ Route::middleware(['auth', 'admin','applock','trackactivity'])->group(function (
 
         Route::get('/admin/routers/online', [AdminVoucherController::class, 'online'])
     ->name('admin.routers.online');
+
+      //Admin Commission 
+    Route::get('/resellers', [AdminVoucherController::class, 'CommissionIndex'])
+        ->name('admin.Commission.index');
+
+    Route::get('/resellers/{reseller}/edit', [AdminVoucherController::class, 'CommissionEdit'])
+        ->name('admin.Commission.edit');
+
+    Route::put('/resellers/{reseller}', [AdminVoucherController::class, 'CommissionUpdate'])
+        ->name('admin.Commission.update');
+
 
 
      

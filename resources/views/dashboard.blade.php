@@ -4,7 +4,7 @@
         <div class="w-full bg-bg1 rounded-b-2xl p-4 sticky top-0 z-50 shadow-accent flex flex-col">
             <div>
                 <p class="mt-8 text-sm text-t2">Hello,</p>
-                <h1 class="text-xl font-semibold text-accent -mt-1">John Doe</h1>
+                <h1 class="text-xl font-semibold text-accent -mt-1">{{ Auth::user()->full_name}}</h1>
             </div>
 
             <!-- Admin Panel Button -->

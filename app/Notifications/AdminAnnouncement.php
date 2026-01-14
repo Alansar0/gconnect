@@ -53,8 +53,8 @@ class AdminAnnouncement extends Notification implements ShouldQueue
     {
         return [
             // Laravel will automatically pass the notifiable into toBroadcast()
-            // new PrivateChannel('App.Models.User.' . auth()->id()),
-            new PrivateChannel('App.Models.User.' . $this->notifiable->id),
+            new PrivateChannel('App.Models.User.' . auth()->id()),
+            // new PrivateChannel('App.Models.User.' . $this->notifiable->id),
 
         ];
     }

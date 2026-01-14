@@ -7,6 +7,7 @@ use App\Notifications\AdminAnnouncement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Reseller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
@@ -36,7 +37,7 @@ class AdminSettingsController extends Controller
 
         // Choose recipients (modify as needed)
         $recipients = match($request->input('send_to')) {
-            'admins' => User::where('role','admin')->get(),
+            'admins' => User::where('role','reseller')->get(),
             'users'  => User::where('role','user')->get(),
             default  => User::all(),
         };
@@ -168,6 +169,5 @@ class AdminSettingsController extends Controller
             'Emergency mode ' . (! $current ? 'ENABLED' : 'DISABLED')
         );
     }
-
 
 }

@@ -38,7 +38,7 @@
                 class="w-full p-3 rounded bg-bg3 border border-accent-border text-t1">
                 <option value="all">All users</option>
                 <option value="users">Only users</option>
-                <option value="admins">Only admins</option>
+                <option value="admins">Only resellers</option>
             </select>
 
             <button type="submit" class="w-full py-3 bg-accent text-bg1 font-semibold rounded-lg hover:opacity-90 transition">

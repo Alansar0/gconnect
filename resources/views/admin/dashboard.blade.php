@@ -130,7 +130,7 @@
                     <a href="{{ route('admin.voucher_profiles.index') }}" class="{{ $item }}">Add Vocher Plan</a> 
                     <a href="{{ route('VoucherSettings.selectReseller') }}" class="{{ $item }}">Manage  Routers</a>
                     <a href="{{ route('admin.routers.online') }}" class="{{ $item }}">Resellers Status </a>
-
+                    <a href="{{ route('admin.Commission.index') }}" class="{{ $item }}">Manage  Commission</a>
                 </div>
             </div>
 

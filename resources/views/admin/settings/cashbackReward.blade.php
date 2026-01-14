@@ -27,6 +27,22 @@
                     <div class="text-red-600">{{ $message }}</div> 
                 @enderror
             </div>
+            <!-- Admin Commission -->
+        <div class="mb-4">
+            <label class="block mb-1 text-t3">
+                Admin Commission (%) for this reseller
+            </label>
+            <input
+                type="number"
+                step="0.01"
+                min="0"
+                max="100"
+                name="commission_percent"
+                value="{{ old('commission_percent', $reseller->commission_percent) }}"
+                class="w-full p-2 rounded-xl border border-accent-border bg-bg2 text-t1"
+                required
+            >
+        </div>
 
             <!-- Note -->
             <div class="mb-4">

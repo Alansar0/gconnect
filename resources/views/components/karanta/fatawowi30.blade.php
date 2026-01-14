@@ -1,15 +1,6 @@
 <?php
 return [
-    [
-        "page" => 1,
-        "header" => null,
-        "content" => "1",
-        "layout" => [
-            "has_image" => false,
-            "image_size" => "none",
-            "html_tag" => null
-        ]
-    ],
+  
     [
         "page" => 2,
         "header" => null,
@@ -41,7 +32,7 @@ return [
         ]
     ],
     [
-        "page" => 5,
+        "page" => 1,
         "header" => null,
         "content" => "yakeshigemusuduhu,sakamakonana\n\nyawantambayoyidasukedaalaƙada\n\nmu'amalar auratayya daga lokacin\n\namarci har zuwa tsufa. Yakamata\n\nkowacce mace ta san waɗannan\n\nfatawowiguda30.Inamaijanhankalin\n\niyayematadaƴaƴansudasukaranta\n\nwannanlittafintaredaaikidailiminda\n\nyaƙunsa.Allaahyasaalbarkaarayuwar\n\nmubakiɗaya\n\nHaƙƙinMallaka(M)2025",
         "layout" => [
