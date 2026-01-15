@@ -5,13 +5,17 @@
     @PwaHead
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <meta name="theme-color" content="#58a6ff">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png">
 
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -26,7 +30,20 @@
     <!-- Styles / Scripts -->
     @vite(['resources/css/theme.css', 'resources/js/app.js'])
 </head>
-@RegisterServiceWorkerScript
+    @RegisterServiceWorkerScript
+    <script>
+        if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js');
+        });
+        }
+
+        if (evt.request.url.includes('/admin')) {
+            return fetch(evt.request);
+        }
+
+    </script>
+
 <body class="m-0 p-0 bg-bg1 text-t1 font-['Roboto']">
     
     
