@@ -9,6 +9,8 @@ use App\Models\UserReward;
 use Illuminate\Http\Response;
 use App\Models\AdminReward;
 use App\Models\Wallet;
+use App\Models\Transaction;
+use Illuminate\Support\Str;
 
 
 
@@ -109,6 +111,18 @@ class EarnController extends Controller
                 'type'    => $request->type,
                 'source'  => 'azkar'
             ]);
+
+            Transaction::create([
+                'user_id'      => $user->id,
+                'type'         => 'credit',
+                'amount'       => $finalAmount,
+                'status'       => 'success',
+                'reference'    => 'EARN-' . strtoupper(Str::random(10)),
+                'description'  => ucfirst($request->type) . ' reward claimed',
+                'prev_balance' => $wallet->prev_cashback_balance ?? null,
+                'new_balance'  => $wallet->cashback_balance,
+            ]);
+
 
             // ✅ 8. Return correct reward
             return response()->json([
@@ -446,6 +460,18 @@ class EarnController extends Controller
                         'type'    => $type,
                         'source'  => $pageId,
                     ]);
+
+                    Transaction::create([
+                        'user_id'      => auth()->id(),
+                        'type'         => 'credit',
+                        'amount'       => $cashbackAmount,
+                        'status'       => 'success',
+                        'reference'    => strtoupper($type) . '-QUIZ-' . strtoupper(Str::random(8)),
+                        'description'  => ucfirst($type) . " quiz reward (Lesson {$pageId})",
+                        'prev_balance' => $wallet->prev_cashback_balance ?? null,
+                        'new_balance'  => $wallet->cashback_balance,
+                    ]);
+
 
                     /*
                     |--------------------------------------------------------------------------

@@ -99,8 +99,7 @@ class AdminUserController extends Controller
         return view('admin.user.changePin');
     }
 
-     // Update user password manually
-     // App\Http\Controllers\Admin\AdminController.php
+   
 
 public function updatePin(Request $request)
 {
@@ -168,20 +167,7 @@ public function updatePin(Request $request)
         $wallet = null;
         $transactions = collect();
 
-        // if ($q = $request->query('query')) {
-        //     $wallet = Wallet::where('account_number', $q)
-        //         ->orWhereHas('user', function ($query) use ($q) {
-        //             $query->where('email', 'LIKE', "%$q%")
-        //                 ->orWhere('phone_number', 'LIKE', "%$q%");
-        //         })->first();
-
-        //     if ($wallet) {
-        //         $transactions = Transaction::where('user_id', $wallet->user_id)
-        //             ->latest()
-        //             ->take(10)
-        //             ->get();
-        //     }
-        // }
+       
          if ($q = $request->query('query')) {
         $wallet = Wallet::whereHas('user', function ($query) use ($q) {
             $query->where('email', 'LIKE', "%$q%")

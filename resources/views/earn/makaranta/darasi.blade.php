@@ -24,7 +24,8 @@
 
                 @php session(['current_course' => $course ?? 'sharrindajjal']); @endphp
 
-                <button onclick="window.location.href='{{ route('makaranta.karanta', ['pageId' => 1]) }}'"
+                {{-- <button onclick="window.location.href='{{ route('makaranta.karanta', ['pageId' => 1]) }}'" --}}
+                <button onclick="showComingSoon(event)"
                         class="flex-1 py-2 text-sm font-semibold rounded-full text-[var(--text-1)]
                         {{ Route::currentRouteName() === 'makaranta.karanta' ? 'bg-[var(--accent)]/30' : 'hover:bg-[var(--accent)]/20' }} transition-all">
                     📖 Karanta
@@ -108,4 +109,55 @@
             @endif
         </section>
     </div>
+
+ <!-- Coming Soon Modal -->
+<div id="comingSoonModal"
+     class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+
+    <div class="bg-[var(--bg-3)] border border-[var(--accent)]/40
+                rounded-2xl p-6 w-80 text-center
+                shadow-[0_0_25px_var(--shadow-accent)]
+                animate-fade-in">
+
+        <div class="text-4xl mb-3">🚧</div>
+
+        <h3 class="text-lg font-semibold text-[var(--accent)] mb-2">
+            Karanta – Coming Soon
+        </h3>
+
+         <p class="text-[var(--text-2)] text-sm mb-4 leading-relaxed">
+            📖 Sashen Karanta yana kan aiki domin
+             samar da ingantaccen ilimin Musulunci.
+             Za a gamashi nan kusa insha Allah.
+        </p>
+             
+                
+
+
+        <button onclick="closeComingSoon()"
+                class="bg-[var(--accent)] text-[var(--bg-1)]
+                       px-6 py-2 rounded-xl
+                       hover:opacity-90 transition">
+            OK
+        </button>
+    </div>
+</div>
+
+
+<script>
+    function showComingSoon(e) {
+        e.preventDefault();
+        const modal = document.getElementById('comingSoonModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeComingSoon() {
+        const modal = document.getElementById('comingSoonModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+</script>
+
+
 </x-layouts.app>

@@ -301,54 +301,35 @@ class GetVoucherController extends Controller
                     'prev_balance' => $buyerWallet->prev_balance,
                     'new_balance'  => $buyerWallet->new_balance,
                 ]);
-               
+            // === RESELLER CREDIT ===
+            $resellerUser = $reseller->user;
+            $resellerWallet = Wallet::firstOrCreate([
+                'user_id' => $resellerUser->id
+            ]);
 
+            // Credit with custom description
+            $resellerWallet->credit(
+                $resellerNetAmount,
+                'RESELLER-SALE-' . strtoupper(Str::random(10)),
+                'Voucher sale after admin commission'
+            );
 
-                $resellerWallet = Wallet::firstOrCreate(
-                    ['user_id' => $reseller->id]
-                    // ['account_number' => User::generateAccountNumber(), 'balance' => 0]
-                );
+            // === ADMIN COMMISSION ===
+            $admin = User::where('role', User::ROLE_ADMIN)
+                ->where('is_super_admin', true)
+                ->firstOrFail();
 
-                // Credit reseller wallet (after commission)
-                $resellerWallet = Wallet::firstOrCreate([
-                    'user_id' => $reseller->id
-                ]);
+            $adminWallet = Wallet::firstOrCreate([
+                'user_id' => $admin->id
+            ]);
 
-                $resellerWallet->balance += $resellerNetAmount;
-                $resellerWallet->save();
-
-                $admin = User::where('role', User::ROLE_ADMIN)
-                    ->where('is_super_admin', true)
-                    ->firstOrFail();
-
-                $adminWallet = Wallet::firstOrCreate([
-                    'user_id' => $admin->id
-                ]);
-
-                $adminWallet->balance += $commissionAmount;
-                $adminWallet->save();
-
-                Transaction::create([
-                    'user_id' => $admin->id,
-                    'type' => 'credit',
-                    'amount' => $commissionAmount,
-                    'status' => 'success',
-                    'reference' => 'ADMIN-COMM-' . strtoupper(Str::random(10)),
-                    'description' => "Voucher commission from reseller #{$reseller->id}",
-                ]);
-
-                Transaction::create([
-                    'user_id' => $reseller->id,
-                    'type' => 'credit',
-                    'amount' => $resellerNetAmount,
-                    'status' => 'success',
-                    'reference' => 'RESELLER-SALE-' . strtoupper(Str::random(10)),
-                    'description' => 'Voucher sale after admin commission',
-                ]);
-
-
-
-
+            // Credit with custom description
+            $adminWallet->credit(
+                $commissionAmount,
+                'ADMIN-COMM-' . strtoupper(Str::random(10)),
+                "Voucher commission from reseller {$reseller->name}"
+            );
+            
                 VoucherQueue::create([
                     'voucher_id' => $voucher->id,
                     'reseller_id' => $reseller->id,

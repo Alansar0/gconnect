@@ -73,7 +73,7 @@
             @foreach([
                 ['route'=> 'earn.morningAzkar', 'icon'=>'fa-regular fa-sun', 'label'=>'Morning Dhikr'],
                 ['route'=> 'earn.eveningAzkar', 'icon'=>'fa-regular fa-moon', 'label'=>'Evening Dhikr'],
-                ['route'=> 'earn.makaranta.index', 'icon'=>'fas fa-book-open', 'label'=>'Makaranta'],
+                ['route'=> 'earn.makaranta.index', 'icon'=>'fas fa-book-open', 'label'=>'Makaranta', 'coming_soon' => true],
                 ['route'=> 'earn.friday', 'icon'=>'fas fa-mosque', 'label'=>'Friday Gifts'],
             ] as $option)
                 <a href="{{ route($option['route']) }}"
@@ -86,21 +86,31 @@
             @endforeach
         </div>
 
-        <!-- Hadith Section -->
+      
+        
+         <!-- Hadith Section -->
         <div class="bg-bg3 border shadow-md rounded-2xl p-4 mt-6 mx-4 max-w-md"
-             style="border-color: var(--unique-bottom-border);">
+            style="border-color: var(--unique-bottom-border);">
             <h3 class="text-accent font-semibold mb-2">Hadith of the Day</h3>
             <p class="text-t2 text-sm leading-relaxed">
-                The Prophet Muhammad ﷺ said: “Whoever says <span class="italic text-accent">Subhan Allah wa
-                bihamdihi</span> a hundred times a day,
-                will be forgiven all his sins even if they were as much as the foam of the sea.”
+                The Prophet Muhammad ﷺ said:
+                <span class="italic text-accent">
+                    “Whoever travels a path in search of knowledge, Allah will make easy for him a path to Paradise.”
+                </span>
+                <br>
+                <span class="text-xs text-t3">— Sahih Muslim</span>
             </p>
             <div class="flex justify-center mt-3">
-                <button class="text-accent text-sm font-medium hover:underline">Refresh 🔄</button>
+                <button class="text-accent text-sm font-medium hover:underline">
+                    Reflect 📘
+                </button>
             </div>
         </div>
 
     </div>
+
+
+
 </x-layouts.app>
 
 
