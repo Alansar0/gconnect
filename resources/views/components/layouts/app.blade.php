@@ -2,12 +2,16 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
 
 <head>
+    @PwaHead
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#58a6ff">
+
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -22,7 +26,7 @@
     <!-- Styles / Scripts -->
     @vite(['resources/css/theme.css', 'resources/js/app.js'])
 </head>
-
+@RegisterServiceWorkerScript
 <body class="m-0 p-0 bg-bg1 text-t1 font-['Roboto']">
     
     
